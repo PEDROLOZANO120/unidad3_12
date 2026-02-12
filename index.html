@@ -1,331 +1,611 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="es">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Unidad 3 - Recurso Offline</title>
+  <title>Unidad 3 - Recurso interactivo</title>
   <style>
     :root {
-      --bg: #f4f7fb;
-      --card: #ffffff;
-      --accent: #1f6feb;
-      --accent-dark: #1654b3;
+      --bg: #f3f6fd;
+      --card: #fff;
       --text: #1f2937;
       --muted: #6b7280;
-      --ok: #0f9d58;
-      --warn: #d93025;
+      --primary: #2563eb;
+      --primary-dark: #1d4ed8;
+      --ok: #15803d;
+      --warn: #dc2626;
+      --border: #dbe4f3;
       --radius: 14px;
-      --shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+      --shadow: 0 10px 25px rgba(2, 6, 23, 0.1);
     }
 
-    * {
-      box-sizing: border-box;
-    }
+    * { box-sizing: border-box; }
 
     body {
       margin: 0;
       font-family: system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, sans-serif;
       color: var(--text);
-      background: linear-gradient(180deg, #eef3ff 0%, var(--bg) 100%);
-      min-height: 100vh;
+      background: linear-gradient(180deg, #eaf1ff 0%, var(--bg) 100%);
     }
 
     .topbar {
-      position: fixed;
+      position: sticky;
       top: 0;
-      left: 0;
-      right: 0;
-      z-index: 1000;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      gap: 1rem;
-      padding: 0.85rem 1rem;
+      z-index: 20;
       background: #111827;
-      color: #f9fafb;
-      box-shadow: 0 8px 18px rgba(0, 0, 0, 0.25);
+      color: #fff;
+      padding: .9rem 1rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: .6rem;
+      box-shadow: 0 4px 20px rgba(0,0,0,.25);
     }
 
-    .topbar__status {
-      font-weight: 600;
-      letter-spacing: 0.2px;
-      white-space: nowrap;
-      overflow: hidden;
-      text-overflow: ellipsis;
-    }
+    .topbar strong { font-size: .95rem; }
 
     .btn {
       border: 0;
       border-radius: 10px;
-      padding: 0.65rem 0.95rem;
-      font-weight: 600;
+      padding: .6rem .9rem;
+      font-weight: 700;
       cursor: pointer;
-      transition: transform 0.08s ease, opacity 0.2s ease, background 0.2s ease;
     }
 
-    .btn:active {
-      transform: translateY(1px);
-    }
-
-    .btn--primary {
-      color: #fff;
-      background: var(--accent);
-    }
-
-    .btn--primary:hover {
-      background: var(--accent-dark);
-    }
-
-    .btn--ghost {
-      color: #fff;
-      background: rgba(255, 255, 255, 0.16);
-    }
-
-    .btn--ghost:hover {
-      background: rgba(255, 255, 255, 0.24);
-    }
+    .btn-primary { background: var(--primary); color: #fff; }
+    .btn-primary:hover { background: var(--primary-dark); }
+    .btn-ghost { background: rgba(255,255,255,.15); color: #fff; }
 
     main {
-      max-width: 900px;
+      max-width: 1050px;
       margin: 0 auto;
-      padding: 5.5rem 1rem 2rem;
+      padding: 1rem;
+      display: grid;
+      gap: 1rem;
     }
 
     .card {
       background: var(--card);
       border-radius: var(--radius);
-      padding: 1.2rem;
       box-shadow: var(--shadow);
-      margin-bottom: 1rem;
+      padding: 1rem;
+      border: 1px solid var(--border);
     }
 
-    h1, h2, h3 {
-      margin-top: 0;
-    }
+    h1,h2,h3 { margin-top: 0; }
+    .muted { color: var(--muted); }
+    .row { display: flex; flex-wrap: wrap; gap: .6rem; }
 
-    .muted {
-      color: var(--muted);
-    }
-
-    label {
-      display: block;
-      margin: 1rem 0 0.4rem;
-      font-weight: 600;
-    }
-
-    input[type="text"] {
+    input[type="text"], select {
       width: 100%;
-      padding: 0.75rem 0.8rem;
+      border: 1px solid #cfd8e6;
       border-radius: 10px;
-      border: 1px solid #cfd8e3;
-      font-size: 1rem;
+      padding: .65rem .75rem;
+      font-size: .98rem;
+      background: #fff;
     }
 
-    .row {
-      display: flex;
-      gap: 0.75rem;
-      flex-wrap: wrap;
-      align-items: center;
-      margin-top: 0.8rem;
+    .message { min-height: 1.2rem; font-weight: 700; margin-top: .5rem; }
+    .ok { color: var(--ok); }
+    .warn { color: var(--warn); }
+
+    .layout {
+      display: grid;
+      grid-template-columns: 1.25fr .75fr;
+      gap: 1rem;
     }
 
-    .message {
-      min-height: 1.4rem;
-      font-size: 0.95rem;
-      font-weight: 600;
-      margin-top: 0.5rem;
-    }
+    @media (max-width: 900px) { .layout { grid-template-columns: 1fr; } }
 
-    .message--ok {
-      color: var(--ok);
-    }
-
-    .message--warn {
-      color: var(--warn);
-    }
-
-    .topics {
+    .tema-grid {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-      gap: 0.8rem;
-      margin-top: 1rem;
+      gap: .75rem;
+      margin-top: .8rem;
     }
 
-    .topic {
-      border: 1px solid #dfe7f5;
+    .tema {
+      border: 1px solid var(--border);
       border-radius: 12px;
-      padding: 0.8rem;
-      background: #f8faff;
+      padding: .75rem;
+      background: #f8fbff;
     }
 
-    .topic h3 {
-      margin-bottom: 0.5rem;
-      font-size: 1.03rem;
+    .progress {
+      background: #eef2ff;
+      border-radius: 999px;
+      overflow: hidden;
+      height: 12px;
     }
 
-    .topic p {
-      margin: 0 0 0.6rem;
-      color: var(--muted);
-      font-size: 0.95rem;
+    .progress > span {
+      height: 100%;
+      display: block;
+      background: linear-gradient(90deg, #2563eb, #0ea5e9);
+      width: 0;
+      transition: width .2s ease;
     }
+
+    .map-wrap {
+      position: relative;
+      border-radius: 12px;
+      overflow: hidden;
+      border: 1px solid var(--border);
+      background: #f0f7ff;
+    }
+
+    .map-wrap svg { width: 100%; display: block; }
+
+    .hotspot {
+      position: absolute;
+      transform: translate(-50%, -50%);
+      background: #1d4ed8;
+      color: #fff;
+      border: 2px solid #fff;
+      border-radius: 999px;
+      width: 40px;
+      height: 40px;
+      font-weight: 800;
+      cursor: pointer;
+      box-shadow: 0 4px 12px rgba(0,0,0,.25);
+    }
+
+    .hotspot:disabled { opacity: .5; cursor: not-allowed; }
+
+    details {
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: .6rem .75rem;
+      margin-bottom: .65rem;
+      background: #fff;
+    }
+
+    summary { cursor: pointer; font-weight: 700; }
+
+    .tabla {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: .6rem;
+    }
+
+    .tabla th, .tabla td {
+      border: 1px solid #e5e7eb;
+      padding: .5rem;
+      text-align: left;
+    }
+
+    .grid-sopa {
+      display: grid;
+      grid-template-columns: repeat(10, 1fr);
+      gap: 3px;
+      max-width: 340px;
+    }
+
+    .cell {
+      background: #eff6ff;
+      border: 1px solid #bfdbfe;
+      text-align: center;
+      padding: .35rem;
+      font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+      font-weight: 700;
+    }
+
+    .hidden { display: none; }
   </style>
 </head>
 <body>
-  <header class="topbar" aria-label="Barra superior fija">
-    <div id="topbarStatus" class="topbar__status">👤 Invitado | ⭐ Puntaje: 0/10</div>
-    <button id="btnReiniciar" class="btn btn--ghost" type="button">Reiniciar</button>
+  <header class="topbar" aria-label="Barra de estado">
+    <strong id="statusTop">👤 Invitado | ⭐ Puntaje: 0/100</strong>
+    <button id="btnReset" type="button" class="btn btn-ghost">Reiniciar progreso</button>
   </header>
 
   <main>
-    <section class="card" id="inicioSection">
-      <h1>Inicio del recurso</h1>
-      <p class="muted">Ingresa tu nombre para activar la navegación por temas y guardar el progreso local.</p>
-
-      <label for="nombreInput">Nombre completo</label>
-      <input id="nombreInput" type="text" autocomplete="name" placeholder="Ejemplo: Ana García López" />
-
-      <div class="row">
-        <button id="btnGuardar" class="btn btn--primary" type="button">Guardar</button>
+    <section class="card">
+      <h1>Unidad 3: Recurso Integrado</h1>
+      <p class="muted">Este recurso funciona offline e integra gate de nombre, progreso persistente, mapa con hotspots, temas 2 al 5, actividades y evaluación automática.</p>
+      <label for="nombre">Nombre completo</label>
+      <input id="nombre" type="text" autocomplete="name" placeholder="Ejemplo: Laura Pérez" />
+      <div class="row" style="margin-top:.7rem">
+        <button id="btnGuardar" type="button" class="btn btn-primary">Guardar y desbloquear</button>
       </div>
-      <div id="mensaje" class="message" aria-live="polite"></div>
+      <div id="msg" class="message" aria-live="polite"></div>
     </section>
 
-    <section class="card" id="temasSection">
-      <h2>Temas</h2>
-      <p id="estadoTemas" class="muted">Bloqueado: guarda tu nombre para continuar.</p>
+    <section class="layout">
+      <div class="card">
+        <h2>Mapa de navegación con hotspots</h2>
+        <p id="estadoGate" class="muted">Bloqueado: guarda tu nombre para habilitar el mapa y los temas.</p>
 
-      <div class="topics">
-        <article class="topic">
-          <h3>Tema 1</h3>
-          <p>Contenido introductorio.</p>
-          <button class="btn btn--primary js-tema" data-tema="tema1" type="button">Ir al tema</button>
-        </article>
-        <article class="topic">
+        <div class="map-wrap" id="mapa">
+          <svg viewBox="0 0 800 420" role="img" aria-label="Mapa temático Unidad 3">
+            <defs>
+              <linearGradient id="g1" x1="0" x2="1" y1="0" y2="1">
+                <stop offset="0%" stop-color="#dbeafe"/>
+                <stop offset="100%" stop-color="#bfdbfe"/>
+              </linearGradient>
+            </defs>
+            <rect width="800" height="420" fill="url(#g1)"></rect>
+            <circle cx="160" cy="110" r="70" fill="#d1fae5"></circle>
+            <circle cx="430" cy="100" r="90" fill="#fef3c7"></circle>
+            <circle cx="640" cy="270" r="95" fill="#fee2e2"></circle>
+            <text x="125" y="115" font-size="24" font-weight="700" fill="#065f46">Tema 2</text>
+            <text x="390" y="105" font-size="24" font-weight="700" fill="#92400e">Tema 3</text>
+            <text x="590" y="275" font-size="24" font-weight="700" fill="#991b1b">Tema 4</text>
+            <text x="310" y="330" font-size="24" font-weight="700" fill="#1e3a8a">Tema 5</text>
+          </svg>
+          <button class="hotspot js-hotspot" data-target="tema2" style="left:20%;top:26%" aria-label="Abrir tema 2">2</button>
+          <button class="hotspot js-hotspot" data-target="tema3" style="left:52%;top:24%" aria-label="Abrir tema 3">3</button>
+          <button class="hotspot js-hotspot" data-target="tema4" style="left:80%;top:63%" aria-label="Abrir tema 4">4</button>
+          <button class="hotspot js-hotspot" data-target="tema5" style="left:43%;top:77%" aria-label="Abrir tema 5">5</button>
+        </div>
+      </div>
+
+      <aside class="card">
+        <h2>Progreso</h2>
+        <p class="muted">Actividades completadas: <strong id="doneCount">0</strong>/5</p>
+        <div class="progress" aria-hidden="true"><span id="bar"></span></div>
+        <p style="margin-top:.7rem">Último tema visitado: <strong id="ultimoTema">Ninguno</strong></p>
+      </aside>
+    </section>
+
+    <section class="card">
+      <h2>Temas 2 al 5</h2>
+      <div class="tema-grid">
+        <article class="tema" id="tema2">
           <h3>Tema 2</h3>
-          <p>Práctica y repaso.</p>
-          <button class="btn btn--primary js-tema" data-tema="tema2" type="button">Ir al tema</button>
+          <p>Conceptos clave y repaso guiado.</p>
+          <details><summary>Contenido</summary><p>Se explica la base teórica del tema y su aplicación práctica.</p></details>
+        </article>
+        <article class="tema" id="tema3">
+          <h3>Tema 3</h3>
+          <p>Profundización y análisis.</p>
+          <details><summary>Contenido</summary><p>Comparación de casos y toma de decisiones con criterios.</p></details>
+        </article>
+        <article class="tema" id="tema4">
+          <h3>Tema 4</h3>
+          <p>Transferencia a nuevos contextos.</p>
+          <details><summary>Contenido</summary><p>Resolución de situaciones reales con pasos secuenciados.</p></details>
+        </article>
+        <article class="tema" id="tema5">
+          <h3>Tema 5</h3>
+          <p>Cierre integrador.</p>
+          <details><summary>Contenido</summary><p>Síntesis y preparación para la evaluación final.</p></details>
         </article>
       </div>
+    </section>
+
+    <section class="card" id="actividades">
+      <h2>Actividades</h2>
+
+      <details open>
+        <summary>1) Relacionar conceptos</summary>
+        <table class="tabla">
+          <thead><tr><th>País</th><th>Capital</th></tr></thead>
+          <tbody>
+            <tr><td>Perú</td><td><select data-actividad="relacionar" data-id="pe"><option value="">Selecciona...</option><option>Lima</option><option>Quito</option><option>La Paz</option></select></td></tr>
+            <tr><td>Ecuador</td><td><select data-actividad="relacionar" data-id="ec"><option value="">Selecciona...</option><option>Sucre</option><option>Lima</option><option>Quito</option></select></td></tr>
+            <tr><td>Bolivia</td><td><select data-actividad="relacionar" data-id="bo"><option value="">Selecciona...</option><option>La Paz</option><option>Bogotá</option><option>Asunción</option></select></td></tr>
+          </tbody>
+        </table>
+        <button class="btn btn-primary" data-check="relacionar" type="button">Calificar relacionar</button>
+      </details>
+
+      <details>
+        <summary>2) Completar enunciados</summary>
+        <p>La <input type="text" data-actividad="completar" data-id="c1" style="width:160px;display:inline-block" /> permite guardar información localmente en el navegador.</p>
+        <p>Los <input type="text" data-actividad="completar" data-id="c2" style="width:140px;display:inline-block" /> facilitan navegar entre secciones desde un mapa.</p>
+        <button class="btn btn-primary" data-check="completar" type="button">Calificar completar</button>
+      </details>
+
+      <details>
+        <summary>3) Sopa de letras</summary>
+        <p>Busca: <strong>MAPA</strong>, <strong>TEMA</strong>, <strong>DATOS</strong>.</p>
+        <div class="grid-sopa" aria-label="Sopa de letras">
+          <div class="cell">M</div><div class="cell">A</div><div class="cell">P</div><div class="cell">A</div><div class="cell">B</div><div class="cell">Q</div><div class="cell">R</div><div class="cell">T</div><div class="cell">U</div><div class="cell">L</div>
+          <div class="cell">T</div><div class="cell">E</div><div class="cell">M</div><div class="cell">A</div><div class="cell">K</div><div class="cell">A</div><div class="cell">T</div><div class="cell">E</div><div class="cell">X</div><div class="cell">O</div>
+          <div class="cell">D</div><div class="cell">A</div><div class="cell">T</div><div class="cell">O</div><div class="cell">S</div><div class="cell">I</div><div class="cell">N</div><div class="cell">F</div><div class="cell">O</div><div class="cell">S</div>
+          <div class="cell">L</div><div class="cell">P</div><div class="cell">E</div><div class="cell">R</div><div class="cell">S</div><div class="cell">I</div><div class="cell">S</div><div class="cell">T</div><div class="cell">E</div><div class="cell">N</div>
+        </div>
+        <div class="row" style="margin-top:.6rem">
+          <input type="text" data-actividad="sopa" placeholder="Escribe las 3 palabras separadas por coma" />
+          <button class="btn btn-primary" data-check="sopa" type="button">Calificar sopa</button>
+        </div>
+      </details>
+
+      <details>
+        <summary>4) Crucigrama (respuestas textuales)</summary>
+        <p>Horizontal 1: almacenamiento del navegador → <input type="text" data-actividad="cruci" data-id="h1" style="width:180px;display:inline-block" /></p>
+        <p>Vertical 1: elemento de clic sobre mapa → <input type="text" data-actividad="cruci" data-id="v1" style="width:160px;display:inline-block" /></p>
+        <button class="btn btn-primary" data-check="cruci" type="button">Calificar crucigrama</button>
+      </details>
+
+      <div id="msgActividades" class="message" aria-live="polite"></div>
+    </section>
+
+    <section class="card" id="evaluacion">
+      <h2>Evaluación final (5 puntos)</h2>
+      <ol>
+        <li>¿Qué API permite persistencia local?
+          <select data-eval="1"><option value="">Selecciona...</option><option>localStorage</option><option>sessionTemp</option><option>indexMemory</option></select>
+        </li>
+        <li>¿Qué controla el gate de acceso?
+          <select data-eval="2"><option value="">Selecciona...</option><option>El nombre del estudiante</option><option>La hora del sistema</option><option>El tamaño de pantalla</option></select>
+        </li>
+        <li>¿Para qué sirven los hotspots?
+          <select data-eval="3"><option value="">Selecciona...</option><option>Navegar a temas</option><option>Reducir batería</option><option>Comprimir audio</option></select>
+        </li>
+        <li>¿Cuántos temas integrados tiene este recurso?
+          <select data-eval="4"><option value="">Selecciona...</option><option>4 (temas 2 a 5)</option><option>2</option><option>10</option></select>
+        </li>
+        <li>¿Qué sucede al reiniciar?
+          <select data-eval="5"><option value="">Selecciona...</option><option>Se borra progreso y respuestas</option><option>Se instala una app</option><option>Se bloquea la página</option></select>
+        </li>
+      </ol>
+      <button id="btnEvaluar" class="btn btn-primary" type="button">Calcular puntaje total</button>
+      <div id="msgEval" class="message" aria-live="polite"></div>
     </section>
   </main>
 
   <script>
-    (function () {
-      const STORAGE_KEYS = {
+    (() => {
+      const KEYS = {
         nombre: 'u3_nombre',
         puntaje: 'u3_puntaje',
         progreso: 'u3_progreso',
         respuestas: 'u3_respuestas'
       };
 
-      const topbarStatus = document.getElementById('topbarStatus');
-      const btnReiniciar = document.getElementById('btnReiniciar');
-      const nombreInput = document.getElementById('nombreInput');
-      const btnGuardar = document.getElementById('btnGuardar');
-      const mensaje = document.getElementById('mensaje');
-      const estadoTemas = document.getElementById('estadoTemas');
-      const botonesTema = Array.from(document.querySelectorAll('.js-tema'));
+      const TOTAL_ACT = 5;
 
-      function getNombreGuardado() {
-        return (localStorage.getItem(STORAGE_KEYS.nombre) || '').trim();
+      const ui = {
+        statusTop: document.getElementById('statusTop'),
+        nombre: document.getElementById('nombre'),
+        msg: document.getElementById('msg'),
+        estadoGate: document.getElementById('estadoGate'),
+        btnGuardar: document.getElementById('btnGuardar'),
+        btnReset: document.getElementById('btnReset'),
+        hotspots: Array.from(document.querySelectorAll('.js-hotspot')),
+        doneCount: document.getElementById('doneCount'),
+        bar: document.getElementById('bar'),
+        ultimoTema: document.getElementById('ultimoTema'),
+        msgActividades: document.getElementById('msgActividades'),
+        btnChecks: Array.from(document.querySelectorAll('[data-check]')),
+        evals: Array.from(document.querySelectorAll('[data-eval]')),
+        btnEvaluar: document.getElementById('btnEvaluar'),
+        msgEval: document.getElementById('msgEval')
+      };
+
+      const normalizar = (v) => (v || '').toLowerCase().trim();
+      const getNombre = () => (localStorage.getItem(KEYS.nombre) || '').trim();
+      const getPuntaje = () => Number(localStorage.getItem(KEYS.puntaje) || 0);
+
+      const loadJSON = (key, fallback) => {
+        try {
+          const val = localStorage.getItem(key);
+          return val ? JSON.parse(val) : fallback;
+        } catch {
+          return fallback;
+        }
+      };
+
+      const saveJSON = (key, value) => localStorage.setItem(key, JSON.stringify(value));
+
+      function getProgreso() {
+        return loadJSON(KEYS.progreso, { temaActual: null, completadas: [] });
       }
 
-      function getPuntajeGuardado() {
-        const raw = localStorage.getItem(STORAGE_KEYS.puntaje);
-        const parsed = Number(raw);
-        return Number.isFinite(parsed) ? Math.max(0, Math.min(10, parsed)) : 0;
+      function getRespuestas() {
+        return loadJSON(KEYS.respuestas, {});
       }
 
-      function renderTopbar() {
-        const nombre = getNombreGuardado() || 'Invitado';
-        const puntaje = getPuntajeGuardado();
-        topbarStatus.textContent = `👤 ${nombre} | ⭐ Puntaje: ${puntaje}/10`;
+      function setGate(bloqueado) {
+        ui.hotspots.forEach((h) => { h.disabled = bloqueado; });
+        ui.estadoGate.textContent = bloqueado
+          ? 'Bloqueado: guarda tu nombre para habilitar el mapa y los temas.'
+          : 'Habilitado: puedes navegar por los temas desde el mapa.';
       }
 
-      function setTemasBloqueados(bloqueado) {
-        botonesTema.forEach((btn) => {
-          btn.disabled = bloqueado;
-          btn.style.opacity = bloqueado ? '0.6' : '1';
-          btn.style.cursor = bloqueado ? 'not-allowed' : 'pointer';
+      function renderStatus() {
+        const nombre = getNombre() || 'Invitado';
+        const puntaje = getPuntaje();
+        ui.statusTop.textContent = `👤 ${nombre} | ⭐ Puntaje: ${puntaje}/100`;
+
+        const progreso = getProgreso();
+        const done = progreso.completadas.length;
+        ui.doneCount.textContent = String(done);
+        ui.bar.style.width = `${Math.round((done / TOTAL_ACT) * 100)}%`;
+        ui.ultimoTema.textContent = progreso.temaActual || 'Ninguno';
+      }
+
+      function mensaje(el, texto, ok = true) {
+        el.textContent = texto;
+        el.className = `message ${ok ? 'ok' : 'warn'}`;
+      }
+
+      function marcarCompletada(idActividad) {
+        const p = getProgreso();
+        if (!p.completadas.includes(idActividad)) p.completadas.push(idActividad);
+        saveJSON(KEYS.progreso, p);
+        renderStatus();
+      }
+
+      function guardarRespuesta(clave, valor) {
+        const r = getRespuestas();
+        r[clave] = valor;
+        saveJSON(KEYS.respuestas, r);
+      }
+
+      function calificarRelacionar() {
+        const expected = { pe: 'Lima', ec: 'Quito', bo: 'La Paz' };
+        let ok = 0;
+        document.querySelectorAll('select[data-actividad="relacionar"]').forEach((s) => {
+          guardarRespuesta(`rel_${s.dataset.id}`, s.value);
+          if (s.value === expected[s.dataset.id]) ok += 1;
         });
-
-        estadoTemas.textContent = bloqueado
-          ? 'Bloqueado: guarda tu nombre para continuar.'
-          : 'Habilitado: ya puedes navegar por los temas.';
+        if (ok === 3) marcarCompletada('relacionar');
+        return ok === 3;
       }
 
-      function refreshUI() {
-        const hasNombre = Boolean(getNombreGuardado());
-        setTemasBloqueados(!hasNombre);
-        renderTopbar();
+      function calificarCompletar() {
+        const expected = { c1: 'localstorage', c2: 'hotspots' };
+        let ok = 0;
+        document.querySelectorAll('input[data-actividad="completar"]').forEach((i) => {
+          const val = normalizar(i.value);
+          guardarRespuesta(`comp_${i.dataset.id}`, i.value);
+          if (val === expected[i.dataset.id]) ok += 1;
+        });
+        if (ok === 2) marcarCompletada('completar');
+        return ok === 2;
       }
 
-      function mostrarMensaje(texto, tipo) {
-        mensaje.textContent = texto;
-        mensaje.className = `message ${tipo === 'ok' ? 'message--ok' : 'message--warn'}`;
+      function calificarSopa() {
+        const input = document.querySelector('input[data-actividad="sopa"]');
+        const parts = normalizar(input.value).split(',').map((v) => v.trim()).filter(Boolean);
+        guardarRespuesta('sopa', input.value);
+        const base = ['mapa', 'tema', 'datos'];
+        const ok = base.every((w) => parts.includes(w));
+        if (ok) marcarCompletada('sopa');
+        return ok;
       }
 
-      btnGuardar.addEventListener('click', function () {
-        const nombre = nombreInput.value.trim();
+      function calificarCruci() {
+        const expected = { h1: 'localstorage', v1: 'hotspot' };
+        let ok = 0;
+        document.querySelectorAll('input[data-actividad="cruci"]').forEach((i) => {
+          const val = normalizar(i.value);
+          guardarRespuesta(`cru_${i.dataset.id}`, i.value);
+          if (val === expected[i.dataset.id]) ok += 1;
+        });
+        if (ok === 2) marcarCompletada('cruci');
+        return ok === 2;
+      }
 
+      function calificarEvaluacion() {
+        const expected = {
+          1: 'localStorage',
+          2: 'El nombre del estudiante',
+          3: 'Navegar a temas',
+          4: '4 (temas 2 a 5)',
+          5: 'Se borra progreso y respuestas'
+        };
+        let score = 0;
+        ui.evals.forEach((s) => {
+          const key = Number(s.dataset.eval);
+          guardarRespuesta(`eval_${key}`, s.value);
+          if (s.value === expected[key]) score += 1;
+        });
+        if (score === 5) marcarCompletada('evaluacion');
+        return score;
+      }
+
+      function calcularPuntajeTotal() {
+        const progreso = getProgreso();
+        const actividades = progreso.completadas.filter((x) => x !== 'evaluacion').length;
+        const scoreEval = calificarEvaluacion();
+        const total = Math.round((actividades / 4) * 50 + (scoreEval / 5) * 50);
+        localStorage.setItem(KEYS.puntaje, String(total));
+        renderStatus();
+        return { total, scoreEval };
+      }
+
+      ui.btnGuardar.addEventListener('click', () => {
+        const nombre = ui.nombre.value.trim();
         if (!nombre) {
-          mostrarMensaje('Debes escribir tu nombre completo antes de guardar.', 'warn');
+          mensaje(ui.msg, 'Debes ingresar tu nombre completo.', false);
           return;
         }
-
-        localStorage.setItem(STORAGE_KEYS.nombre, nombre);
-
-        if (localStorage.getItem(STORAGE_KEYS.puntaje) === null) {
-          localStorage.setItem(STORAGE_KEYS.puntaje, '0');
-        }
-        if (localStorage.getItem(STORAGE_KEYS.progreso) === null) {
-          localStorage.setItem(STORAGE_KEYS.progreso, JSON.stringify({ temaActual: null }));
-        }
-        if (localStorage.getItem(STORAGE_KEYS.respuestas) === null) {
-          localStorage.setItem(STORAGE_KEYS.respuestas, JSON.stringify({}));
-        }
-
-        mostrarMensaje('Nombre guardado correctamente. Ya puedes acceder a los temas.', 'ok');
-        refreshUI();
+        localStorage.setItem(KEYS.nombre, nombre);
+        if (!localStorage.getItem(KEYS.puntaje)) localStorage.setItem(KEYS.puntaje, '0');
+        if (!localStorage.getItem(KEYS.progreso)) saveJSON(KEYS.progreso, { temaActual: null, completadas: [] });
+        if (!localStorage.getItem(KEYS.respuestas)) saveJSON(KEYS.respuestas, {});
+        setGate(false);
+        renderStatus();
+        mensaje(ui.msg, 'Nombre guardado. Navegación habilitada.', true);
       });
 
-      btnReiniciar.addEventListener('click', function () {
-        localStorage.removeItem(STORAGE_KEYS.nombre);
-        localStorage.removeItem(STORAGE_KEYS.puntaje);
-        localStorage.removeItem(STORAGE_KEYS.progreso);
-        localStorage.removeItem(STORAGE_KEYS.respuestas);
-
-        nombreInput.value = '';
-        mostrarMensaje('Se borraron nombre, puntaje, progreso y respuestas.', 'ok');
-        refreshUI();
+      ui.btnReset.addEventListener('click', () => {
+        Object.values(KEYS).forEach((k) => localStorage.removeItem(k));
+        ui.nombre.value = '';
+        setGate(true);
+        renderStatus();
+        mensaje(ui.msg, 'Progreso reiniciado correctamente.', true);
+        mensaje(ui.msgActividades, '', true);
+        mensaje(ui.msgEval, '', true);
       });
 
-      botonesTema.forEach((btn) => {
-        btn.addEventListener('click', function () {
-          const nombre = getNombreGuardado();
-          if (!nombre) {
-            mostrarMensaje('Navegación bloqueada: guarda tu nombre para ingresar a los temas.', 'warn');
-            setTemasBloqueados(true);
+      ui.hotspots.forEach((btn) => {
+        btn.addEventListener('click', () => {
+          if (!getNombre()) {
+            mensaje(ui.msg, 'Navegación bloqueada. Primero guarda tu nombre.', false);
+            setGate(true);
             return;
           }
-
-          const tema = btn.getAttribute('data-tema') || 'tema';
-          localStorage.setItem(STORAGE_KEYS.progreso, JSON.stringify({ temaActual: tema }));
-          mostrarMensaje(`Acceso concedido al ${tema}. Progreso actualizado localmente.`, 'ok');
+          const target = btn.dataset.target;
+          document.getElementById(target)?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+          const p = getProgreso();
+          p.temaActual = target;
+          saveJSON(KEYS.progreso, p);
+          renderStatus();
         });
+      });
+
+      ui.btnChecks.forEach((btn) => {
+        btn.addEventListener('click', () => {
+          if (!getNombre()) {
+            mensaje(ui.msgActividades, 'Debes guardar tu nombre antes de calificar actividades.', false);
+            return;
+          }
+          const which = btn.dataset.check;
+          let ok = false;
+          if (which === 'relacionar') ok = calificarRelacionar();
+          if (which === 'completar') ok = calificarCompletar();
+          if (which === 'sopa') ok = calificarSopa();
+          if (which === 'cruci') ok = calificarCruci();
+          mensaje(ui.msgActividades, ok ? `Actividad "${which}" completada.` : `Actividad "${which}" con errores, intenta nuevamente.`, ok);
+        });
+      });
+
+      ui.btnEvaluar.addEventListener('click', () => {
+        if (!getNombre()) {
+          mensaje(ui.msgEval, 'Debes guardar tu nombre antes de evaluar.', false);
+          return;
+        }
+        const { total, scoreEval } = calcularPuntajeTotal();
+        const ok = scoreEval >= 3;
+        mensaje(ui.msgEval, `Evaluación: ${scoreEval}/5. Puntaje total acumulado: ${total}/100.`, ok);
       });
 
       (function init() {
-        const nombre = getNombreGuardado();
-        if (nombre) {
-          nombreInput.value = nombre;
-        }
+        const nombre = getNombre();
+        if (nombre) ui.nombre.value = nombre;
+        setGate(!nombre);
 
-        if (localStorage.getItem(STORAGE_KEYS.puntaje) === null) {
-          localStorage.setItem(STORAGE_KEYS.puntaje, '0');
-        }
+        const respuestas = getRespuestas();
+        Object.entries(respuestas).forEach(([k, v]) => {
+          const [tipo, id] = k.split('_');
+          if (tipo === 'rel') {
+            const el = document.querySelector(`select[data-actividad="relacionar"][data-id="${id}"]`);
+            if (el) el.value = v;
+          }
+          if (tipo === 'comp') {
+            const el = document.querySelector(`input[data-actividad="completar"][data-id="${id}"]`);
+            if (el) el.value = v;
+          }
+          if (tipo === 'cru') {
+            const el = document.querySelector(`input[data-actividad="cruci"][data-id="${id}"]`);
+            if (el) el.value = v;
+          }
+          if (k === 'sopa') {
+            const el = document.querySelector('input[data-actividad="sopa"]');
+            if (el) el.value = v;
+          }
+          if (tipo === 'eval') {
+            const el = document.querySelector(`select[data-eval="${id}"]`);
+            if (el) el.value = v;
+          }
+        });
 
-        refreshUI();
+        renderStatus();
       })();
     })();
   </script>
