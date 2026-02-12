@@ -362,6 +362,33 @@
     .clues ul { margin:.3rem 0 0 1rem; padding:0; }
     .clues li { margin:.26rem 0; color:var(--muted); }
 
+  
+
+    .hud {
+      display:flex; flex-wrap:wrap; gap:.5rem; align-items:center;
+      padding:.65rem .7rem; border:1px solid var(--line); border-radius:12px;
+      background:rgba(4,18,12,.5); margin-top:.55rem;
+    }
+    .hud-chip {
+      padding:.28rem .55rem; border-radius:999px; border:1px solid var(--line);
+      background:rgba(68, 177, 122, .18); font-size:.78rem; font-weight:700;
+      letter-spacing:.2px;
+    }
+    .hero-title-row { display:flex; align-items:center; justify-content:space-between; gap:.5rem; flex-wrap:wrap; }
+    .hero-badge { font-size:.78rem; border:1px solid var(--line); border-radius:999px; padding:.25rem .55rem; background:rgba(3,15,10,.55); }
+    .panel, .map-card, .topic-card, .activity-card, .eval-card { backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px); }
+    .hotspot { animation: pulse 2s ease-in-out infinite; }
+    @keyframes pulse {
+      0%, 100% { box-shadow: 0 0 0 0 rgba(114, 244, 173, .25), 0 10px 20px rgba(0,0,0,.35); }
+      50% { box-shadow: 0 0 0 8px rgba(114, 244, 173, 0), 0 10px 20px rgba(0,0,0,.35); }
+    }
+    .topic-card { position:relative; }
+    .topic-card::before {
+      content:''; position:absolute; inset:0 0 auto 0; height:2px;
+      background:linear-gradient(90deg, transparent, rgba(140,245,190,.8), transparent);
+      border-radius: 16px 16px 0 0;
+    }
+
   </style>
 </head>
 <body>
@@ -405,13 +432,24 @@
 
     <main class="content glass">
       <section class="hero">
-        <h2>Enfoque de la unidad</h2>
+        <div class="hero-title-row">
+          <h2>Enfoque de la unidad</h2>
+          <span class="hero-badge">🎮 Modo misión académica</span>
+        </div>
         <p>La ecología del paisaje estudia cómo el <strong>patrón espacial</strong> del territorio influye en los <strong>procesos ecológicos</strong>. Se analiza un mosaico de coberturas (bosque, cultivo, urbano, humedal, etc.) y su efecto sobre flujos de organismos, energía y materia.</p>
         <p><strong>Patrón ↔ Proceso</strong> es la idea central para diseñar conectividad, evaluar impactos y planificar restauración.</p>
+        <div class="hud" aria-label="resumen rápido de unidad">
+          <span class="hud-chip">Patrón</span>
+          <span class="hud-chip">Proceso</span>
+          <span class="hud-chip">Conectividad</span>
+          <span class="hud-chip">Fragmentación</span>
+          <span class="hud-chip">Escala</span>
+          <span class="hud-chip">Biogeografía de islas</span>
+        </div>
       </section>
 
       <section class="map-card" id="mapaSection">
-        <h3>Mapa de la unidad (hotspots)</h3>
+        <h3>Mapa de la unidad (hotspots interactivos)</h3>
         <p id="mapState" class="subtitle">Bloqueado: guarda tu nombre para habilitar hotspots y actividades.</p>
         <div class="map-stage" aria-label="Mapa visual de la Unidad 3">
           <button class="hotspot js-hotspot" data-target="tema1" style="left:14%;top:25%" aria-label="Abrir tema 1">1</button>
