@@ -554,7 +554,7 @@
             <div class="body">
               <div class="sopa-layout">
                 <div class="sopa-board">
-                  <p class="subtitle">Selecciona visualmente y reporta las palabras encontradas.</p>
+                  <p class="subtitle">Haz clic sobre las letras de cada palabra. No necesitas escribir nada.</p>
                   <div class="sopa-grid-pro" aria-label="Sopa de letras profesional">
                     <span class="cell-pro">C</span><span class="cell-pro">O</span><span class="cell-pro">N</span><span class="cell-pro">E</span><span class="cell-pro">C</span><span class="cell-pro">T</span><span class="cell-pro">I</span><span class="cell-pro">V</span><span class="cell-pro">I</span><span class="cell-pro">D</span><span class="cell-pro">A</span><span class="cell-pro">D</span><span class="cell-pro">Q</span><span class="cell-pro">L</span><span class="cell-pro">M</span><span class="cell-pro">T</span><span class="cell-pro">R</span><span class="cell-pro">U</span>
                     <span class="cell-pro">A</span><span class="cell-pro">R</span><span class="cell-pro">F</span><span class="cell-pro">G</span><span class="cell-pro">N</span><span class="cell-pro">P</span><span class="cell-pro">O</span><span class="cell-pro">H</span><span class="cell-pro">B</span><span class="cell-pro">W</span><span class="cell-pro">X</span><span class="cell-pro">S</span><span class="cell-pro">E</span><span class="cell-pro">C</span><span class="cell-pro">A</span><span class="cell-pro">L</span><span class="cell-pro">A</span><span class="cell-pro">D</span>
@@ -572,12 +572,12 @@
                     <span class="tag">MATRIZ</span><span class="tag">PARCHE</span><span class="tag">BORDE</span><span class="tag">MOSAICO</span><span class="tag">ESCALA</span>
                   </div>
                   <p class="subtitle">💡 Haz clic sobre las letras hasta marcar cada palabra objetivo.</p>
-                  <div id="sopaFound" class="tag-list" aria-live="polite"></div>
+                  <small class="subtitle">Estado de palabras encontradas:</small><div id="sopaFound" class="tag-list" aria-live="polite"></div>
                 </aside>
               </div>
                             <div class="actions">
-                <button class="btn btn-primary" data-review="sopa" type="button">Revisar</button>
-                <button class="btn btn-secondary" data-retry="sopa" type="button">Reintentar</button>
+                <button class="btn btn-primary" data-review="sopa" type="button">Validar selección</button>
+                <button class="btn btn-secondary" data-retry="sopa" type="button">Limpiar selección</button>
               </div>
               <div id="fb-sopa" class="feedback" aria-live="polite"></div>
             </div>
@@ -947,25 +947,22 @@
 
       function updateSopaFound() {
         const found = $('#sopaFound');
-        if (!found) return;
+        if (!found) return false;
         const words = ['fragmentacion', 'conectividad', 'heterogeneidad'];
-        found.innerHTML = words.map((w) => {
+        const state = words.map((w) => {
           const cells = $$(`.sopa-grid-pro .cell-pro[data-word="${w}"]`);
           const ok = cells.length > 0 && cells.every((c) => c.classList.contains('selected'));
-          return `<span class="tag ${ok ? 'found' : ''}">${w.toUpperCase()}</span>`;
-        }).join('');
+          return { w, ok };
+        });
+        found.innerHTML = state.map(({w, ok}) => `<span class="tag ${ok ? 'found' : ''}">${ok ? '✅' : '⬜'} ${w.toUpperCase()}</span>`).join('');
+        return state.every((s) => s.ok);
       }
 
       function reviewSopa() {
-        const words = ['fragmentacion', 'conectividad', 'heterogeneidad'];
-        const pass = words.every((w) => {
-          const cells = $$(`.sopa-grid-pro .cell-pro[data-word="${w}"]`);
-          return cells.length > 0 && cells.every((c) => c.classList.contains('selected'));
-        });
+        const pass = updateSopaFound();
         saveRespuesta('sopa', JSON.stringify($$('.sopa-grid-pro .cell-pro').map((c) => c.classList.contains('selected') ? '1' : '0')));
         pass ? markDone('sopa') : unmarkDone('sopa');
-        updateSopaFound();
-        setFeedback('fb-sopa', pass ? '✅ Sopa completada: seleccionaste correctamente las palabras objetivo.' : '❌ Debes marcar con clic todas las letras de cada palabra objetivo.', pass);
+        setFeedback('fb-sopa', pass ? '✅ Sopa completada correctamente por selección visual.' : '❌ Aún faltan letras por marcar en las palabras objetivo.', pass);
       }
 
       function retrySopa() {
@@ -1096,7 +1093,7 @@
         mark(Array.from({length:12}, (_,i)=>i), 'conectividad');
         mark(Array.from({length:14}, (_,i)=>36+i), 'heterogeneidad');
         mark(Array.from({length:13}, (_,i)=>54+i), 'fragmentacion');
-        cells.forEach((c) => c.addEventListener('click', () => { c.classList.toggle('selected'); updateSopaFound(); }));
+        cells.forEach((c) => c.addEventListener('click', () => { c.classList.toggle('selected'); const done = updateSopaFound(); if (done) { markDone('sopa'); setFeedback('fb-sopa', '✅ ¡Perfecto! Ya encontraste todas las palabras.', true); } }));
         // restaurar selección guardada
         const saved = getRespuestas().sopa || '';
         if (saved && saved.startsWith('[')) {
