@@ -389,6 +389,44 @@
       border-radius: 16px 16px 0 0;
     }
 
+  
+
+    .topic-card { display:none; }
+    .topic-card.in-modal { display:block; margin:0; }
+
+    .modal {
+      position:fixed; inset:0; z-index:2000; display:none;
+      background:rgba(2,10,7,.72);
+      backdrop-filter: blur(4px);
+      -webkit-backdrop-filter: blur(4px);
+      padding:1.2rem;
+    }
+    .modal.open { display:block; }
+    .modal-window {
+      height:calc(100vh - 2.4rem);
+      border:1px solid var(--line); border-radius:18px;
+      background:linear-gradient(180deg, rgba(7,30,20,.95), rgba(5,22,15,.95));
+      box-shadow: 0 20px 40px rgba(0,0,0,.45);
+      display:grid; grid-template-rows:auto 1fr;
+      overflow:hidden;
+    }
+    .modal-head { display:flex; justify-content:space-between; align-items:center; gap:.7rem; padding:.8rem 1rem; border-bottom:1px solid var(--line); }
+    .modal-head h3 { margin:0; font-size:1.2rem; }
+    .modal-body { overflow:auto; padding:1rem; }
+
+    .sopa-grid-pro .cell-pro { cursor:pointer; user-select:none; transition:.12s ease; }
+    .sopa-grid-pro .cell-pro.target { box-shadow: inset 0 0 0 1px rgba(130,214,172,.35); }
+    .sopa-grid-pro .cell-pro.selected { background:#56d98c; color:#052815; transform:scale(1.03); }
+
+    .fill-list { display:grid; gap:.5rem; margin-top:.65rem; }
+    .fill-row { display:flex; align-items:center; gap:.38rem; flex-wrap:wrap; }
+    .fill-num { width:24px; height:24px; border-radius:999px; display:grid; place-items:center; border:1px solid var(--line); background:rgba(0,0,0,.45); font-size:.75rem; font-weight:700; }
+    .letter-box {
+      width:30px; height:30px; text-transform:uppercase; text-align:center;
+      border:1px solid rgba(144,233,188,.35); border-radius:8px;
+      background:rgba(8,25,17,.9); color:var(--text); font-weight:700;
+    }
+
   </style>
 </head>
 <body>
@@ -568,10 +606,20 @@
                   </ul>
                 </aside>
               </div>
-              <p>1) Cobertura dominante → <input class="input" style="max-width:220px;display:inline-block" data-act="cruci" data-id="1" type="text" /></p>
-              <p>2) Conexión lineal → <input class="input" style="max-width:220px;display:inline-block" data-act="cruci" data-id="2" type="text" /></p>
-              <p>3) Variabilidad espacial → <input class="input" style="max-width:220px;display:inline-block" data-act="cruci" data-id="3" type="text" /></p>
-              <p>4) Área homogénea → <input class="input" style="max-width:220px;display:inline-block" data-act="cruci" data-id="4" type="text" /></p>
+              <div class="fill-list" aria-label="Rellenar palabras del crucigrama">
+              <div class="fill-row"><span class="fill-num">1</span>
+                <input class="letter-box" data-act="cruci-cell" data-word="1" data-pos="0" maxlength="1" /><input class="letter-box" data-act="cruci-cell" data-word="1" data-pos="1" maxlength="1" /><input class="letter-box" data-act="cruci-cell" data-word="1" data-pos="2" maxlength="1" /><input class="letter-box" data-act="cruci-cell" data-word="1" data-pos="3" maxlength="1" /><input class="letter-box" data-act="cruci-cell" data-word="1" data-pos="4" maxlength="1" /><input class="letter-box" data-act="cruci-cell" data-word="1" data-pos="5" maxlength="1" />
+              </div>
+              <div class="fill-row"><span class="fill-num">2</span>
+                <input class="letter-box" data-act="cruci-cell" data-word="2" data-pos="0" maxlength="1" /><input class="letter-box" data-act="cruci-cell" data-word="2" data-pos="1" maxlength="1" /><input class="letter-box" data-act="cruci-cell" data-word="2" data-pos="2" maxlength="1" /><input class="letter-box" data-act="cruci-cell" data-word="2" data-pos="3" maxlength="1" /><input class="letter-box" data-act="cruci-cell" data-word="2" data-pos="4" maxlength="1" /><input class="letter-box" data-act="cruci-cell" data-word="2" data-pos="5" maxlength="1" /><input class="letter-box" data-act="cruci-cell" data-word="2" data-pos="6" maxlength="1" /><input class="letter-box" data-act="cruci-cell" data-word="2" data-pos="7" maxlength="1" />
+              </div>
+              <div class="fill-row"><span class="fill-num">3</span>
+                <input class="letter-box" data-act="cruci-cell" data-word="3" data-pos="0" maxlength="1" /><input class="letter-box" data-act="cruci-cell" data-word="3" data-pos="1" maxlength="1" /><input class="letter-box" data-act="cruci-cell" data-word="3" data-pos="2" maxlength="1" /><input class="letter-box" data-act="cruci-cell" data-word="3" data-pos="3" maxlength="1" /><input class="letter-box" data-act="cruci-cell" data-word="3" data-pos="4" maxlength="1" /><input class="letter-box" data-act="cruci-cell" data-word="3" data-pos="5" maxlength="1" /><input class="letter-box" data-act="cruci-cell" data-word="3" data-pos="6" maxlength="1" /><input class="letter-box" data-act="cruci-cell" data-word="3" data-pos="7" maxlength="1" /><input class="letter-box" data-act="cruci-cell" data-word="3" data-pos="8" maxlength="1" /><input class="letter-box" data-act="cruci-cell" data-word="3" data-pos="9" maxlength="1" /><input class="letter-box" data-act="cruci-cell" data-word="3" data-pos="10" maxlength="1" /><input class="letter-box" data-act="cruci-cell" data-word="3" data-pos="11" maxlength="1" /><input class="letter-box" data-act="cruci-cell" data-word="3" data-pos="12" maxlength="1" /><input class="letter-box" data-act="cruci-cell" data-word="3" data-pos="13" maxlength="1" />
+              </div>
+              <div class="fill-row"><span class="fill-num">4</span>
+                <input class="letter-box" data-act="cruci-cell" data-word="4" data-pos="0" maxlength="1" /><input class="letter-box" data-act="cruci-cell" data-word="4" data-pos="1" maxlength="1" /><input class="letter-box" data-act="cruci-cell" data-word="4" data-pos="2" maxlength="1" /><input class="letter-box" data-act="cruci-cell" data-word="4" data-pos="3" maxlength="1" /><input class="letter-box" data-act="cruci-cell" data-word="4" data-pos="4" maxlength="1" /><input class="letter-box" data-act="cruci-cell" data-word="4" data-pos="5" maxlength="1" />
+              </div>
+              </div>
               <div class="actions">
                 <button class="btn btn-primary" data-review="cruci" type="button">Revisar</button>
                 <button class="btn btn-secondary" data-retry="cruci" type="button">Reintentar</button>
@@ -686,6 +734,10 @@
         btnGuardar: $('#btnGuardar'),
         btnReset: $('#btnReset'),
         msgGate: $('#msgGate'),
+        temaModal: $('#temaModal'),
+        modalBody: $('#modalBody'),
+        modalTitle: $('#modalTitle'),
+        btnCloseModal: $('#btnCloseModal'),
         mapState: $('#mapState'),
         hotspots: $$('.js-hotspot'),
         topicLinks: $$('.js-topic-link'),
@@ -761,13 +813,41 @@
       // =========================
       // 2) Navegación y gate
       // =========================
+      let modalTemaActual = null;
+      let modalPlaceholder = null;
+
+      function closeTemaModal() {
+        if (!modalTemaActual) return;
+        const section = document.getElementById(modalTemaActual);
+        if (section && modalPlaceholder && modalPlaceholder.parentNode) {
+          modalPlaceholder.parentNode.insertBefore(section, modalPlaceholder);
+          modalPlaceholder.remove();
+          section.classList.remove('in-modal');
+        }
+        ui.temaModal.classList.remove('open');
+        ui.temaModal.setAttribute('aria-hidden', 'true');
+        modalTemaActual = null;
+        modalPlaceholder = null;
+      }
+
       function goToTema(target) {
         if (!getNombre()) {
           ui.msgGate.textContent = 'Debes guardar tu nombre antes de navegar.';
           ui.msgGate.className = 'msg warn';
           return;
         }
-        document.getElementById(target)?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        if (modalTemaActual) closeTemaModal();
+        const section = document.getElementById(target);
+        if (!section) return;
+        modalPlaceholder = document.createElement('div');
+        section.parentNode.insertBefore(modalPlaceholder, section);
+        section.classList.add('in-modal');
+        ui.modalBody.appendChild(section);
+        ui.modalTitle.textContent = section.querySelector('h3')?.textContent || 'Tema';
+        ui.temaModal.classList.add('open');
+        ui.temaModal.setAttribute('aria-hidden', 'false');
+        modalTemaActual = target;
+
         const p = getProgreso();
         p.temaActual = target;
         saveJSON(KEYS.progreso, p);
@@ -776,6 +856,10 @@
 
       ui.hotspots.forEach((b) => b.addEventListener('click', () => goToTema(b.dataset.target)));
       ui.topicLinks.forEach((b) => b.addEventListener('click', () => goToTema(b.dataset.target)));
+      ui.btnCloseModal.addEventListener('click', closeTemaModal);
+      ui.temaModal.addEventListener('click', (e) => { if (e.target === ui.temaModal) closeTemaModal(); });
+      document.addEventListener('keydown', (e) => { if (e.key === 'Escape') closeTemaModal(); });
+
 
       ui.btnGuardar.addEventListener('click', () => {
         const nombre = ui.nombre.value.trim();
@@ -839,7 +923,7 @@
           saveRespuesta(`comp_${i.dataset.id}`, i.value);
           if (v === expected[i.dataset.id]) ok += 1;
         });
-        const pass = ok === 4;
+        const pass = ok === 2;
         pass ? markDone('comp') : unmarkDone('comp');
         setFeedback('fb-comp', pass ? '✅ Excelente, completaste correctamente.' : '❌ Faltan términos clave (configuración / heterogeneidad).', pass);
       }
@@ -854,15 +938,22 @@
         const input = $('input[data-act="sopa"]');
         const parts = normalize(input.value).split(',').map((x) => x.trim()).filter(Boolean);
         saveRespuesta('sopa', input.value);
-        const pass = ['fragmentacion', 'conectividad', 'heterogeneidad'].every((w) => parts.includes(w));
+        const words = ['fragmentacion', 'conectividad', 'heterogeneidad'];
+        const typedOk = words.every((w) => parts.includes(w));
+        const selected = words.every((w) => {
+          const cells = $$(`.sopa-grid-pro .cell-pro[data-word="${w}"]`);
+          return cells.length > 0 && cells.every((c) => c.classList.contains('selected'));
+        });
+        const pass = typedOk && selected;
         pass ? markDone('sopa') : unmarkDone('sopa');
-        setFeedback('fb-sopa', pass ? '✅ Encontraste todas las palabras largas.' : '❌ Debes incluir: FRAGMENTACION, CONECTIVIDAD, HETEROGENEIDAD.', pass);
+        setFeedback('fb-sopa', pass ? '✅ Sopa completada: selección y palabras correctas.' : '❌ Debes marcar con clic todas las letras objetivo y escribir las 3 palabras.', pass);
       }
 
       function retrySopa() {
         const input = $('input[data-act="sopa"]');
         input.value = '';
         saveRespuesta('sopa', '');
+        $$('.sopa-grid-pro .cell-pro.selected').forEach((c) => c.classList.remove('selected'));
         unmarkDone('sopa');
         setFeedback('fb-sopa', 'Actividad reiniciada.', true);
       }
@@ -870,10 +961,11 @@
       function reviewCruci() {
         const expected = { 1: 'matriz', 2: 'corredor', 3: 'heterogeneidad', 4: 'parche' };
         let ok = 0;
-        $$('input[data-act="cruci"]').forEach((i) => {
-          const v = normalize(i.value);
-          saveRespuesta(`cruci_${i.dataset.id}`, i.value);
-          if (v === expected[i.dataset.id]) ok += 1;
+        [1,2,3,4].forEach((id) => {
+          const cells = $$(`input[data-act="cruci-cell"][data-word="${id}"]`).sort((a,b)=>Number(a.dataset.pos)-Number(b.dataset.pos));
+          const word = cells.map((c)=>normalize(c.value).slice(0,1)).join('');
+          saveRespuesta(`cruci_${id}`, word);
+          if (word === expected[id]) ok += 1;
         });
         const pass = ok === 4;
         pass ? markDone('cruci') : unmarkDone('cruci');
@@ -881,7 +973,8 @@
       }
 
       function retryCruci() {
-        $$('input[data-act="cruci"]').forEach((i) => { i.value = ''; saveRespuesta(`cruci_${i.dataset.id}`, ''); });
+        $$('input[data-act="cruci-cell"]').forEach((i) => { i.value = ''; });
+        [1,2,3,4].forEach((id)=>saveRespuesta(`cruci_${id}`, ''));
         unmarkDone('cruci');
         setFeedback('fb-cruci', 'Actividad reiniciada.', true);
       }
@@ -975,6 +1068,19 @@
       $$('[data-review]').forEach((b) => b.addEventListener('click', () => reviewMap[b.dataset.review]()));
       $$('[data-retry]').forEach((b) => b.addEventListener('click', () => retryMap[b.dataset.retry]()));
 
+
+      function setupSopaClickGame() {
+        const cells = $$('.sopa-grid-pro .cell-pro');
+        if (!cells.length) return;
+        const mark = (indexes, word) => indexes.forEach((i) => {
+          if (cells[i]) { cells[i].dataset.word = word; cells[i].classList.add('target'); }
+        });
+        mark(Array.from({length:12}, (_,i)=>i), 'conectividad');
+        mark(Array.from({length:14}, (_,i)=>36+i), 'heterogeneidad');
+        mark(Array.from({length:13}, (_,i)=>54+i), 'fragmentacion');
+        cells.forEach((c) => c.addEventListener('click', () => c.classList.toggle('selected')));
+      }
+
       // =========================
       // 6) Inicialización
       // =========================
@@ -991,8 +1097,9 @@
             if (el) el.value = v;
           }
           if (type === 'cruci') {
-            const el = document.querySelector(`input[data-act="cruci"][data-id="${id}"]`);
-            if (el) el.value = v;
+            const cells = $$(`input[data-act="cruci-cell"][data-word="${id}"]`).sort((a,b)=>Number(a.dataset.pos)-Number(b.dataset.pos));
+            const chars = String(v || '').split('');
+            cells.forEach((c, idx) => { c.value = chars[idx] || ''; });
           }
           if (k === 'sopa') {
             const el = document.querySelector('input[data-act="sopa"]');
@@ -1013,10 +1120,22 @@
         const nombre = getNombre();
         if (nombre) ui.nombre.value = nombre;
         setGate(!nombre);
+        setupSopaClickGame();
         restoreResponses();
         render();
       })();
     })();
   </script>
+
+  <div id="temaModal" class="modal" aria-hidden="true">
+    <div class="modal-window">
+      <div class="modal-head">
+        <h3 id="modalTitle">Tema</h3>
+        <button id="btnCloseModal" class="btn btn-secondary" type="button">Cerrar</button>
+      </div>
+      <div id="modalBody" class="modal-body"></div>
+    </div>
+  </div>
+
 </body>
 </html>
