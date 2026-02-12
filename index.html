@@ -358,7 +358,8 @@
     .cross-grid { display:grid; grid-template-columns: repeat(20, 36px); gap:8px; justify-content:start; max-width:100%; overflow:auto; padding:.3rem; }
     .dot { width:36px; height:36px; border-radius:999px; display:grid; place-items:center; border:1px solid rgba(135, 223, 180, .28); background:rgba(2, 10, 7, .78); color:#c8ffe0; font-size:.78rem; position:relative; }
     .dot.active { background:rgba(3, 18, 12, .9); }
-    .dot .n { position:absolute; top:-6px; left:10px; font-size:.62rem; background:rgba(0,0,0,.65); border:1px solid var(--line); border-radius:999px; width:16px; height:16px; display:grid; place-items:center; }
+    .dot .n { position:absolute; top:-6px; left:10px; font-size:.62rem; background:rgba(0,0,0,.65); border:1px solid var(--line); border-radius:999px; width:16px; height:16px; display:grid; place-items:center; z-index:2; }
+    .dot-input { width:28px; height:28px; border-radius:999px; border:1px solid rgba(145,236,192,.45); background:rgba(6,20,13,.95); color:#ecfff4; text-align:center; text-transform:uppercase; font-weight:800; font-size:.88rem; }
     .clues { border:1px solid var(--line); border-radius:14px; background:rgba(0,0,0,.22); padding:.65rem; }
     .clues ul { margin:.3rem 0 0 1rem; padding:0; }
     .clues li { margin:.26rem 0; color:var(--muted); }
@@ -616,21 +617,6 @@
                   </ul>
                 </aside>
               </div>
-              <div class="circle-fill-wrap" aria-label="Rellenar palabras del crucigrama en círculos">
-                <div class="circle-word"><span class="fill-num">1</span>
-                  <input class="circle-input" data-act="cruci-cell" data-word="1" data-pos="0" maxlength="1" /><input class="circle-input" data-act="cruci-cell" data-word="1" data-pos="1" maxlength="1" /><input class="circle-input" data-act="cruci-cell" data-word="1" data-pos="2" maxlength="1" /><input class="circle-input" data-act="cruci-cell" data-word="1" data-pos="3" maxlength="1" /><input class="circle-input" data-act="cruci-cell" data-word="1" data-pos="4" maxlength="1" /><input class="circle-input" data-act="cruci-cell" data-word="1" data-pos="5" maxlength="1" />
-                </div>
-                <div class="circle-word"><span class="fill-num">2</span>
-                  <input class="circle-input" data-act="cruci-cell" data-word="2" data-pos="0" maxlength="1" /><input class="circle-input" data-act="cruci-cell" data-word="2" data-pos="1" maxlength="1" /><input class="circle-input" data-act="cruci-cell" data-word="2" data-pos="2" maxlength="1" /><input class="circle-input" data-act="cruci-cell" data-word="2" data-pos="3" maxlength="1" /><input class="circle-input" data-act="cruci-cell" data-word="2" data-pos="4" maxlength="1" /><input class="circle-input" data-act="cruci-cell" data-word="2" data-pos="5" maxlength="1" /><input class="circle-input" data-act="cruci-cell" data-word="2" data-pos="6" maxlength="1" /><input class="circle-input" data-act="cruci-cell" data-word="2" data-pos="7" maxlength="1" />
-                </div>
-                <div class="circle-word"><span class="fill-num">3</span>
-                  <input class="circle-input" data-act="cruci-cell" data-word="3" data-pos="0" maxlength="1" /><input class="circle-input" data-act="cruci-cell" data-word="3" data-pos="1" maxlength="1" /><input class="circle-input" data-act="cruci-cell" data-word="3" data-pos="2" maxlength="1" /><input class="circle-input" data-act="cruci-cell" data-word="3" data-pos="3" maxlength="1" /><input class="circle-input" data-act="cruci-cell" data-word="3" data-pos="4" maxlength="1" /><input class="circle-input" data-act="cruci-cell" data-word="3" data-pos="5" maxlength="1" /><input class="circle-input" data-act="cruci-cell" data-word="3" data-pos="6" maxlength="1" /><input class="circle-input" data-act="cruci-cell" data-word="3" data-pos="7" maxlength="1" /><input class="circle-input" data-act="cruci-cell" data-word="3" data-pos="8" maxlength="1" /><input class="circle-input" data-act="cruci-cell" data-word="3" data-pos="9" maxlength="1" /><input class="circle-input" data-act="cruci-cell" data-word="3" data-pos="10" maxlength="1" /><input class="circle-input" data-act="cruci-cell" data-word="3" data-pos="11" maxlength="1" /><input class="circle-input" data-act="cruci-cell" data-word="3" data-pos="12" maxlength="1" /><input class="circle-input" data-act="cruci-cell" data-word="3" data-pos="13" maxlength="1" />
-                </div>
-                <div class="circle-word"><span class="fill-num">4</span>
-                  <input class="circle-input" data-act="cruci-cell" data-word="4" data-pos="0" maxlength="1" /><input class="circle-input" data-act="cruci-cell" data-word="4" data-pos="1" maxlength="1" /><input class="circle-input" data-act="cruci-cell" data-word="4" data-pos="2" maxlength="1" /><input class="circle-input" data-act="cruci-cell" data-word="4" data-pos="3" maxlength="1" /><input class="circle-input" data-act="cruci-cell" data-word="4" data-pos="4" maxlength="1" /><input class="circle-input" data-act="cruci-cell" data-word="4" data-pos="5" maxlength="1" />
-                </div>
-              </div>
-            </div>
               <div class="actions">
                 <button class="btn btn-primary" data-review="cruci" type="button">Revisar</button>
                 <button class="btn btn-secondary" data-retry="cruci" type="button">Reintentar</button>
@@ -1115,6 +1101,40 @@
         updateSopaFound();
       }
 
+
+      function setupCruciGridInputs() {
+        const grid = document.querySelector('.cross-grid');
+        if (!grid) return;
+        // limpiar inputs previos
+        grid.querySelectorAll('input.dot-input').forEach((i) => i.remove());
+        const dots = Array.from(grid.querySelectorAll('.dot.active'));
+        const lengths = { 1: 6, 2: 8, 3: 14, 4: 6 };
+        [1,2,3,4].forEach((w) => {
+          const start = grid.querySelector(`.dot .n:nth-child(1)`);
+        });
+        const startDots = [1,2,3,4].map((n) => {
+          const marker = Array.from(grid.querySelectorAll('.dot .n')).find((m) => m.textContent.trim() === String(n));
+          return marker ? marker.parentElement : null;
+        });
+        startDots.forEach((startDot, idx) => {
+          const word = idx + 1;
+          if (!startDot) return;
+          const startIndex = dots.indexOf(startDot);
+          if (startIndex < 0) return;
+          const len = lengths[word];
+          const slice = dots.slice(startIndex, startIndex + len);
+          slice.forEach((dot, pos) => {
+            const input = document.createElement('input');
+            input.className = 'dot-input';
+            input.maxLength = 1;
+            input.setAttribute('data-act', 'cruci-cell');
+            input.setAttribute('data-word', String(word));
+            input.setAttribute('data-pos', String(pos));
+            dot.appendChild(input);
+          });
+        });
+      }
+
       // =========================
       // 6) Inicialización
       // =========================
@@ -1151,14 +1171,17 @@
         if (nombre) ui.nombre.value = nombre;
         setGate(!nombre);
         setupSopaClickGame();
+        setupCruciGridInputs();
         restoreResponses();
         // auto-avance en crucigrama
         $$('input[data-act="cruci-cell"]').forEach((el) => {
           el.addEventListener('input', () => {
             el.value = (el.value || "").toUpperCase().slice(0,1);
             if (el.value) {
-              const next = el.nextElementSibling;
-              if (next && next.matches('input[data-act="cruci-cell"]')) next.focus();
+              const w = el.dataset.word;
+              const pos = Number(el.dataset.pos || 0) + 1;
+              const next = document.querySelector(`input[data-act="cruci-cell"][data-word="${w}"][data-pos="${pos}"]`);
+              if (next) next.focus();
             }
           });
         });
