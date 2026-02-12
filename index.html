@@ -428,6 +428,15 @@
       background:rgba(8,25,17,.9); color:var(--text); font-weight:700;
     }
 
+    .circle-fill-wrap { margin-top:.7rem; border:1px solid var(--line); border-radius:12px; padding:.65rem; background:rgba(0,0,0,.2); }
+    .circle-word { display:flex; align-items:center; gap:.34rem; flex-wrap:wrap; margin:.35rem 0; }
+    .circle-word .fill-num { flex:0 0 auto; }
+    .circle-input {
+      width:34px; height:34px; border-radius:999px; text-align:center; text-transform:uppercase;
+      border:1px solid rgba(141,231,188,.42); background:rgba(4,14,10,.86); color:#eafff3;
+      font-weight:800; font-size:.92rem;
+    }
+
   </style>
 </head>
 <body>
@@ -607,20 +616,21 @@
                   </ul>
                 </aside>
               </div>
-              <div class="fill-list" aria-label="Rellenar palabras del crucigrama">
-              <div class="fill-row"><span class="fill-num">1</span>
-                <input class="letter-box" data-act="cruci-cell" data-word="1" data-pos="0" maxlength="1" /><input class="letter-box" data-act="cruci-cell" data-word="1" data-pos="1" maxlength="1" /><input class="letter-box" data-act="cruci-cell" data-word="1" data-pos="2" maxlength="1" /><input class="letter-box" data-act="cruci-cell" data-word="1" data-pos="3" maxlength="1" /><input class="letter-box" data-act="cruci-cell" data-word="1" data-pos="4" maxlength="1" /><input class="letter-box" data-act="cruci-cell" data-word="1" data-pos="5" maxlength="1" />
+              <div class="circle-fill-wrap" aria-label="Rellenar palabras del crucigrama en círculos">
+                <div class="circle-word"><span class="fill-num">1</span>
+                  <input class="circle-input" data-act="cruci-cell" data-word="1" data-pos="0" maxlength="1" /><input class="circle-input" data-act="cruci-cell" data-word="1" data-pos="1" maxlength="1" /><input class="circle-input" data-act="cruci-cell" data-word="1" data-pos="2" maxlength="1" /><input class="circle-input" data-act="cruci-cell" data-word="1" data-pos="3" maxlength="1" /><input class="circle-input" data-act="cruci-cell" data-word="1" data-pos="4" maxlength="1" /><input class="circle-input" data-act="cruci-cell" data-word="1" data-pos="5" maxlength="1" />
+                </div>
+                <div class="circle-word"><span class="fill-num">2</span>
+                  <input class="circle-input" data-act="cruci-cell" data-word="2" data-pos="0" maxlength="1" /><input class="circle-input" data-act="cruci-cell" data-word="2" data-pos="1" maxlength="1" /><input class="circle-input" data-act="cruci-cell" data-word="2" data-pos="2" maxlength="1" /><input class="circle-input" data-act="cruci-cell" data-word="2" data-pos="3" maxlength="1" /><input class="circle-input" data-act="cruci-cell" data-word="2" data-pos="4" maxlength="1" /><input class="circle-input" data-act="cruci-cell" data-word="2" data-pos="5" maxlength="1" /><input class="circle-input" data-act="cruci-cell" data-word="2" data-pos="6" maxlength="1" /><input class="circle-input" data-act="cruci-cell" data-word="2" data-pos="7" maxlength="1" />
+                </div>
+                <div class="circle-word"><span class="fill-num">3</span>
+                  <input class="circle-input" data-act="cruci-cell" data-word="3" data-pos="0" maxlength="1" /><input class="circle-input" data-act="cruci-cell" data-word="3" data-pos="1" maxlength="1" /><input class="circle-input" data-act="cruci-cell" data-word="3" data-pos="2" maxlength="1" /><input class="circle-input" data-act="cruci-cell" data-word="3" data-pos="3" maxlength="1" /><input class="circle-input" data-act="cruci-cell" data-word="3" data-pos="4" maxlength="1" /><input class="circle-input" data-act="cruci-cell" data-word="3" data-pos="5" maxlength="1" /><input class="circle-input" data-act="cruci-cell" data-word="3" data-pos="6" maxlength="1" /><input class="circle-input" data-act="cruci-cell" data-word="3" data-pos="7" maxlength="1" /><input class="circle-input" data-act="cruci-cell" data-word="3" data-pos="8" maxlength="1" /><input class="circle-input" data-act="cruci-cell" data-word="3" data-pos="9" maxlength="1" /><input class="circle-input" data-act="cruci-cell" data-word="3" data-pos="10" maxlength="1" /><input class="circle-input" data-act="cruci-cell" data-word="3" data-pos="11" maxlength="1" /><input class="circle-input" data-act="cruci-cell" data-word="3" data-pos="12" maxlength="1" /><input class="circle-input" data-act="cruci-cell" data-word="3" data-pos="13" maxlength="1" />
+                </div>
+                <div class="circle-word"><span class="fill-num">4</span>
+                  <input class="circle-input" data-act="cruci-cell" data-word="4" data-pos="0" maxlength="1" /><input class="circle-input" data-act="cruci-cell" data-word="4" data-pos="1" maxlength="1" /><input class="circle-input" data-act="cruci-cell" data-word="4" data-pos="2" maxlength="1" /><input class="circle-input" data-act="cruci-cell" data-word="4" data-pos="3" maxlength="1" /><input class="circle-input" data-act="cruci-cell" data-word="4" data-pos="4" maxlength="1" /><input class="circle-input" data-act="cruci-cell" data-word="4" data-pos="5" maxlength="1" />
+                </div>
               </div>
-              <div class="fill-row"><span class="fill-num">2</span>
-                <input class="letter-box" data-act="cruci-cell" data-word="2" data-pos="0" maxlength="1" /><input class="letter-box" data-act="cruci-cell" data-word="2" data-pos="1" maxlength="1" /><input class="letter-box" data-act="cruci-cell" data-word="2" data-pos="2" maxlength="1" /><input class="letter-box" data-act="cruci-cell" data-word="2" data-pos="3" maxlength="1" /><input class="letter-box" data-act="cruci-cell" data-word="2" data-pos="4" maxlength="1" /><input class="letter-box" data-act="cruci-cell" data-word="2" data-pos="5" maxlength="1" /><input class="letter-box" data-act="cruci-cell" data-word="2" data-pos="6" maxlength="1" /><input class="letter-box" data-act="cruci-cell" data-word="2" data-pos="7" maxlength="1" />
-              </div>
-              <div class="fill-row"><span class="fill-num">3</span>
-                <input class="letter-box" data-act="cruci-cell" data-word="3" data-pos="0" maxlength="1" /><input class="letter-box" data-act="cruci-cell" data-word="3" data-pos="1" maxlength="1" /><input class="letter-box" data-act="cruci-cell" data-word="3" data-pos="2" maxlength="1" /><input class="letter-box" data-act="cruci-cell" data-word="3" data-pos="3" maxlength="1" /><input class="letter-box" data-act="cruci-cell" data-word="3" data-pos="4" maxlength="1" /><input class="letter-box" data-act="cruci-cell" data-word="3" data-pos="5" maxlength="1" /><input class="letter-box" data-act="cruci-cell" data-word="3" data-pos="6" maxlength="1" /><input class="letter-box" data-act="cruci-cell" data-word="3" data-pos="7" maxlength="1" /><input class="letter-box" data-act="cruci-cell" data-word="3" data-pos="8" maxlength="1" /><input class="letter-box" data-act="cruci-cell" data-word="3" data-pos="9" maxlength="1" /><input class="letter-box" data-act="cruci-cell" data-word="3" data-pos="10" maxlength="1" /><input class="letter-box" data-act="cruci-cell" data-word="3" data-pos="11" maxlength="1" /><input class="letter-box" data-act="cruci-cell" data-word="3" data-pos="12" maxlength="1" /><input class="letter-box" data-act="cruci-cell" data-word="3" data-pos="13" maxlength="1" />
-              </div>
-              <div class="fill-row"><span class="fill-num">4</span>
-                <input class="letter-box" data-act="cruci-cell" data-word="4" data-pos="0" maxlength="1" /><input class="letter-box" data-act="cruci-cell" data-word="4" data-pos="1" maxlength="1" /><input class="letter-box" data-act="cruci-cell" data-word="4" data-pos="2" maxlength="1" /><input class="letter-box" data-act="cruci-cell" data-word="4" data-pos="3" maxlength="1" /><input class="letter-box" data-act="cruci-cell" data-word="4" data-pos="4" maxlength="1" /><input class="letter-box" data-act="cruci-cell" data-word="4" data-pos="5" maxlength="1" />
-              </div>
-              </div>
+            </div>
               <div class="actions">
                 <button class="btn btn-primary" data-review="cruci" type="button">Revisar</button>
                 <button class="btn btn-secondary" data-retry="cruci" type="button">Reintentar</button>
