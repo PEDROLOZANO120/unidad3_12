@@ -1,0 +1,333 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Unidad 3 - Recurso Offline</title>
+  <style>
+    :root {
+      --bg: #f4f7fb;
+      --card: #ffffff;
+      --accent: #1f6feb;
+      --accent-dark: #1654b3;
+      --text: #1f2937;
+      --muted: #6b7280;
+      --ok: #0f9d58;
+      --warn: #d93025;
+      --radius: 14px;
+      --shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      font-family: system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, sans-serif;
+      color: var(--text);
+      background: linear-gradient(180deg, #eef3ff 0%, var(--bg) 100%);
+      min-height: 100vh;
+    }
+
+    .topbar {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 1000;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 1rem;
+      padding: 0.85rem 1rem;
+      background: #111827;
+      color: #f9fafb;
+      box-shadow: 0 8px 18px rgba(0, 0, 0, 0.25);
+    }
+
+    .topbar__status {
+      font-weight: 600;
+      letter-spacing: 0.2px;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .btn {
+      border: 0;
+      border-radius: 10px;
+      padding: 0.65rem 0.95rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: transform 0.08s ease, opacity 0.2s ease, background 0.2s ease;
+    }
+
+    .btn:active {
+      transform: translateY(1px);
+    }
+
+    .btn--primary {
+      color: #fff;
+      background: var(--accent);
+    }
+
+    .btn--primary:hover {
+      background: var(--accent-dark);
+    }
+
+    .btn--ghost {
+      color: #fff;
+      background: rgba(255, 255, 255, 0.16);
+    }
+
+    .btn--ghost:hover {
+      background: rgba(255, 255, 255, 0.24);
+    }
+
+    main {
+      max-width: 900px;
+      margin: 0 auto;
+      padding: 5.5rem 1rem 2rem;
+    }
+
+    .card {
+      background: var(--card);
+      border-radius: var(--radius);
+      padding: 1.2rem;
+      box-shadow: var(--shadow);
+      margin-bottom: 1rem;
+    }
+
+    h1, h2, h3 {
+      margin-top: 0;
+    }
+
+    .muted {
+      color: var(--muted);
+    }
+
+    label {
+      display: block;
+      margin: 1rem 0 0.4rem;
+      font-weight: 600;
+    }
+
+    input[type="text"] {
+      width: 100%;
+      padding: 0.75rem 0.8rem;
+      border-radius: 10px;
+      border: 1px solid #cfd8e3;
+      font-size: 1rem;
+    }
+
+    .row {
+      display: flex;
+      gap: 0.75rem;
+      flex-wrap: wrap;
+      align-items: center;
+      margin-top: 0.8rem;
+    }
+
+    .message {
+      min-height: 1.4rem;
+      font-size: 0.95rem;
+      font-weight: 600;
+      margin-top: 0.5rem;
+    }
+
+    .message--ok {
+      color: var(--ok);
+    }
+
+    .message--warn {
+      color: var(--warn);
+    }
+
+    .topics {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 0.8rem;
+      margin-top: 1rem;
+    }
+
+    .topic {
+      border: 1px solid #dfe7f5;
+      border-radius: 12px;
+      padding: 0.8rem;
+      background: #f8faff;
+    }
+
+    .topic h3 {
+      margin-bottom: 0.5rem;
+      font-size: 1.03rem;
+    }
+
+    .topic p {
+      margin: 0 0 0.6rem;
+      color: var(--muted);
+      font-size: 0.95rem;
+    }
+  </style>
+</head>
+<body>
+  <header class="topbar" aria-label="Barra superior fija">
+    <div id="topbarStatus" class="topbar__status">👤 Invitado | ⭐ Puntaje: 0/10</div>
+    <button id="btnReiniciar" class="btn btn--ghost" type="button">Reiniciar</button>
+  </header>
+
+  <main>
+    <section class="card" id="inicioSection">
+      <h1>Inicio del recurso</h1>
+      <p class="muted">Ingresa tu nombre para activar la navegación por temas y guardar el progreso local.</p>
+
+      <label for="nombreInput">Nombre completo</label>
+      <input id="nombreInput" type="text" autocomplete="name" placeholder="Ejemplo: Ana García López" />
+
+      <div class="row">
+        <button id="btnGuardar" class="btn btn--primary" type="button">Guardar</button>
+      </div>
+      <div id="mensaje" class="message" aria-live="polite"></div>
+    </section>
+
+    <section class="card" id="temasSection">
+      <h2>Temas</h2>
+      <p id="estadoTemas" class="muted">Bloqueado: guarda tu nombre para continuar.</p>
+
+      <div class="topics">
+        <article class="topic">
+          <h3>Tema 1</h3>
+          <p>Contenido introductorio.</p>
+          <button class="btn btn--primary js-tema" data-tema="tema1" type="button">Ir al tema</button>
+        </article>
+        <article class="topic">
+          <h3>Tema 2</h3>
+          <p>Práctica y repaso.</p>
+          <button class="btn btn--primary js-tema" data-tema="tema2" type="button">Ir al tema</button>
+        </article>
+      </div>
+    </section>
+  </main>
+
+  <script>
+    (function () {
+      const STORAGE_KEYS = {
+        nombre: 'u3_nombre',
+        puntaje: 'u3_puntaje',
+        progreso: 'u3_progreso',
+        respuestas: 'u3_respuestas'
+      };
+
+      const topbarStatus = document.getElementById('topbarStatus');
+      const btnReiniciar = document.getElementById('btnReiniciar');
+      const nombreInput = document.getElementById('nombreInput');
+      const btnGuardar = document.getElementById('btnGuardar');
+      const mensaje = document.getElementById('mensaje');
+      const estadoTemas = document.getElementById('estadoTemas');
+      const botonesTema = Array.from(document.querySelectorAll('.js-tema'));
+
+      function getNombreGuardado() {
+        return (localStorage.getItem(STORAGE_KEYS.nombre) || '').trim();
+      }
+
+      function getPuntajeGuardado() {
+        const raw = localStorage.getItem(STORAGE_KEYS.puntaje);
+        const parsed = Number(raw);
+        return Number.isFinite(parsed) ? Math.max(0, Math.min(10, parsed)) : 0;
+      }
+
+      function renderTopbar() {
+        const nombre = getNombreGuardado() || 'Invitado';
+        const puntaje = getPuntajeGuardado();
+        topbarStatus.textContent = `👤 ${nombre} | ⭐ Puntaje: ${puntaje}/10`;
+      }
+
+      function setTemasBloqueados(bloqueado) {
+        botonesTema.forEach((btn) => {
+          btn.disabled = bloqueado;
+          btn.style.opacity = bloqueado ? '0.6' : '1';
+          btn.style.cursor = bloqueado ? 'not-allowed' : 'pointer';
+        });
+
+        estadoTemas.textContent = bloqueado
+          ? 'Bloqueado: guarda tu nombre para continuar.'
+          : 'Habilitado: ya puedes navegar por los temas.';
+      }
+
+      function refreshUI() {
+        const hasNombre = Boolean(getNombreGuardado());
+        setTemasBloqueados(!hasNombre);
+        renderTopbar();
+      }
+
+      function mostrarMensaje(texto, tipo) {
+        mensaje.textContent = texto;
+        mensaje.className = `message ${tipo === 'ok' ? 'message--ok' : 'message--warn'}`;
+      }
+
+      btnGuardar.addEventListener('click', function () {
+        const nombre = nombreInput.value.trim();
+
+        if (!nombre) {
+          mostrarMensaje('Debes escribir tu nombre completo antes de guardar.', 'warn');
+          return;
+        }
+
+        localStorage.setItem(STORAGE_KEYS.nombre, nombre);
+
+        if (localStorage.getItem(STORAGE_KEYS.puntaje) === null) {
+          localStorage.setItem(STORAGE_KEYS.puntaje, '0');
+        }
+        if (localStorage.getItem(STORAGE_KEYS.progreso) === null) {
+          localStorage.setItem(STORAGE_KEYS.progreso, JSON.stringify({ temaActual: null }));
+        }
+        if (localStorage.getItem(STORAGE_KEYS.respuestas) === null) {
+          localStorage.setItem(STORAGE_KEYS.respuestas, JSON.stringify({}));
+        }
+
+        mostrarMensaje('Nombre guardado correctamente. Ya puedes acceder a los temas.', 'ok');
+        refreshUI();
+      });
+
+      btnReiniciar.addEventListener('click', function () {
+        localStorage.removeItem(STORAGE_KEYS.nombre);
+        localStorage.removeItem(STORAGE_KEYS.puntaje);
+        localStorage.removeItem(STORAGE_KEYS.progreso);
+        localStorage.removeItem(STORAGE_KEYS.respuestas);
+
+        nombreInput.value = '';
+        mostrarMensaje('Se borraron nombre, puntaje, progreso y respuestas.', 'ok');
+        refreshUI();
+      });
+
+      botonesTema.forEach((btn) => {
+        btn.addEventListener('click', function () {
+          const nombre = getNombreGuardado();
+          if (!nombre) {
+            mostrarMensaje('Navegación bloqueada: guarda tu nombre para ingresar a los temas.', 'warn');
+            setTemasBloqueados(true);
+            return;
+          }
+
+          const tema = btn.getAttribute('data-tema') || 'tema';
+          localStorage.setItem(STORAGE_KEYS.progreso, JSON.stringify({ temaActual: tema }));
+          mostrarMensaje(`Acceso concedido al ${tema}. Progreso actualizado localmente.`, 'ok');
+        });
+      });
+
+      (function init() {
+        const nombre = getNombreGuardado();
+        if (nombre) {
+          nombreInput.value = nombre;
+        }
+
+        if (localStorage.getItem(STORAGE_KEYS.puntaje) === null) {
+          localStorage.setItem(STORAGE_KEYS.puntaje, '0');
+        }
+
+        refreshUI();
+      })();
+    })();
+  </script>
+</body>
+</html>
