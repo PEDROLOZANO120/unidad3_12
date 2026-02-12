@@ -1,0 +1,754 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Unidad: Concepto de paisaje</title>
+  <style>
+    :root {
+      --bg: #07130d;
+      --bg-soft: #0d1f16;
+      --panel: #10271b;
+      --panel-2: #153623;
+      --green: #39d98a;
+      --green-soft: #7fe7b5;
+      --text: #e8fff2;
+      --muted: #b9e7cb;
+      --error: #ff7676;
+      --warning: #ffd166;
+    }
+
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      font-family: "Segoe UI", Roboto, sans-serif;
+      background: linear-gradient(180deg, #050d09 0%, #0a1a12 100%);
+      color: var(--text);
+      line-height: 1.6;
+    }
+
+    main {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 2rem 1rem 4rem;
+    }
+
+    h1, h2, h3 { color: var(--green-soft); }
+
+    .card {
+      background: var(--panel);
+      border: 1px solid #1f5c3a;
+      border-radius: 14px;
+      padding: 1.1rem;
+      margin-bottom: 1.2rem;
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.25);
+    }
+
+    .idea {
+      border-left: 5px solid var(--green);
+      background: #0f2f1d;
+      padding: .85rem 1rem;
+      margin: .8rem 0;
+      border-radius: 10px;
+      font-weight: 600;
+    }
+
+    .progress {
+      background: #0b1d14;
+      border-radius: 999px;
+      overflow: hidden;
+      height: 18px;
+      border: 1px solid #295b3c;
+    }
+
+    .progress > span {
+      display: block;
+      height: 100%;
+      width: 0;
+      background: linear-gradient(90deg, #22c777, #57e39f);
+      transition: width .4s ease;
+    }
+
+    .score {
+      display: flex;
+      justify-content: space-between;
+      gap: 1rem;
+      flex-wrap: wrap;
+      color: var(--muted);
+      margin-top: .6rem;
+    }
+
+    .grid-2 {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: .8rem;
+    }
+
+    .match-item {
+      background: var(--panel-2);
+      border-radius: 10px;
+      padding: .9rem;
+      border: 1px solid #2a6c44;
+    }
+
+    label { display: block; font-weight: 600; margin-bottom: .3rem; }
+
+    select, button, input {
+      width: 100%;
+      background: #09170f;
+      color: var(--text);
+      border: 1px solid #2f7d4d;
+      border-radius: 8px;
+      padding: .55rem .65rem;
+      font-size: .95rem;
+    }
+
+    button {
+      width: auto;
+      min-width: 130px;
+      cursor: pointer;
+      background: #13492e;
+      margin-right: .5rem;
+      margin-top: .6rem;
+    }
+
+    button:hover { background: #1b6942; }
+
+    .feedback {
+      margin-top: .8rem;
+      font-weight: 700;
+    }
+
+    .ok { color: var(--green-soft); }
+    .bad { color: var(--error); }
+
+    .crossword {
+      display: grid;
+      grid-template-columns: repeat(9, 34px);
+      gap: 4px;
+      justify-content: start;
+      margin: .8rem 0;
+    }
+
+    .cell {
+      width: 34px;
+      height: 34px;
+      text-align: center;
+      text-transform: uppercase;
+      font-weight: 700;
+      padding: 0;
+    }
+
+    .blocked {
+      width: 34px;
+      height: 34px;
+      background: #020705;
+      border: 1px solid #0f2418;
+      border-radius: 6px;
+    }
+
+    .clues {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: .8rem;
+    }
+
+    .word-search {
+      display: grid;
+      grid-template-columns: repeat(10, 33px);
+      gap: 4px;
+      margin: .8rem 0;
+    }
+
+    .ws-cell {
+      width: 33px;
+      height: 33px;
+      border: 1px solid #2f7d4d;
+      border-radius: 6px;
+      display: grid;
+      place-items: center;
+      background: #0d2016;
+      font-weight: 700;
+      cursor: pointer;
+      user-select: none;
+    }
+
+    .ws-cell.active { outline: 2px solid var(--warning); }
+    .ws-cell.found { background: #1f6a44; }
+
+    .word-list li.done { color: var(--green-soft); text-decoration: line-through; }
+
+    .small { color: var(--muted); font-size: .9rem; }
+  </style>
+</head>
+<body>
+  <main>
+    <section id="tema1">
+      <h1>Tema 1: Concepto de paisaje en ecología</h1>
+
+      <div class="card">
+        <h2>Panorama de la unidad</h2>
+        <p>
+          En esta unidad estudiarás el paisaje como una unidad ecológica compleja donde confluyen procesos biofísicos,
+          relaciones sociales, cambios de uso del suelo y dinámicas históricas. A lo largo del tema se abordará cómo la
+          ecología del paisaje integra escalas espaciales y temporales para comprender patrones de fragmentación,
+          conectividad, heterogeneidad, flujos de energía y resiliencia. También analizarás cómo estos elementos permiten
+          diagnosticar impactos humanos y diseñar estrategias de manejo para conservar la biodiversidad y sostener servicios
+          ecosistémicos en territorios productivos y de conservación.
+        </p>
+      </div>
+
+      <div class="card">
+        <h2>Objetivos de la unidad</h2>
+        <ul>
+          <li>Definir el concepto de paisaje desde una perspectiva ecológica, sistémica y socioambiental.</li>
+          <li>Reconocer los componentes estructurales del paisaje: matriz, parches, corredores, bordes y ecotonos.</li>
+          <li>Relacionar la escala de análisis con los procesos ecológicos observables.</li>
+          <li>Explicar cómo la configuración espacial condiciona biodiversidad, conectividad y servicios ecosistémicos.</li>
+          <li>Aplicar criterios de interpretación del paisaje en casos reales de planificación y restauración ecológica.</li>
+        </ul>
+      </div>
+
+      <div class="card">
+        <h2>Resultado de aprendizaje</h2>
+        <p>
+          Al finalizar la unidad, serás capaz de interpretar un territorio como paisaje ecológico, identificar sus elementos
+          estructurales y funcionales, y argumentar decisiones de manejo sustentable con base en indicadores de fragmentación,
+          conectividad y dinámica espacial.
+        </p>
+      </div>
+
+      <article class="card">
+        <h2>Teoría ampliada: ¿qué entendemos por paisaje en ecología?</h2>
+        <p>
+          En ecología, el paisaje no se reduce a una imagen “bonita” ni a una escena visual estática. Se entiende como un
+          mosaico dinámico de ecosistemas y usos del suelo que interactúan entre sí mediante flujos de organismos, energía,
+          agua, nutrientes e información. Esta mirada rompe con la idea de que cada ecosistema funciona de manera aislada y
+          propone, en cambio, que los procesos ecológicos dependen de la organización espacial de unidades distintas que se
+          influyen mutuamente. Por ejemplo, un bosque ripario no puede analizarse sin considerar la matriz agrícola que lo
+          rodea, la red hídrica que lo conecta, las rutas de dispersión de fauna y las prácticas sociales que transforman sus
+          límites. Así, el paisaje es simultáneamente estructura y proceso: tiene una forma observable y una dinámica que la
+          modifica en el tiempo.
+        </p>
+
+        <p>
+          La ecología del paisaje surgió como un puente entre la ecología de comunidades, la geografía, la planificación
+          territorial y las ciencias de la conservación. Su aporte principal fue demostrar que la distribución espacial importa
+          tanto como la composición biológica. Dos territorios pueden tener la misma cobertura boscosa en términos de área
+          total, pero producir resultados ecológicos muy distintos si en uno el bosque está concentrado en bloques conectados
+          y en otro aparece fragmentado en pequeños parches aislados. Esta diferencia en configuración afecta la movilidad de
+          especies, la viabilidad de poblaciones, la infiltración del agua, la propagación de incendios y la capacidad de
+          recuperación frente a perturbaciones.
+        </p>
+
+        <div class="idea">💡 Idea clave: el paisaje ecológico se define por la relación entre <strong>patrón espacial</strong> y <strong>proceso ecológico</strong>, no solo por la presencia de “naturaleza”.</div>
+
+        <h3>Componentes estructurales del paisaje</h3>
+        <p>
+          Para estudiar un paisaje se usan categorías que ayudan a describir su arquitectura espacial. Entre las más comunes
+          están:
+        </p>
+        <ul>
+          <li><strong>Matriz:</strong> cobertura dominante que ocupa mayor extensión y condiciona la permeabilidad del territorio.</li>
+          <li><strong>Parches:</strong> unidades relativamente homogéneas que difieren de la matriz (bosques remanentes, humedales, cultivos).</li>
+          <li><strong>Corredores:</strong> franjas lineales que facilitan flujos entre parches (riberas, cercas vivas, setos, franjas forestales).</li>
+          <li><strong>Bordes:</strong> zonas de transición donde cambian abruptamente condiciones microclimáticas y biológicas.</li>
+          <li><strong>Ecotonos:</strong> transiciones graduales entre sistemas, con alta riqueza por superposición de especies.</li>
+        </ul>
+
+        <p>
+          Estas categorías no son rígidas: dependen de la escala y del problema de investigación. Un humedal puede ser un
+          parche dentro de una matriz agrícola a escala regional, pero convertirse en matriz si se analiza un microterritorio
+          donde predominan comunidades acuáticas. De ahí que la delimitación del paisaje sea una decisión metodológica que debe
+          justificarse con claridad.
+        </p>
+
+        <h3>La importancia de la escala</h3>
+        <p>
+          La escala es una de las nociones centrales para evitar interpretaciones equivocadas. Incluye al menos dos dimensiones:
+          el <em>grano</em> (resolución del dato, por ejemplo tamaño de píxel o unidad mínima cartografiable) y la <em>extensión</em>
+          (área total de estudio). Una especie de anfibio puede responder a charcas y microhábitats en escalas de metros, mientras
+          un mamífero mediano requiere corredores de kilómetros. Cuando no se ajusta la escala al fenómeno, se invisibilizan
+          procesos críticos: un mapa de baja resolución puede subestimar corredores estrechos; una ventana temporal corta puede
+          ocultar ciclos sucesionales o impactos acumulativos.
+        </p>
+
+        <p>
+          Además, la escala temporal es tan relevante como la espacial. El paisaje actual suele ser resultado de decisiones
+          históricas: apertura de caminos, expansión urbana, cambios en políticas agrarias, incendios recurrentes o restauración
+          natural asistida. Por ello, leer el paisaje exige incorporar memoria territorial. Lo que hoy parece “natural” puede
+          ser un sistema secundario en recuperación; lo que hoy es productivo puede estar reduciendo umbrales de resiliencia que
+          solo se evidenciarán décadas después.
+        </p>
+
+        <div class="idea">💡 Idea clave: sin una escala adecuada, no existe diagnóstico ecológico confiable del paisaje.</div>
+
+        <h3>Configuración, conectividad y fragmentación</h3>
+        <p>
+          La fragmentación describe la división de hábitats continuos en piezas menores, más aisladas y con mayor proporción de
+          borde. Este proceso no depende solo de cuánta superficie se pierde, sino de cómo queda organizada la que permanece.
+          En términos ecológicos, la fragmentación puede reducir el tamaño efectivo de poblaciones, aumentar endogamia,
+          interrumpir dispersión de semillas y alterar redes tróficas. Sin embargo, no toda fragmentación produce exactamente el
+          mismo efecto: algunos paisajes con matriz permeable mantienen conectividad funcional aunque los parches estén separados
+          físicamente.
+        </p>
+
+        <p>
+          La conectividad tiene dos caras. La <strong>conectividad estructural</strong> se refiere al arreglo físico de coberturas
+          (distancias, continuidad, presencia de corredores). La <strong>conectividad funcional</strong> depende de cómo los organismos
+          perciben y usan ese espacio. Un seto puede ser corredor para aves insectívoras y barrera para especies de interior de
+          bosque. Por eso, el análisis de conectividad debe considerar grupos focales, requerimientos ecológicos y comportamiento.
+          En restauración, este enfoque evita soluciones genéricas y favorece intervenciones específicas, como ampliar franjas
+          ribereñas, reducir barreras viales o mejorar calidad de hábitat en nodos estratégicos.
+        </p>
+
+        <h3>Funciones ecosistémicas y dimensión socioecológica</h3>
+        <p>
+          El paisaje también organiza servicios ecosistémicos que sostienen la vida humana. La regulación hídrica depende de la
+          posición relativa entre coberturas forestales, pendientes, suelos y cuerpos de agua. La polinización en agroecosistemas
+          mejora cuando existen parches seminaturales cercanos. El control biológico de plagas aumenta si hay refugios para fauna
+          benéfica. La captura de carbono varía según estructura de vegetación y continuidad de áreas de conservación. En síntesis,
+          la forma del paisaje influye en la calidad de los beneficios que recibe la sociedad.
+        </p>
+
+        <p>
+          Desde una perspectiva socioecológica, los paisajes son coproducidos por naturaleza y cultura. Prácticas campesinas,
+          sistemas de tenencia de la tierra, infraestructura, normativa ambiental y mercados globales modelan el territorio.
+          Ignorar estas variables conduce a diagnósticos incompletos. Por ejemplo, proponer un corredor biológico sin considerar
+          derechos de propiedad, costos de oportunidad o gobernanza local puede hacer inviable la medida. En cambio, integrar
+          actores sociales y conocimiento local permite diseñar paisajes multifuncionales donde producción y conservación no se
+          excluyan, sino que se articulen mediante acuerdos de manejo.
+        </p>
+
+        <div class="idea">💡 Idea clave: el paisaje ecológico es una unidad biofísica <strong>y</strong> social; su gestión requiere ciencia y participación.</div>
+
+        <h3>Métodos de análisis y ejemplos aplicados</h3>
+        <p>
+          El estudio del paisaje combina trabajo de campo, cartografía, sensores remotos, sistemas de información geográfica e
+          indicadores cuantitativos. Algunos índices frecuentes son tamaño medio de parche, densidad de borde, distancia al
+          vecino más próximo, diversidad de coberturas e índices de conectividad. Estos datos no sustituyen la observación
+          ecológica directa, pero permiten comparar escenarios y priorizar acciones.
+        </p>
+
+        <p>
+          <strong>Ejemplo 1: cuenca con expansión urbana.</strong> Cuando una ciudad se extiende sobre zonas periurbanas, suele
+          incrementar superficies impermeables y reducir cobertura vegetal continua. El análisis de paisaje ayuda a identificar
+          subcuencas críticas para infiltración y a ubicar infraestructura verde (parques lineales, humedales urbanos, techos
+          verdes) que reduzca riesgo de inundación.
+        </p>
+
+        <p>
+          <strong>Ejemplo 2: mosaico agroforestal.</strong> En regiones agrícolas, la inclusión de cercas vivas, franjas de
+          vegetación nativa y sistemas silvopastoriles puede mejorar conectividad para polinizadores y aves, reducir erosión y
+          diversificar ingresos productivos. Aquí, la matriz no se “elimina”; se transforma para ganar permeabilidad ecológica.
+        </p>
+
+        <p>
+          <strong>Ejemplo 3: restauración de bosque seco.</strong> En paisajes altamente fragmentados, no siempre es posible
+          restaurar grandes bloques continuos de inmediato. Una estrategia efectiva consiste en crear nodos de restauración
+          escalonados que funcionen como “islas de recursos”, conectadas por corredores ribereños y manejo de regeneración natural.
+          Con el tiempo, estos nodos aumentan flujo genético y estabilizan procesos ecosistémicos.
+        </p>
+
+        <h3>Paisaje, resiliencia y toma de decisiones</h3>
+        <p>
+          El enfoque de paisaje fortalece la resiliencia porque permite pensar en redundancia ecológica, diversidad funcional y
+          conectividad adaptativa. Un territorio con múltiples rutas de flujo ecológico resiste mejor perturbaciones extremas,
+          como sequías prolongadas o incendios. Del mismo modo, paisajes heterogéneos ofrecen más oportunidades para recolonización
+          después de eventos de disturbio. En gestión pública, esto se traduce en políticas de ordenamiento que no separen de forma
+          rígida conservación y producción, sino que promuevan gradientes de uso compatibles con objetivos ecológicos.
+        </p>
+
+        <p>
+          Tomar decisiones basadas en paisaje implica evaluar compensaciones. A veces, ampliar una vía mejora conectividad social
+          pero fragmenta hábitat. Otras veces, restringir usos protege biodiversidad pero impacta economías locales si no existen
+          alternativas. La ecología del paisaje no elimina estos conflictos; ofrece herramientas para hacerlos explícitos y negociar
+          soluciones informadas. Por eso es clave construir escenarios prospectivos: ¿qué ocurre con biodiversidad y agua si cambia
+          la cobertura en diez años?, ¿qué ganancia se obtiene al restaurar corredores?, ¿dónde conviene intervenir primero para
+          maximizar beneficios ecológicos y sociales?
+        </p>
+
+        <p>
+          En conclusión, el concepto de paisaje en ecología representa una forma integrada de comprender el territorio. Su valor
+          radica en conectar patrones espaciales con procesos ecológicos, incorporar la dimensión temporal e incluir a la sociedad
+          como actor constitutivo del sistema. Esta perspectiva permite pasar de diagnósticos fragmentados a estrategias territoriales
+          más coherentes, adaptativas y sostenibles. Aprender a “leer” paisajes no solo mejora la investigación científica; también
+          fortalece la educación ambiental, la planificación y la gobernanza para enfrentar desafíos como cambio climático, pérdida
+          de biodiversidad y seguridad hídrica.
+        </p>
+      </article>
+
+      <section class="card" id="actividad1">
+        <h2>Actividad 1. Relacionar concepto-definición</h2>
+        <p class="small">Selecciona la definición correcta para cada concepto.</p>
+        <div class="grid-2" id="matchingContainer"></div>
+        <button id="checkMatch">Revisar</button>
+        <button id="retryMatch">Reintentar</button>
+        <p class="feedback" id="matchFeedback"></p>
+      </section>
+
+      <section class="card" id="actividad2">
+        <h2>Actividad 2. Crucigrama de términos clave</h2>
+        <p class="small">Completa la cuadrícula con letras en mayúscula y sin tildes.</p>
+        <div id="crossword" class="crossword"></div>
+        <div class="clues">
+          <div>
+            <h3>Horizontales</h3>
+            <ol>
+              <li>Unidad amplia que integra elementos ecológicos y sociales (7).</li>
+              <li>Elemento dominante que condiciona la permeabilidad (6).</li>
+              <li>Patrón heterogéneo de coberturas (7).</li>
+            </ol>
+          </div>
+          <div>
+            <h3>Verticales</h3>
+            <ol>
+              <li>Unidad relativamente homogénea distinta de la matriz (6).</li>
+              <li>Conjunto organizado de elementos interconectados (7).</li>
+              <li>Área de transición o delimitación (4).</li>
+            </ol>
+          </div>
+        </div>
+        <button id="checkCrossword">Revisar</button>
+        <button id="retryCrossword">Reintentar</button>
+        <p class="feedback" id="crosswordFeedback"></p>
+      </section>
+
+      <section class="card" id="actividad3">
+        <h2>Actividad 3. Sopa de letras</h2>
+        <p class="small">Haz clic en letras contiguas para formar palabras. Presiona “Revisar” para validar la selección.</p>
+        <div class="word-search" id="wordSearch"></div>
+        <div>
+          <h3>Términos a encontrar</h3>
+          <ul class="word-list" id="wordList"></ul>
+        </div>
+        <button id="checkWord">Revisar</button>
+        <button id="retryWord">Reintentar</button>
+        <p class="feedback" id="wordFeedback"></p>
+      </section>
+
+      <section class="card">
+        <h2>Puntaje y progreso</h2>
+        <div class="progress"><span id="progressBar"></span></div>
+        <div class="score">
+          <span id="scoreText">Puntaje: 0</span>
+          <span id="progressText">Progreso: 0%</span>
+        </div>
+      </section>
+    </section>
+  </main>
+
+  <script>
+    const STORAGE_KEY = "tema1_progreso";
+    const TOTAL_POINTS = 30;
+
+    const state = {
+      score: 0,
+      completed: {
+        match: false,
+        crossword: false,
+        wordsearch: false,
+      },
+      foundWords: []
+    };
+
+    function normalizeText(text) {
+      return text
+        .normalize("NFD")
+        .replace(/[\u0300-\u036f]/g, "")
+        .toUpperCase()
+        .trim();
+    }
+
+    function saveState() {
+      localStorage.setItem(STORAGE_KEY, JSON.stringify(state));
+    }
+
+    function loadState() {
+      const raw = localStorage.getItem(STORAGE_KEY);
+      if (!raw) return;
+      try {
+        const parsed = JSON.parse(raw);
+        Object.assign(state, parsed);
+      } catch {
+        console.warn("No se pudo cargar progreso previo.");
+      }
+    }
+
+    function updateScoreBoard() {
+      const completedCount = Object.values(state.completed).filter(Boolean).length;
+      const progress = Math.round((completedCount / 3) * 100);
+      document.getElementById("scoreText").textContent = `Puntaje: ${state.score} / ${TOTAL_POINTS}`;
+      document.getElementById("progressText").textContent = `Progreso: ${progress}%`;
+      document.getElementById("progressBar").style.width = `${progress}%`;
+    }
+
+    const matchData = [
+      { concept: "Matriz", answer: "Cobertura dominante del paisaje", options: ["Franja lineal de conexión", "Cobertura dominante del paisaje", "Zona de transición entre ecosistemas"] },
+      { concept: "Parche", answer: "Unidad homogénea distinta de la matriz", options: ["Unidad homogénea distinta de la matriz", "Barrera absoluta para la fauna", "Índice de precipitación"] },
+      { concept: "Conectividad", answer: "Facilidad para el movimiento de organismos y flujos", options: ["Aumento de temperatura anual", "Facilidad para el movimiento de organismos y flujos", "Pérdida de suelo por erosión"] },
+      { concept: "Ecotono", answer: "Área de transición con mezcla de especies", options: ["Área de transición con mezcla de especies", "Cobertura urbana impermeable", "Tamaño mínimo de cuenca"] },
+    ];
+
+    function renderMatching() {
+      const container = document.getElementById("matchingContainer");
+      container.innerHTML = "";
+      matchData.forEach((item, idx) => {
+        const div = document.createElement("div");
+        div.className = "match-item";
+        div.innerHTML = `
+          <label>${item.concept}</label>
+          <select data-index="${idx}">
+            <option value="">Selecciona una definición</option>
+            ${item.options.map(op => `<option value="${op}">${op}</option>`).join("")}
+          </select>
+        `;
+        container.appendChild(div);
+      });
+    }
+
+    function setupMatching() {
+      document.getElementById("checkMatch").addEventListener("click", () => {
+        const selects = document.querySelectorAll("#matchingContainer select");
+        let correct = 0;
+        selects.forEach((sel, i) => {
+          if (sel.value === matchData[i].answer) correct++;
+        });
+        const fb = document.getElementById("matchFeedback");
+        if (correct === matchData.length) {
+          fb.textContent = "¡Excelente! Todas las relaciones son correctas.";
+          fb.className = "feedback ok";
+          if (!state.completed.match) {
+            state.completed.match = true;
+            state.score += 10;
+          }
+        } else {
+          fb.textContent = `Tienes ${correct} de ${matchData.length} correctas. Revisa e intenta de nuevo.`;
+          fb.className = "feedback bad";
+        }
+        saveState();
+        updateScoreBoard();
+      });
+
+      document.getElementById("retryMatch").addEventListener("click", () => {
+        document.querySelectorAll("#matchingContainer select").forEach(sel => sel.value = "");
+        const fb = document.getElementById("matchFeedback");
+        fb.textContent = "Actividad reiniciada. Vuelve a relacionar concepto y definición.";
+        fb.className = "feedback";
+      });
+    }
+
+    const crosswordConfig = {
+      rows: 8,
+      cols: 9,
+      solution: {
+        "0-1": "P", "0-2": "A", "0-3": "I", "0-4": "S", "0-5": "A", "0-6": "J", "0-7": "E",
+        "1-1": "A", "2-1": "R", "3-1": "C", "4-1": "H", "5-1": "E",
+        "1-4": "I", "2-4": "S", "3-4": "T", "4-4": "E", "5-4": "M", "6-4": "A",
+        "3-2": "M", "3-3": "A", "3-5": "R", "3-6": "I", "3-7": "Z",
+        "4-7": "O", "5-7": "N", "6-7": "A",
+        "6-1": "M", "6-2": "O", "6-3": "S", "6-5": "I", "6-6": "C", "6-8": "O"
+      }
+    };
+
+    function renderCrossword() {
+      const board = document.getElementById("crossword");
+      board.innerHTML = "";
+      for (let r = 0; r < crosswordConfig.rows; r++) {
+        for (let c = 0; c < crosswordConfig.cols; c++) {
+          const key = `${r}-${c}`;
+          if (crosswordConfig.solution[key]) {
+            const input = document.createElement("input");
+            input.className = "cell";
+            input.maxLength = 1;
+            input.dataset.key = key;
+            input.addEventListener("input", (e) => {
+              e.target.value = normalizeText(e.target.value).slice(0, 1);
+            });
+            board.appendChild(input);
+          } else {
+            const block = document.createElement("div");
+            block.className = "blocked";
+            board.appendChild(block);
+          }
+        }
+      }
+    }
+
+    function setupCrossword() {
+      document.getElementById("checkCrossword").addEventListener("click", () => {
+        const cells = document.querySelectorAll("#crossword input");
+        let correct = 0;
+        cells.forEach(cell => {
+          const expected = crosswordConfig.solution[cell.dataset.key];
+          if (normalizeText(cell.value) === expected) correct++;
+        });
+        const fb = document.getElementById("crosswordFeedback");
+        if (correct === cells.length) {
+          fb.textContent = "¡Crucigrama correcto! Usaste bien los términos clave.";
+          fb.className = "feedback ok";
+          if (!state.completed.crossword) {
+            state.completed.crossword = true;
+            state.score += 10;
+          }
+        } else {
+          fb.textContent = `Hay ${correct} de ${cells.length} celdas correctas. Verifica mayúsculas y sin tildes.`;
+          fb.className = "feedback bad";
+        }
+        saveState();
+        updateScoreBoard();
+      });
+
+      document.getElementById("retryCrossword").addEventListener("click", () => {
+        document.querySelectorAll("#crossword input").forEach(cell => cell.value = "");
+        const fb = document.getElementById("crosswordFeedback");
+        fb.textContent = "Crucigrama reiniciado. Intenta nuevamente.";
+        fb.className = "feedback";
+      });
+    }
+
+    const wordSearchGrid = [
+      ["P","A","I","S","A","J","E","Q","T","R"],
+      ["L","F","M","N","X","A","B","C","D","E"],
+      ["E","C","O","T","O","N","O","P","R","S"],
+      ["A","K","L","M","A","N","Q","R","S","T"],
+      ["P","A","R","C","H","E","U","V","W","X"],
+      ["Y","Z","A","B","C","D","E","F","G","H"],
+      ["M","A","T","R","I","Z","J","K","L","M"],
+      ["N","O","P","Q","R","S","T","U","V","W"],
+      ["E","S","C","A","L","A","X","Y","Z","A"],
+      ["B","C","D","E","F","G","H","I","J","K"]
+    ];
+
+    const wordPaths = {
+      PAISAJE: [[0,0],[0,1],[0,2],[0,3],[0,4],[0,5],[0,6]],
+      ECOTONO: [[2,0],[2,1],[2,2],[2,3],[2,4],[2,5],[2,6]],
+      PARCHE: [[4,0],[4,1],[4,2],[4,3],[4,4],[4,5]],
+      MATRIZ: [[6,0],[6,1],[6,2],[6,3],[6,4],[6,5]],
+      ESCALA: [[8,0],[8,1],[8,2],[8,3],[8,4],[8,5]],
+    };
+
+    let currentSelection = [];
+
+    function coordToKey(r, c) {
+      return `${r}-${c}`;
+    }
+
+    function renderWordSearch() {
+      const board = document.getElementById("wordSearch");
+      board.innerHTML = "";
+      wordSearchGrid.forEach((row, r) => {
+        row.forEach((letter, c) => {
+          const cell = document.createElement("div");
+          cell.className = "ws-cell";
+          cell.dataset.key = coordToKey(r, c);
+          cell.textContent = letter;
+          cell.addEventListener("click", () => {
+            const key = coordToKey(r, c);
+            if (currentSelection.includes(key)) return;
+            currentSelection.push(key);
+            cell.classList.add("active");
+          });
+          board.appendChild(cell);
+        });
+      });
+      renderWordList();
+      applyFoundStyles();
+    }
+
+    function renderWordList() {
+      const ul = document.getElementById("wordList");
+      ul.innerHTML = "";
+      Object.keys(wordPaths).forEach(word => {
+        const li = document.createElement("li");
+        li.textContent = word;
+        if (state.foundWords.includes(word)) li.classList.add("done");
+        ul.appendChild(li);
+      });
+    }
+
+    function applyFoundStyles() {
+      document.querySelectorAll(".ws-cell").forEach(c => c.classList.remove("found"));
+      state.foundWords.forEach(word => {
+        wordPaths[word].forEach(([r, c]) => {
+          const cell = document.querySelector(`.ws-cell[data-key="${coordToKey(r, c)}"]`);
+          if (cell) cell.classList.add("found");
+        });
+      });
+    }
+
+    function clearWordSelection() {
+      currentSelection = [];
+      document.querySelectorAll(".ws-cell.active").forEach(c => c.classList.remove("active"));
+    }
+
+    function isSamePath(a, b) {
+      if (a.length !== b.length) return false;
+      return a.every((coord, i) => coord === coordToKey(b[i][0], b[i][1]));
+    }
+
+    function setupWordSearch() {
+      document.getElementById("checkWord").addEventListener("click", () => {
+        const fb = document.getElementById("wordFeedback");
+        let matchedWord = null;
+
+        Object.entries(wordPaths).forEach(([word, path]) => {
+          if (!state.foundWords.includes(word) && isSamePath(currentSelection, path)) {
+            matchedWord = word;
+          }
+        });
+
+        if (matchedWord) {
+          state.foundWords.push(matchedWord);
+          renderWordList();
+          applyFoundStyles();
+          fb.textContent = `¡Correcto! Encontraste la palabra ${matchedWord}.`;
+          fb.className = "feedback ok";
+          if (state.foundWords.length === Object.keys(wordPaths).length) {
+            if (!state.completed.wordsearch) {
+              state.completed.wordsearch = true;
+              state.score += 10;
+            }
+            fb.textContent += " Sopa de letras completada.";
+          }
+        } else {
+          fb.textContent = "Selección no válida. Elige letras contiguas en el orden correcto e inténtalo otra vez.";
+          fb.className = "feedback bad";
+        }
+        clearWordSelection();
+        saveState();
+        updateScoreBoard();
+      });
+
+      document.getElementById("retryWord").addEventListener("click", () => {
+        state.foundWords = [];
+        clearWordSelection();
+        renderWordList();
+        applyFoundStyles();
+        const fb = document.getElementById("wordFeedback");
+        fb.textContent = "Sopa de letras reiniciada. Empieza de nuevo.";
+        fb.className = "feedback";
+        saveState();
+      });
+    }
+
+    function hydrateProgress() {
+      if (state.foundWords.length) {
+        renderWordList();
+        applyFoundStyles();
+      }
+    }
+
+    loadState();
+    renderMatching();
+    setupMatching();
+    renderCrossword();
+    setupCrossword();
+    renderWordSearch();
+    setupWordSearch();
+    hydrateProgress();
+    updateScoreBoard();
+  </script>
+</body>
+</html>
