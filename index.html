@@ -1,0 +1,205 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Unidad 3 - Mapa de la unidad</title>
+    <style>
+      :root {
+        color-scheme: light;
+        font-family: Arial, Helvetica, sans-serif;
+      }
+
+      body {
+        margin: 0;
+        background: #f4f7fb;
+        color: #1b2b45;
+      }
+
+      main {
+        max-width: 1000px;
+        margin: 0 auto;
+        padding: 2rem 1rem 3rem;
+      }
+
+      h1,
+      h2 {
+        margin: 0 0 0.8rem;
+      }
+
+      .card {
+        background: white;
+        border-radius: 14px;
+        box-shadow: 0 10px 30px rgba(32, 63, 101, 0.12);
+        padding: 1.2rem;
+        margin-bottom: 1rem;
+      }
+
+      .name-row {
+        display: flex;
+        gap: 0.6rem;
+        flex-wrap: wrap;
+      }
+
+      input {
+        flex: 1 1 260px;
+        padding: 0.6rem 0.8rem;
+      }
+
+      button.save {
+        padding: 0.6rem 1rem;
+      }
+
+      #mapa-section {
+        scroll-margin-top: 1rem;
+      }
+
+      .map-wrapper {
+        position: relative;
+        width: min(100%, 980px);
+        margin: 0 auto;
+      }
+
+      .map-image {
+        width: 100%;
+        display: block;
+        border-radius: 12px;
+      }
+
+      .hotspot {
+        position: absolute;
+        border: 2px solid rgba(255, 255, 255, 0.75);
+        border-radius: 12px;
+        background: rgba(255, 255, 255, 0.08);
+        color: white;
+        font-weight: 700;
+        cursor: pointer;
+        transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
+      }
+
+      .hotspot:hover,
+      .hotspot:focus-visible {
+        transform: scale(1.04);
+        border-color: #fce76d;
+        box-shadow: 0 0 0 3px rgba(252, 231, 109, 0.45);
+      }
+
+      .hotspot.blocked {
+        cursor: not-allowed;
+        opacity: 0.55;
+      }
+
+      [data-target="tema1"] { left: 6.8%; top: 15.7%; width: 26.8%; height: 24.2%; }
+      [data-target="tema2"] { left: 36.8%; top: 11.4%; width: 26.8%; height: 24.2%; }
+      [data-target="tema3"] { left: 66.8%; top: 15.7%; width: 26.8%; height: 24.2%; }
+      [data-target="tema4"] { left: 20.9%; top: 55.7%; width: 26.8%; height: 24.2%; }
+      [data-target="tema5"] { left: 54.2%; top: 55.7%; width: 26.8%; height: 24.2%; }
+
+      .message {
+        margin-top: 0.75rem;
+        min-height: 1.5rem;
+        color: #a34100;
+        font-weight: 600;
+      }
+
+      .tema {
+        min-height: 220px;
+      }
+    </style>
+  </head>
+  <body>
+    <main>
+      <h1>Unidad 3</h1>
+      <section class="card" aria-label="Ingreso de nombre">
+        <h2>Identificación</h2>
+        <div class="name-row">
+          <input id="nombre" type="text" placeholder="Escribe tu nombre" />
+          <button id="guardar" class="save" type="button">Guardar nombre</button>
+        </div>
+      </section>
+
+      <section id="mapa-section" class="card">
+        <h2>Mapa de la unidad</h2>
+        <p>Selecciona un tema para navegar rápidamente.</p>
+        <div class="map-wrapper" aria-label="Mapa interactivo de la unidad">
+          <img
+            class="map-image"
+            alt="Mapa de la unidad con cinco temas"
+            src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0naHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmcnIHZpZXdCb3g9JzAgMCAxMjAwIDcwMCc+CiAgPGRlZnM+CiAgICA8bGluZWFyR3JhZGllbnQgaWQ9J2JnJyB4MT0nMCcgeTE9JzAnIHgyPScxJyB5Mj0nMSc+CiAgICAgIDxzdG9wIG9mZnNldD0nMCUnIHN0b3AtY29sb3I9JyMwZTNiNzMnLz4KICAgICAgPHN0b3Agb2Zmc2V0PScxMDAlJyBzdG9wLWNvbG9yPScjMWI2Y2E4Jy8+CiAgICA8L2xpbmVhckdyYWRpZW50PgogIDwvZGVmcz4KICA8cmVjdCB3aWR0aD0nMTIwMCcgaGVpZ2h0PSc3MDAnIGZpbGw9J3VybCgjYmcpJyByeD0nMjInLz4KICA8ZyBmaWxsPScjZmZmZmZmJyBmaWxsLW9wYWNpdHk9JzAuMTgnIHN0cm9rZT0nI2ZmZmZmZicgc3Ryb2tlLW9wYWNpdHk9JzAuNDUnIHN0cm9rZS13aWR0aD0nMyc+CiAgICA8cmVjdCB4PSc4MCcgeT0nMTEwJyB3aWR0aD0nMzIwJyBoZWlnaHQ9JzE3MCcgcng9JzE4Jy8+CiAgICA8cmVjdCB4PSc0NDAnIHk9JzgwJyB3aWR0aD0nMzIwJyBoZWlnaHQ9JzE3MCcgcng9JzE4Jy8+CiAgICA8cmVjdCB4PSc4MDAnIHk9JzExMCcgd2lkdGg9JzMyMCcgaGVpZ2h0PScxNzAnIHJ4PScxOCcvPgogICAgPHJlY3QgeD0nMjUwJyB5PSczOTAnIHdpZHRoPSczMjAnIGhlaWdodD0nMTcwJyByeD0nMTgnLz4KICAgIDxyZWN0IHg9JzY1MCcgeT0nMzkwJyB3aWR0aD0nMzIwJyBoZWlnaHQ9JzE3MCcgcng9JzE4Jy8+CiAgPC9nPgogIDxnIGZvbnQtZmFtaWx5PSdBcmlhbCwgc2Fucy1zZXJpZicgZmlsbD0nd2hpdGUnIGZvbnQtc2l6ZT0nNDInIGZvbnQtd2VpZ2h0PSc3MDAnIHRleHQtYW5jaG9yPSdtaWRkbGUnPgogICAgPHRleHQgeD0nMjQwJyB5PScyMDUnPlRlbWEgMTwvdGV4dD4KICAgIDx0ZXh0IHg9JzYwMCcgeT0nMTc1Jz5UZW1hIDI8L3RleHQ+CiAgICA8dGV4dCB4PSc5NjAnIHk9JzIwNSc+VGVtYSAzPC90ZXh0PgogICAgPHRleHQgeD0nNDEwJyB5PSc0ODUnPlRlbWEgNDwvdGV4dD4KICAgIDx0ZXh0IHg9JzgxMCcgeT0nNDg1Jz5UZW1hIDU8L3RleHQ+CiAgPC9nPgo8L3N2Zz4K"
+          />
+
+          <button class="hotspot" data-target="tema1" type="button" aria-label="Ir a Tema 1"></button>
+          <button class="hotspot" data-target="tema2" type="button" aria-label="Ir a Tema 2"></button>
+          <button class="hotspot" data-target="tema3" type="button" aria-label="Ir a Tema 3"></button>
+          <button class="hotspot" data-target="tema4" type="button" aria-label="Ir a Tema 4"></button>
+          <button class="hotspot" data-target="tema5" type="button" aria-label="Ir a Tema 5"></button>
+        </div>
+        <p id="mensaje" class="message" role="status" aria-live="polite"></p>
+      </section>
+
+      <section id="tema1" class="card tema"><h2>Tema 1</h2></section>
+      <section id="tema2" class="card tema"><h2>Tema 2</h2></section>
+      <section id="tema3" class="card tema"><h2>Tema 3</h2></section>
+      <section id="tema4" class="card tema"><h2>Tema 4</h2></section>
+      <section id="tema5" class="card tema"><h2>Tema 5</h2></section>
+    </main>
+
+    <script>
+      const STORAGE_KEY = "nombreUsuario";
+      const nombreInput = document.getElementById("nombre");
+      const guardarBtn = document.getElementById("guardar");
+      const mensaje = document.getElementById("mensaje");
+      const hotspots = [...document.querySelectorAll(".hotspot")];
+
+      function getSavedName() {
+        return (localStorage.getItem(STORAGE_KEY) || "").trim();
+      }
+
+      function updateHotspotState() {
+        const hasName = Boolean(getSavedName());
+        hotspots.forEach((hotspot) => {
+          hotspot.classList.toggle("blocked", !hasName);
+          hotspot.disabled = !hasName;
+        });
+        if (!hasName) {
+          mensaje.textContent = "Primero guarda tu nombre para desbloquear el mapa interactivo.";
+        } else {
+          mensaje.textContent = "";
+        }
+      }
+
+      guardarBtn.addEventListener("click", () => {
+        const nombre = nombreInput.value.trim();
+        if (!nombre) {
+          mensaje.textContent = "Ingresa un nombre válido antes de guardar.";
+          updateHotspotState();
+          return;
+        }
+        localStorage.setItem(STORAGE_KEY, nombre);
+        mensaje.textContent = `¡Listo, ${nombre}! Ya puedes usar los hotspots.`;
+        updateHotspotState();
+      });
+
+      hotspots.forEach((hotspot) => {
+        hotspot.addEventListener("click", () => {
+          const savedName = getSavedName();
+          if (!savedName) {
+            mensaje.textContent = "Debes guardar tu nombre antes de navegar por los temas.";
+            updateHotspotState();
+            return;
+          }
+          const target = document.getElementById(hotspot.dataset.target);
+          if (target) {
+            target.scrollIntoView({ behavior: "smooth", block: "start" });
+          }
+        });
+      });
+
+      const initialName = getSavedName();
+      if (initialName) {
+        nombreInput.value = initialName;
+      }
+      updateHotspotState();
+    </script>
+  </body>
+</html>
