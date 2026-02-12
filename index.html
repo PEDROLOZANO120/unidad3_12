@@ -1,0 +1,359 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Unidad 3 - Ecología del paisaje</title>
+    <style>
+      :root {
+        color-scheme: light dark;
+        --bg: #f6f8fa;
+        --card: #ffffff;
+        --text: #1f2328;
+        --ok: #1a7f37;
+        --bad: #cf222e;
+      }
+
+      body {
+        margin: 0;
+        font-family: system-ui, -apple-system, Segoe UI, Roboto, sans-serif;
+        color: var(--text);
+        background: var(--bg);
+        line-height: 1.5;
+      }
+
+      main {
+        max-width: 960px;
+        margin: 0 auto;
+        padding: 2rem 1rem 4rem;
+      }
+
+      section {
+        background: var(--card);
+        border-radius: 12px;
+        padding: 1.25rem;
+        margin-bottom: 1rem;
+        box-shadow: 0 1px 2px rgba(0, 0, 0, 0.08);
+      }
+
+      h1,
+      h2,
+      h3 {
+        margin-top: 0;
+      }
+
+      .quiz-item {
+        border-top: 1px solid #d0d7de;
+        padding-top: 0.75rem;
+        margin-top: 0.75rem;
+      }
+
+      .options label {
+        display: block;
+        margin: 0.2rem 0;
+      }
+
+      .feedback {
+        margin-top: 0.35rem;
+        font-weight: 600;
+      }
+
+      .feedback.ok {
+        color: var(--ok);
+      }
+
+      .feedback.bad {
+        color: var(--bad);
+      }
+
+      .small-note {
+        font-size: 0.9rem;
+        opacity: 0.85;
+      }
+    </style>
+  </head>
+  <body>
+    <main>
+      <h1>Unidad 3: Ecología del paisaje</h1>
+
+      <section id="tema2">
+        <h2>Tema 2: Elementos de ecología del paisaje</h2>
+        <p>
+          La ecología del paisaje estudia cómo se organiza el territorio y cómo
+          esa organización influye en procesos ecológicos. Un <strong>parche</strong>
+          es una unidad relativamente homogénea (por ejemplo, un bosque o una
+          laguna), mientras que la <strong>matriz</strong> es el tipo de cobertura
+          dominante que rodea a los parches. Los <strong>corredores</strong>
+          conectan áreas separadas y facilitan desplazamientos de organismos,
+          semillas, energía o materia.
+        </p>
+        <p>
+          El <strong>borde</strong> es la zona de transición entre dos unidades,
+          donde suelen cambiar temperatura, humedad, luz y presión de especies.
+          Estos gradientes alteran los <strong>flujos</strong> ecológicos y pueden
+          favorecer o bloquear movimientos. La
+          <strong>conectividad</strong> describe qué tan posible es desplazarse
+          entre parches; puede ser estructural (cómo está dibujado el paisaje) o
+          funcional (cómo realmente lo usan las especies).
+        </p>
+        <p>
+          La <strong>fragmentación</strong> ocurre cuando un hábitat continuo se
+          divide en porciones más pequeñas y aisladas. Esto suele reducir tamaño
+          de poblaciones locales, aumentar efectos de borde y dificultar la
+          recolonización tras perturbaciones.
+        </p>
+        <div class="quiz" data-theme="tema2"></div>
+      </section>
+
+      <section id="tema3">
+        <h2>Tema 3: Escala</h2>
+        <p>
+          La escala es central para interpretar patrones del paisaje. El
+          <strong>grano</strong> representa el nivel de detalle mínimo de
+          observación (por ejemplo, tamaño de píxel o unidad de muestreo), y la
+          <strong>extensión</strong> define el área total analizada.
+        </p>
+        <p>
+          Existen <strong>escalas espaciales</strong> (metros, kilómetros,
+          regiones) y <strong>temporales</strong> (días, años, décadas). Un mismo
+          fenómeno puede verse estable a corto plazo y dinámico a largo plazo.
+          De forma similar, una tendencia visible localmente puede desaparecer al
+          ampliar el área de estudio.
+        </p>
+        <p>
+          Por eso, las conclusiones dependen de la escala elegida. Comparar
+          resultados entre estudios requiere verificar si usan granos,
+          extensiones y ventanas temporales compatibles.
+        </p>
+        <div class="quiz" data-theme="tema3"></div>
+      </section>
+
+      <section id="tema4">
+        <h2>Tema 4: Atributos del paisaje</h2>
+        <p>
+          Un paisaje puede describirse mediante varios atributos. La
+          <strong>heterogeneidad</strong> expresa cuánta variedad de coberturas o
+          hábitats hay; la <strong>complejidad</strong> se relaciona con arreglos
+          internos y patrones no triviales. La <strong>forma</strong> de los
+          parches influye en la proporción borde/interior, mientras que el
+          <strong>tamaño</strong> condiciona la capacidad de sostener
+          poblaciones.
+        </p>
+        <p>
+          El <strong>aislamiento</strong> mide separación entre parches y suele
+          afectar dispersión y flujo génico. La
+          <strong>conectividad</strong> atenúa ese aislamiento cuando existen
+          rutas funcionales de movimiento. La <strong>dominancia</strong> aparece
+          cuando uno o pocos tipos de cobertura ocupan gran parte del territorio,
+          modelando la dinámica de todo el sistema.
+        </p>
+        <div class="quiz" data-theme="tema4"></div>
+      </section>
+
+      <section id="tema5">
+        <h2>Tema 5: Teoría de biogeografía de islas</h2>
+        <p>
+          La teoría de biogeografía de islas propone que el número de especies en
+          una isla tiende a un equilibrio dinámico entre
+          <strong>inmigración</strong> y <strong>extinción</strong>. Islas más
+          cercanas a la fuente de colonizadores suelen recibir más inmigrantes,
+          mientras que islas más pequeñas tienden a tener más extinciones por
+          poblaciones reducidas.
+        </p>
+        <p>
+          En un mapa de islas, esto implica que, en general, las islas
+          <strong>grandes y cercanas</strong> mantendrán mayor riqueza específica
+          que las <strong>pequeñas y lejanas</strong>. El equilibrio no es fijo en
+          composición: pueden cambiar las especies presentes, aunque se conserve
+          un número parecido de especies totales.
+        </p>
+        <p>
+          Esta lógica también se aplica a "islas" de hábitat en paisajes
+          fragmentados: bosques remanentes, humedales aislados o parches de
+          vegetación rodeados por una matriz hostil.
+        </p>
+        <div class="quiz" data-theme="tema5"></div>
+      </section>
+
+      <p class="small-note">
+        Las respuestas de autoevaluación se guardan automáticamente en este
+        navegador mediante <code>localStorage</code>.
+      </p>
+    </main>
+
+    <script>
+      const quizzes = {
+        tema2: [
+          {
+            id: "t2q1",
+            type: "mc",
+            question: "¿Qué elemento suele ocupar mayor superficie del paisaje?",
+            options: ["Corredor", "Matriz", "Borde"],
+            answer: "Matriz",
+            feedback: {
+              ok: "Correcto: la matriz es la cobertura dominante.",
+              bad: "No es correcto. En general, la matriz domina la superficie."
+            }
+          },
+          {
+            id: "t2q2",
+            type: "vf",
+            question: "V/F: La fragmentación puede aumentar el aislamiento entre parches.",
+            options: ["Verdadero", "Falso"],
+            answer: "Verdadero",
+            feedback: {
+              ok: "Bien: al dividir hábitats, suele aumentar el aislamiento.",
+              bad: "Incorrecto: la fragmentación generalmente incrementa el aislamiento."
+            }
+          }
+        ],
+        tema3: [
+          {
+            id: "t3q1",
+            type: "mc",
+            question: "El grano se refiere principalmente a...",
+            options: ["Área total del estudio", "Detalle mínimo de observación", "Duración del monitoreo"],
+            answer: "Detalle mínimo de observación",
+            feedback: {
+              ok: "Correcto: el grano define la resolución o detalle básico.",
+              bad: "No. El grano describe el nivel mínimo de detalle."
+            }
+          },
+          {
+            id: "t3q2",
+            type: "vf",
+            question: "V/F: Cambiar la escala puede modificar las conclusiones de un estudio.",
+            options: ["Verdadero", "Falso"],
+            answer: "Verdadero",
+            feedback: {
+              ok: "Exacto: la interpretación depende de la escala espacial y temporal.",
+              bad: "Incorrecto: sí, la escala puede cambiar patrones observados y conclusiones."
+            }
+          }
+        ],
+        tema4: [
+          {
+            id: "t4q1",
+            type: "mc",
+            question: "¿Qué atributo se relaciona con la separación entre parches?",
+            options: ["Aislamiento", "Dominancia", "Complejidad"],
+            answer: "Aislamiento",
+            feedback: {
+              ok: "Correcto: el aislamiento cuantifica la separación funcional o espacial.",
+              bad: "No. El atributo asociado a separación es el aislamiento."
+            }
+          },
+          {
+            id: "t4q2",
+            type: "vf",
+            question: "V/F: La forma de un parche puede influir en los efectos de borde.",
+            options: ["Verdadero", "Falso"],
+            answer: "Verdadero",
+            feedback: {
+              ok: "Bien: formas más recortadas suelen aumentar proporción de borde.",
+              bad: "Incorrecto: la geometría sí afecta la relación borde/interior."
+            }
+          }
+        ],
+        tema5: [
+          {
+            id: "t5q1",
+            type: "mc",
+            question: "Según la teoría, ¿qué combinación tendería a mayor riqueza de especies?",
+            options: ["Isla pequeña y lejana", "Isla grande y cercana", "Isla pequeña y cercana"],
+            answer: "Isla grande y cercana",
+            feedback: {
+              ok: "Correcto: mayor inmigración y menor riesgo relativo de extinción.",
+              bad: "No es la mejor opción esperada; suele destacarse isla grande y cercana."
+            }
+          },
+          {
+            id: "t5q2",
+            type: "vf",
+            question: "V/F: En equilibrio, la composición de especies puede cambiar aunque el número total sea similar.",
+            options: ["Verdadero", "Falso"],
+            answer: "Verdadero",
+            feedback: {
+              ok: "Exacto: hay recambio de especies en equilibrio dinámico.",
+              bad: "Incorrecto: el equilibrio puede mantener riqueza total con composición cambiante."
+            }
+          },
+          {
+            id: "t5q3",
+            type: "vf",
+            question: "V/F: La teoría de islas solo sirve para islas oceánicas y nunca para paisajes terrestres fragmentados.",
+            options: ["Verdadero", "Falso"],
+            answer: "Falso",
+            feedback: {
+              ok: "Correcto: también se usa en parches de hábitat aislados.",
+              bad: "No. También se aplica a 'islas de hábitat' en paisajes fragmentados."
+            }
+          }
+        ]
+      };
+
+      function storageKey(theme, qid) {
+        return `quiz_${theme}_${qid}`;
+      }
+
+      function createQuizItem(theme, item) {
+        const wrapper = document.createElement("article");
+        wrapper.className = "quiz-item";
+
+        const title = document.createElement("p");
+        title.innerHTML = `<strong>${item.question}</strong>`;
+        wrapper.appendChild(title);
+
+        const optionsDiv = document.createElement("div");
+        optionsDiv.className = "options";
+
+        const saved = localStorage.getItem(storageKey(theme, item.id));
+        const feedback = document.createElement("p");
+        feedback.className = "feedback";
+
+        item.options.forEach((opt) => {
+          const label = document.createElement("label");
+          const input = document.createElement("input");
+          input.type = "radio";
+          input.name = `${theme}_${item.id}`;
+          input.value = opt;
+          input.checked = saved === opt;
+
+          input.addEventListener("change", () => {
+            localStorage.setItem(storageKey(theme, item.id), opt);
+            const isCorrect = opt === item.answer;
+            feedback.textContent = isCorrect ? item.feedback.ok : item.feedback.bad;
+            feedback.className = `feedback ${isCorrect ? "ok" : "bad"}`;
+          });
+
+          label.append(input, ` ${opt}`);
+          optionsDiv.appendChild(label);
+        });
+
+        if (saved) {
+          const isCorrect = saved === item.answer;
+          feedback.textContent = isCorrect ? item.feedback.ok : item.feedback.bad;
+          feedback.className = `feedback ${isCorrect ? "ok" : "bad"}`;
+        } else {
+          feedback.textContent = "Selecciona una opción para ver la corrección automática.";
+        }
+
+        wrapper.append(optionsDiv, feedback);
+        return wrapper;
+      }
+
+      document.querySelectorAll(".quiz").forEach((quizContainer) => {
+        const theme = quizContainer.dataset.theme;
+        const questions = quizzes[theme] || [];
+
+        const heading = document.createElement("h3");
+        heading.textContent = "Mini autoevaluación";
+        quizContainer.appendChild(heading);
+
+        questions.forEach((item) => {
+          quizContainer.appendChild(createQuizItem(theme, item));
+        });
+      });
+    </script>
+  </body>
+</html>
