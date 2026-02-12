@@ -6,136 +6,47 @@
   <title>Unidad 3 - Ecología del paisaje</title>
   <style>
     :root {
-      --bg: #f2f6ff;
-      --card: #ffffff;
-      --text: #1f2937;
-      --muted: #6b7280;
-      --primary: #1d4ed8;
-      --primary-dark: #1e40af;
-      --ok: #15803d;
-      --warn: #dc2626;
-      --border: #d7e0f1;
-      --shadow: 0 12px 28px rgba(15, 23, 42, .12);
-      --radius: 14px;
+      --bg:#f2f6ff; --card:#fff; --text:#1f2937; --muted:#6b7280;
+      --primary:#1d4ed8; --primary-dark:#1e40af; --ok:#15803d; --warn:#dc2626;
+      --border:#d7e0f1; --shadow:0 12px 28px rgba(15,23,42,.12); --radius:14px;
     }
-    * { box-sizing: border-box; }
-    body {
-      margin: 0;
-      font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
-      background: linear-gradient(180deg,#eaf1ff,var(--bg));
-      color: var(--text);
-    }
-    .topbar {
-      position: sticky;
-      top: 0;
-      z-index: 30;
-      background: #0f172a;
-      color: #fff;
-      padding: .8rem 1rem;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: .8rem;
-      box-shadow: 0 4px 20px rgba(0,0,0,.25);
-    }
-    main {
-      max-width: 1100px;
-      margin: auto;
-      padding: 1rem;
-      display: grid;
-      gap: 1rem;
-    }
-    .card {
-      background: var(--card);
-      border: 1px solid var(--border);
-      border-radius: var(--radius);
-      box-shadow: var(--shadow);
-      padding: 1rem;
-    }
-    h1,h2,h3 { margin-top: 0; }
-    .muted { color: var(--muted); }
-    .btn {
-      border: none;
-      border-radius: 10px;
-      padding: .62rem .95rem;
-      font-weight: 700;
-      cursor: pointer;
-    }
-    .btn-primary { background: var(--primary); color: #fff; }
-    .btn-primary:hover { background: var(--primary-dark); }
-    .btn-ghost { background: rgba(255,255,255,.18); color: #fff; }
-    .row { display: flex; flex-wrap: wrap; gap: .6rem; }
-    input[type="text"], select {
-      width: 100%;
-      border: 1px solid #cfd8e6;
-      border-radius: 10px;
-      padding: .62rem .72rem;
-      font-size: 1rem;
-      background: #fff;
-    }
-    .message { min-height: 1.2rem; font-weight: 700; margin-top: .5rem; }
-    .ok { color: var(--ok); }
-    .warn { color: var(--warn); }
-    .layout { display: grid; grid-template-columns: 1.3fr .7fr; gap: 1rem; }
-    @media (max-width: 920px) { .layout { grid-template-columns: 1fr; } }
-    .map-wrap {
-      position: relative;
-      border: 1px solid var(--border);
-      border-radius: 12px;
-      overflow: hidden;
-      background: #f8fbff;
-    }
-    .map-wrap svg { display: block; width: 100%; }
-    .hotspot {
-      position: absolute;
-      transform: translate(-50%, -50%);
-      width: 42px;
-      height: 42px;
-      border-radius: 999px;
-      border: 2px solid #fff;
-      background: #1d4ed8;
-      color: #fff;
-      font-weight: 800;
-      cursor: pointer;
-      box-shadow: 0 4px 12px rgba(0,0,0,.3);
-    }
-    .hotspot:disabled { opacity: .55; cursor: not-allowed; }
-    .tema-grid { display:grid; grid-template-columns: repeat(auto-fit,minmax(230px,1fr)); gap:.75rem; }
-    .tema {
-      border:1px solid var(--border);
-      border-radius:12px;
-      background:#f9fbff;
-      padding:.8rem;
-    }
-    .progress { height: 12px; border-radius: 999px; background:#e5edff; overflow:hidden; }
-    .progress span { display:block; height:100%; width:0; background:linear-gradient(90deg,#2563eb,#0ea5e9); transition:width .2s; }
+    * { box-sizing:border-box; }
+    body { margin:0; font-family:system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif; background:linear-gradient(180deg,#eaf1ff,var(--bg)); color:var(--text); }
+    .topbar { position:sticky; top:0; z-index:30; background:#0f172a; color:#fff; padding:.8rem 1rem; display:flex; align-items:center; justify-content:space-between; gap:.8rem; box-shadow:0 4px 20px rgba(0,0,0,.25); }
+    main { max-width:1150px; margin:auto; padding:1rem; display:grid; gap:1rem; }
+    .card { background:var(--card); border:1px solid var(--border); border-radius:var(--radius); box-shadow:var(--shadow); padding:1rem; }
+    h1,h2,h3,h4 { margin-top:0; }
+    .muted { color:var(--muted); }
+    .btn { border:none; border-radius:10px; padding:.62rem .95rem; font-weight:700; cursor:pointer; }
+    .btn-primary { background:var(--primary); color:#fff; } .btn-primary:hover { background:var(--primary-dark); }
+    .btn-ghost { background:rgba(255,255,255,.18); color:#fff; }
+    .row { display:flex; flex-wrap:wrap; gap:.6rem; }
+    input[type="text"],select { width:100%; border:1px solid #cfd8e6; border-radius:10px; padding:.62rem .72rem; font-size:1rem; background:#fff; }
+    .message { min-height:1.2rem; font-weight:700; margin-top:.5rem; } .ok { color:var(--ok); } .warn { color:var(--warn); }
+    .layout { display:grid; grid-template-columns:1.3fr .7fr; gap:1rem; } @media (max-width:920px){ .layout { grid-template-columns:1fr; } }
+    .map-wrap { position:relative; border:1px solid var(--border); border-radius:12px; overflow:hidden; background:#f8fbff; }
+    .map-wrap svg { display:block; width:100%; }
+    .hotspot { position:absolute; transform:translate(-50%,-50%); width:42px; height:42px; border-radius:999px; border:2px solid #fff; background:#1d4ed8; color:#fff; font-weight:800; cursor:pointer; box-shadow:0 4px 12px rgba(0,0,0,.3); }
+    .hotspot:disabled { opacity:.55; cursor:not-allowed; }
+    .progress { height:12px; border-radius:999px; background:#e5edff; overflow:hidden; } .progress span { display:block; height:100%; width:0; background:linear-gradient(90deg,#2563eb,#0ea5e9); transition:width .2s; }
 
-    .actividad {
-      border: 1px solid var(--border);
-      border-radius: 12px;
-      margin-bottom: .8rem;
-      overflow: hidden;
-      background: #fff;
-    }
-    .actividad header {
-      background: #eef4ff;
-      border-bottom: 1px solid var(--border);
-      padding: .55rem .75rem;
-      font-weight: 800;
-    }
-    .actividad .body { padding: .75rem; }
-    .img-format {
-      border: 1px solid #cfe0ff;
-      border-radius: 10px;
-      background: #f7faff;
-      padding: .45rem;
-      margin-bottom: .65rem;
-    }
-    .img-format svg { width: 100%; height: auto; display: block; }
-    .tabla { width: 100%; border-collapse: collapse; }
-    .tabla th, .tabla td { border: 1px solid #e5e7eb; padding: .45rem; }
-    .sopa-grid { display:grid; grid-template-columns: repeat(10,1fr); gap:3px; max-width:360px; }
-    .cell { text-align:center; background:#eff6ff; border:1px solid #bfdbfe; padding:.3rem; font-weight:700; font-family: ui-monospace, monospace; }
+    .accordion { border:1px solid var(--border); border-radius:12px; background:#fff; margin-bottom:.75rem; overflow:hidden; }
+    .accordion > summary { list-style:none; cursor:pointer; font-weight:800; padding:.8rem .9rem; background:#eef4ff; border-bottom:1px solid var(--border); }
+    .accordion > summary::-webkit-details-marker { display:none; }
+    .acc-body { padding:.85rem; }
+    .cards-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(230px,1fr)); gap:.7rem; margin-top:.6rem; }
+    .mini-card { border:1px solid var(--border); border-radius:12px; background:#f8fbff; padding:.65rem; }
+    .mini-card h4 { margin:.1rem 0 .35rem; font-size:1rem; }
+
+    .actividad { border:1px solid var(--border); border-radius:12px; margin-bottom:.8rem; overflow:hidden; background:#fff; }
+    .actividad header { background:#eef4ff; border-bottom:1px solid var(--border); padding:.55rem .75rem; font-weight:800; }
+    .actividad .body { padding:.75rem; }
+    .img-format { border:1px solid #cfe0ff; border-radius:10px; background:#f7faff; padding:.45rem; margin-bottom:.65rem; }
+    .img-format svg { width:100%; height:auto; display:block; }
+    .tabla { width:100%; border-collapse:collapse; }
+    .tabla th,.tabla td { border:1px solid #e5e7eb; padding:.45rem; }
+    .sopa-grid { display:grid; grid-template-columns:repeat(10,1fr); gap:3px; max-width:360px; }
+    .cell { text-align:center; background:#eff6ff; border:1px solid #bfdbfe; padding:.3rem; font-weight:700; font-family:ui-monospace,monospace; }
   </style>
 </head>
 <body>
@@ -146,14 +57,20 @@
 
   <main>
     <section class="card">
-      <h1>Unidad 3: Ecología del paisaje</h1>
-      <p><strong>Resultado de aprendizaje:</strong> al finalizar la unidad, el estudiante explica y aplica los conceptos de ecología del paisaje para analizar patrones espaciales, conectividad y efectos de escala, interpretando criterios ecológicos medibles para la toma de decisiones.</p>
-      <p class="muted">Primero guarda tu nombre para habilitar navegación, actividades y evaluación (persistencia en localStorage).</p>
+      <h1>Unidad 3 — Ecología del paisaje</h1>
+      <p><strong>Enfoque de la unidad:</strong> la ecología del paisaje estudia cómo el patrón espacial del territorio influye en procesos ecológicos. Analiza un mosaico de bosques, cultivos, pastos, ríos, zonas urbanas y humedales, no sitios aislados.</p>
+      <p><strong>Idea central:</strong> ✅ <strong>Patrón ↔ Proceso</strong>. Patrón = organización del mosaico; Proceso = movimiento de organismos, energía, agua, nutrientes, disturbios y cambios en biodiversidad.</p>
+      <div class="cards-grid">
+        <article class="mini-card"><h4>Diseño ecológico</h4><p>Corredores y conectividad funcional.</p></article>
+        <article class="mini-card"><h4>Evaluación de impacto</h4><p>Carreteras y expansión agrícola/urbana.</p></article>
+        <article class="mini-card"><h4>Restauración</h4><p>Priorizar dónde reforestar para conectar parches.</p></article>
+        <article class="mini-card"><h4>Planificación territorial</h4><p>Uso del suelo con enfoque ecosistémico.</p></article>
+      </div>
+      <p style="margin-top:.7rem"><strong>Resultado de aprendizaje:</strong> al finalizar, el estudiante explica y aplica conceptos de ecología del paisaje para interpretar patrón–proceso, escala, conectividad/fragmentación y atributos medibles del mosaico, proponiendo decisiones de manejo.</p>
+      <p class="muted">Guarda tu nombre para habilitar navegación, actividades y evaluación (persistencia localStorage).</p>
       <label for="nombre">Nombre completo</label>
       <input id="nombre" type="text" autocomplete="name" placeholder="Ejemplo: María López" />
-      <div class="row" style="margin-top:.65rem">
-        <button id="btnGuardar" class="btn btn-primary" type="button">Guardar y desbloquear</button>
-      </div>
+      <div class="row" style="margin-top:.65rem"><button id="btnGuardar" class="btn btn-primary" type="button">Guardar y desbloquear</button></div>
       <div id="msg" class="message" aria-live="polite"></div>
     </section>
 
@@ -162,27 +79,23 @@
         <h2>Mapa de contenidos con hotspots</h2>
         <p id="estadoGate" class="muted">Bloqueado: guarda tu nombre para habilitar el mapa.</p>
         <div class="map-wrap">
-          <svg viewBox="0 0 900 430" role="img" aria-label="Mapa de temas de la unidad">
-            <defs>
-              <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
-                <stop offset="0%" stop-color="#dbeafe"/>
-                <stop offset="100%" stop-color="#bfdbfe"/>
-              </linearGradient>
-            </defs>
-            <rect width="900" height="430" fill="url(#bg)"/>
-            <ellipse cx="180" cy="130" rx="130" ry="90" fill="#dcfce7"/>
-            <ellipse cx="460" cy="110" rx="150" ry="90" fill="#fef3c7"/>
-            <ellipse cx="730" cy="190" rx="130" ry="100" fill="#fee2e2"/>
-            <ellipse cx="450" cy="320" rx="190" ry="90" fill="#e0e7ff"/>
-            <text x="105" y="135" font-size="24" font-weight="700" fill="#166534">Tema 1</text>
-            <text x="385" y="115" font-size="24" font-weight="700" fill="#92400e">Tema 2</text>
-            <text x="660" y="195" font-size="24" font-weight="700" fill="#991b1b">Tema 3</text>
-            <text x="385" y="326" font-size="24" font-weight="700" fill="#1e3a8a">Tema 4</text>
+          <svg viewBox="0 0 980 430" role="img" aria-label="Mapa de temas de la unidad">
+            <defs><linearGradient id="bg" x1="0" y1="0" x2="1" y2="1"><stop offset="0%" stop-color="#dbeafe"/><stop offset="100%" stop-color="#bfdbfe"/></linearGradient></defs>
+            <rect width="980" height="430" fill="url(#bg)"/>
+            <ellipse cx="145" cy="120" rx="110" ry="85" fill="#dcfce7"/><ellipse cx="360" cy="100" rx="125" ry="85" fill="#fef3c7"/>
+            <ellipse cx="585" cy="120" rx="115" ry="85" fill="#fee2e2"/><ellipse cx="805" cy="115" rx="120" ry="85" fill="#e0e7ff"/>
+            <ellipse cx="490" cy="320" rx="160" ry="90" fill="#ede9fe"/>
+            <text x="105" y="125" font-size="23" font-weight="700" fill="#166534">Tema 1</text>
+            <text x="320" y="105" font-size="23" font-weight="700" fill="#92400e">Tema 2</text>
+            <text x="545" y="125" font-size="23" font-weight="700" fill="#991b1b">Tema 3</text>
+            <text x="765" y="120" font-size="23" font-weight="700" fill="#1e3a8a">Tema 4</text>
+            <text x="450" y="325" font-size="23" font-weight="700" fill="#5b21b6">Tema 5</text>
           </svg>
-          <button class="hotspot js-hotspot" data-target="tema1" style="left:20%;top:30%">1</button>
-          <button class="hotspot js-hotspot" data-target="tema2" style="left:50%;top:25%">2</button>
-          <button class="hotspot js-hotspot" data-target="tema3" style="left:79%;top:44%">3</button>
-          <button class="hotspot js-hotspot" data-target="tema4" style="left:50%;top:74%">4</button>
+          <button class="hotspot js-hotspot" data-target="tema1" style="left:15%;top:28%">1</button>
+          <button class="hotspot js-hotspot" data-target="tema2" style="left:37%;top:23%">2</button>
+          <button class="hotspot js-hotspot" data-target="tema3" style="left:60%;top:28%">3</button>
+          <button class="hotspot js-hotspot" data-target="tema4" style="left:82%;top:26%">4</button>
+          <button class="hotspot js-hotspot" data-target="tema5" style="left:50%;top:74%">5</button>
         </div>
       </div>
       <aside class="card">
@@ -194,25 +107,75 @@
     </section>
 
     <section class="card">
-      <h2>Temas de la unidad</h2>
-      <div class="tema-grid">
-        <article class="tema" id="tema1">
-          <h3>Tema 1: Concepto de paisaje</h3>
-          <p>El paisaje en ecología no es solo “vista escénica”: es un <strong>mosaico</strong> de coberturas compuesto por <strong>parches, matriz y corredores</strong>. La configuración espacial condiciona dispersión, flujos y dinámica ecológica.</p>
-        </article>
-        <article class="tema" id="tema2">
-          <h3>Tema 2: Elementos de ecología del paisaje</h3>
-          <p>Incluye parche, matriz, corredor, borde, flujos de organismos/energía/materia, conectividad y efectos de fragmentación. Permite interpretar estructura y funcionamiento del territorio.</p>
-        </article>
-        <article class="tema" id="tema3">
-          <h3>Tema 3: Escala</h3>
-          <p>Importa trabajar con <strong>grano</strong> y <strong>extensión</strong>, en escalas espacial y temporal. Los patrones detectados y conclusiones cambian según la escala de análisis elegida.</p>
-        </article>
-        <article class="tema" id="tema4">
-          <h3>Tema 4: Atributos del paisaje</h3>
-          <p>Se analizan heterogeneidad, complejidad, forma, tamaño, aislamiento, conectividad y dominancia para interpretar el estado ecológico y apoyar decisiones de manejo.</p>
-        </article>
-      </div>
+      <h2>Teoría de la unidad (acordeones + tarjetas visuales)</h2>
+
+      <details class="accordion" id="tema1" open>
+        <summary>Tema 1 — Concepto de paisaje</summary>
+        <div class="acc-body">
+          <p><strong>¿Qué es paisaje en ecología?</strong> Es una unidad ecológica y espacial con múltiples coberturas organizadas como mosaico, cuya organización afecta procesos ecológicos.</p>
+          <div class="cards-grid">
+            <article class="mini-card"><h4>Mosaico del paisaje</h4><p>Parches, matriz, corredores y bordes/ecotonos.</p></article>
+            <article class="mini-card"><h4>Composición (qué hay)</h4><p>Tipos y proporciones de cobertura: bosque, cultivo, agua, urbano, etc.</p></article>
+            <article class="mini-card"><h4>Configuración (cómo se organiza)</h4><p>Tamaño, forma, distancia, fragmentación, conectividad y corredores.</p></article>
+            <article class="mini-card"><h4>Heterogeneidad</h4><p>Nivel de variedad y mezcla espacial del mosaico.</p></article>
+          </div>
+          <p>✅ <strong>Conclusión:</strong> dos paisajes con igual % de bosque pueden tener distinta biodiversidad si su configuración espacial es diferente.</p>
+          <p><strong>Sistema dinámico:</strong> cambia por expansión agrícola, urbanización, regeneración secundaria, restauración e incendios/inundaciones.</p>
+        </div>
+      </details>
+
+      <details class="accordion" id="tema2">
+        <summary>Tema 2 — Elementos de ecología del paisaje</summary>
+        <div class="acc-body">
+          <div class="cards-grid">
+            <article class="mini-card"><h4>Parche (Patch)</h4><p>Área relativamente homogénea (p. ej., fragmento de bosque). El tamaño afecta recursos, especies sensibles y área interior.</p></article>
+            <article class="mini-card"><h4>Matriz</h4><p>Cobertura dominante. Puede ser amigable (agroforestería) u hostil (urbano/monocultivo intensivo).</p></article>
+            <article class="mini-card"><h4>Corredores</h4><p>Riberas, cercas vivas, franjas forestales; facilitan movimiento, aunque también pueden propagar invasoras.</p></article>
+            <article class="mini-card"><h4>Borde / ecotono</h4><p>Transición parche–matriz con cambios de temperatura, humedad, luz, viento y depredación.</p></article>
+          </div>
+          <p><strong>Flujos y procesos:</strong> dispersión, polinización, migración, escorrentía, sedimentos, nutrientes, contaminantes y disturbios (incendio, inundación, tala, plagas).</p>
+        </div>
+      </details>
+
+      <details class="accordion" id="tema3">
+        <summary>Tema 3 — Escala (lo que cambia tus conclusiones)</summary>
+        <div class="acc-body">
+          <div class="cards-grid">
+            <article class="mini-card"><h4>Escala espacial</h4><p><strong>Grano:</strong> tamaño mínimo de observación. <strong>Extensión:</strong> área total del estudio.</p></article>
+            <article class="mini-card"><h4>Efecto del grano</h4><p>Un paisaje puede verse fragmentado con píxel fino y continuo con píxel grueso.</p></article>
+            <article class="mini-card"><h4>Escala temporal</h4><p>Cambios estacionales, anuales o decenales; periodos largos revelan tendencias reales.</p></article>
+            <article class="mini-card"><h4>Jerarquía espacial</h4><p>microhábitat → parche → paisaje → región.</p></article>
+          </div>
+          <p><strong>Regla práctica:</strong> define la escala según el proceso: polinización (pequeña-media), grandes mamíferos (grande), erosión/escorrentía (cuenca).</p>
+        </div>
+      </details>
+
+      <details class="accordion" id="tema4">
+        <summary>Tema 4 — Atributos del paisaje (métricas e interpretación)</summary>
+        <div class="acc-body">
+          <div class="cards-grid">
+            <article class="mini-card"><h4>Tamaño, número y densidad</h4><p>Muchos parches pequeños suelen indicar fragmentación; parches grandes aumentan área interior.</p></article>
+            <article class="mini-card"><h4>Forma y complejidad</h4><p>Parches irregulares generan más borde; compactos reducen borde.</p></article>
+            <article class="mini-card"><h4>Conectividad</h4><p><strong>Estructural:</strong> geometría del paisaje. <strong>Funcional:</strong> depende de la especie.</p></article>
+            <article class="mini-card"><h4>Aislamiento, proximidad y dominancia</h4><p>Mayor aislamiento reduce recolonización; la diversidad de coberturas modifica estabilidad del sistema.</p></article>
+          </div>
+          <p><strong>Principios síntesis:</strong> patrón–proceso, heterogeneidad, jerarquía, disturbios como arquitectos, conectividad vs fragmentación y papel de la matriz.</p>
+        </div>
+      </details>
+
+      <details class="accordion" id="tema5">
+        <summary>Tema 5 — Teoría de biogeografía de islas (aplicada a paisajes fragmentados)</summary>
+        <div class="acc-body">
+          <p><strong>Idea principal:</strong> la riqueza de especies en una isla/parche se equilibra entre <strong>colonización</strong> y <strong>extinción</strong>.</p>
+          <div class="cards-grid">
+            <article class="mini-card"><h4>Tamaño/área</h4><p>Islas/parches grandes suelen mantener más especies y menor extinción.</p></article>
+            <article class="mini-card"><h4>Distancia/aislamiento</h4><p>Islas cercanas facilitan colonización.</p></article>
+            <article class="mini-card"><h4>Aplicación a fragmentación</h4><p>Parches pequeños y aislados se comportan como “islas” con menor riqueza y mayor efecto borde.</p></article>
+            <article class="mini-card"><h4>Relación especies–área</h4><p>La riqueza suele aumentar con el área del hábitat.</p></article>
+          </div>
+          <p><strong>Autoevaluación típica:</strong> composición vs configuración; identificar parche/matriz/corredor/borde; explicar efecto de escala; interpretar fragmentación/conectividad; aplicar biogeografía de islas.</p>
+        </div>
+      </details>
     </section>
 
     <section class="card" id="actividades">
@@ -221,87 +184,40 @@
       <article class="actividad">
         <header>1) Relacionar</header>
         <div class="body">
-          <div class="img-format">
-            <svg viewBox="0 0 760 130" aria-label="Guía visual de relación">
-              <rect width="760" height="130" fill="#eff6ff"/>
-              <text x="20" y="40" font-size="22" font-weight="700" fill="#1e3a8a">Países</text>
-              <text x="420" y="40" font-size="22" font-weight="700" fill="#1e3a8a">Capitales</text>
-              <line x1="190" y1="65" x2="390" y2="65" stroke="#60a5fa" stroke-width="3"/>
-              <line x1="190" y1="95" x2="390" y2="95" stroke="#60a5fa" stroke-width="3"/>
-            </svg>
-          </div>
-          <table class="tabla">
-            <thead><tr><th>País</th><th>Capital</th></tr></thead>
-            <tbody>
-              <tr><td>Perú</td><td><select data-actividad="rel" data-id="pe"><option value="">Selecciona...</option><option>Lima</option><option>Quito</option><option>La Paz</option></select></td></tr>
-              <tr><td>Ecuador</td><td><select data-actividad="rel" data-id="ec"><option value="">Selecciona...</option><option>Sucre</option><option>Lima</option><option>Quito</option></select></td></tr>
-              <tr><td>Bolivia</td><td><select data-actividad="rel" data-id="bo"><option value="">Selecciona...</option><option>La Paz</option><option>Bogotá</option><option>Asunción</option></select></td></tr>
-            </tbody>
-          </table>
+          <div class="img-format"><svg viewBox="0 0 760 130" aria-label="Guía visual de relación"><rect width="760" height="130" fill="#eff6ff"/><text x="20" y="40" font-size="22" font-weight="700" fill="#1e3a8a">Conceptos</text><text x="420" y="40" font-size="22" font-weight="700" fill="#1e3a8a">Definiciones</text><line x1="190" y1="65" x2="390" y2="65" stroke="#60a5fa" stroke-width="3"/><line x1="190" y1="95" x2="390" y2="95" stroke="#60a5fa" stroke-width="3"/></svg></div>
+          <table class="tabla"><thead><tr><th>Concepto</th><th>Definición</th></tr></thead><tbody>
+            <tr><td>Parche</td><td><select data-actividad="rel" data-id="pe"><option value="">Selecciona...</option><option>Área relativamente homogénea</option><option>Cobertura dominante</option><option>Transición parche-matriz</option></select></td></tr>
+            <tr><td>Matriz</td><td><select data-actividad="rel" data-id="ec"><option value="">Selecciona...</option><option>Conexión lineal</option><option>Cobertura dominante</option><option>Área interior</option></select></td></tr>
+            <tr><td>Borde</td><td><select data-actividad="rel" data-id="bo"><option value="">Selecciona...</option><option>Zona de transición ecológica</option><option>Conectividad funcional</option><option>Paisaje continuo</option></select></td></tr>
+          </tbody></table>
           <button class="btn btn-primary" data-check="rel" type="button" style="margin-top:.55rem">Calificar relacionar</button>
         </div>
       </article>
 
-      <article class="actividad">
-        <header>2) Completar</header>
-        <div class="body">
-          <div class="img-format">
-            <svg viewBox="0 0 760 110" aria-label="Plantilla visual completar">
-              <rect width="760" height="110" fill="#f8fafc"/>
-              <rect x="30" y="34" width="220" height="30" rx="8" fill="#dbeafe"/>
-              <rect x="295" y="34" width="200" height="30" rx="8" fill="#dbeafe"/>
-              <rect x="530" y="34" width="180" height="30" rx="8" fill="#dbeafe"/>
-            </svg>
-          </div>
-          <p>La <input style="width:170px;display:inline-block" type="text" data-actividad="comp" data-id="c1" /> permite persistencia en el navegador.</p>
-          <p>El análisis de <input style="width:130px;display:inline-block" type="text" data-actividad="comp" data-id="c2" /> considera parche, matriz y corredor.</p>
-          <button class="btn btn-primary" data-check="comp" type="button">Calificar completar</button>
-        </div>
-      </article>
+      <article class="actividad"><header>2) Completar</header><div class="body">
+        <div class="img-format"><svg viewBox="0 0 760 110" aria-label="Plantilla visual completar"><rect width="760" height="110" fill="#f8fafc"/><rect x="30" y="34" width="220" height="30" rx="8" fill="#dbeafe"/><rect x="295" y="34" width="200" height="30" rx="8" fill="#dbeafe"/><rect x="530" y="34" width="180" height="30" rx="8" fill="#dbeafe"/></svg></div>
+        <p>La <input style="width:170px;display:inline-block" type="text" data-actividad="comp" data-id="c1" /> analiza grano y extensión.</p>
+        <p>La teoría de islas relaciona riqueza de especies con <input style="width:130px;display:inline-block" type="text" data-actividad="comp" data-id="c2" /> del parche.</p>
+        <button class="btn btn-primary" data-check="comp" type="button">Calificar completar</button>
+      </div></article>
 
-      <article class="actividad">
-        <header>3) Sopa de letras</header>
-        <div class="body">
-          <div class="img-format">
-            <svg viewBox="0 0 760 100" aria-label="Encabezado visual sopa de letras">
-              <rect width="760" height="100" fill="#ecfeff"/>
-              <text x="30" y="58" font-size="28" font-weight="800" fill="#0c4a6e">Busca: PAISAJE, ESCALA, PARCHE</text>
-            </svg>
-          </div>
-          <div class="sopa-grid">
-            <div class="cell">P</div><div class="cell">A</div><div class="cell">I</div><div class="cell">S</div><div class="cell">A</div><div class="cell">J</div><div class="cell">E</div><div class="cell">L</div><div class="cell">Q</div><div class="cell">V</div>
-            <div class="cell">X</div><div class="cell">E</div><div class="cell">S</div><div class="cell">C</div><div class="cell">A</div><div class="cell">L</div><div class="cell">A</div><div class="cell">R</div><div class="cell">M</div><div class="cell">N</div>
-            <div class="cell">P</div><div class="cell">A</div><div class="cell">R</div><div class="cell">C</div><div class="cell">H</div><div class="cell">E</div><div class="cell">T</div><div class="cell">U</div><div class="cell">Y</div><div class="cell">I</div>
-            <div class="cell">C</div><div class="cell">O</div><div class="cell">N</div><div class="cell">E</div><div class="cell">C</div><div class="cell">T</div><div class="cell">A</div><div class="cell">D</div><div class="cell">O</div><div class="cell">S</div>
-          </div>
-          <div class="row" style="margin-top:.55rem">
-            <input type="text" data-actividad="sopa" placeholder="Escribe las 3 palabras separadas por coma" />
-            <button class="btn btn-primary" data-check="sopa" type="button">Calificar sopa</button>
-          </div>
+      <article class="actividad"><header>3) Sopa de letras</header><div class="body">
+        <div class="img-format"><svg viewBox="0 0 760 100" aria-label="Encabezado visual sopa"><rect width="760" height="100" fill="#ecfeff"/><text x="30" y="58" font-size="28" font-weight="800" fill="#0c4a6e">Busca: PAISAJE, ESCALA, PARCHE</text></svg></div>
+        <div class="sopa-grid">
+          <div class="cell">P</div><div class="cell">A</div><div class="cell">I</div><div class="cell">S</div><div class="cell">A</div><div class="cell">J</div><div class="cell">E</div><div class="cell">L</div><div class="cell">Q</div><div class="cell">V</div>
+          <div class="cell">X</div><div class="cell">E</div><div class="cell">S</div><div class="cell">C</div><div class="cell">A</div><div class="cell">L</div><div class="cell">A</div><div class="cell">R</div><div class="cell">M</div><div class="cell">N</div>
+          <div class="cell">P</div><div class="cell">A</div><div class="cell">R</div><div class="cell">C</div><div class="cell">H</div><div class="cell">E</div><div class="cell">T</div><div class="cell">U</div><div class="cell">Y</div><div class="cell">I</div>
+          <div class="cell">C</div><div class="cell">O</div><div class="cell">N</div><div class="cell">E</div><div class="cell">C</div><div class="cell">T</div><div class="cell">A</div><div class="cell">D</div><div class="cell">O</div><div class="cell">S</div>
         </div>
-      </article>
+        <div class="row" style="margin-top:.55rem"><input type="text" data-actividad="sopa" placeholder="Escribe las 3 palabras separadas por coma" /><button class="btn btn-primary" data-check="sopa" type="button">Calificar sopa</button></div>
+      </div></article>
 
-      <article class="actividad">
-        <header>4) Crucigrama (respuesta textual)</header>
-        <div class="body">
-          <div class="img-format">
-            <svg viewBox="0 0 760 130" aria-label="Plantilla visual crucigrama">
-              <rect width="760" height="130" fill="#fefce8"/>
-              <g fill="#fde68a" stroke="#d97706">
-                <rect x="30" y="30" width="38" height="38"/>
-                <rect x="70" y="30" width="38" height="38"/>
-                <rect x="110" y="30" width="38" height="38"/>
-                <rect x="110" y="70" width="38" height="38"/>
-                <rect x="150" y="70" width="38" height="38"/>
-              </g>
-              <text x="210" y="56" font-size="22" font-weight="700" fill="#92400e">H1 y V1 (ecología del paisaje)</text>
-            </svg>
-          </div>
-          <p>H1: estructura dominante del paisaje → <input style="width:170px;display:inline-block" type="text" data-actividad="cruci" data-id="h1" /></p>
-          <p>V1: conexión entre parches → <input style="width:170px;display:inline-block" type="text" data-actividad="cruci" data-id="v1" /></p>
-          <button class="btn btn-primary" data-check="cruci" type="button">Calificar crucigrama</button>
-        </div>
-      </article>
+      <article class="actividad"><header>4) Crucigrama (respuesta textual)</header><div class="body">
+        <div class="img-format"><svg viewBox="0 0 760 130" aria-label="Plantilla visual crucigrama"><rect width="760" height="130" fill="#fefce8"/><g fill="#fde68a" stroke="#d97706"><rect x="30" y="30" width="38" height="38"/><rect x="70" y="30" width="38" height="38"/><rect x="110" y="30" width="38" height="38"/><rect x="110" y="70" width="38" height="38"/><rect x="150" y="70" width="38" height="38"/></g><text x="210" y="56" font-size="22" font-weight="700" fill="#92400e">H1 y V1 (ecología del paisaje)</text></svg></div>
+        <p>H1: cobertura dominante del paisaje → <input style="width:170px;display:inline-block" type="text" data-actividad="cruci" data-id="h1" /></p>
+        <p>V1: elemento lineal que conecta parches → <input style="width:170px;display:inline-block" type="text" data-actividad="cruci" data-id="v1" /></p>
+        <button class="btn btn-primary" data-check="cruci" type="button">Calificar crucigrama</button>
+      </div></article>
 
       <div id="msgActividades" class="message" aria-live="polite"></div>
     </section>
@@ -309,11 +225,11 @@
     <section class="card">
       <h2>Evaluación final (5 preguntas)</h2>
       <ol>
-        <li>El paisaje ecológico se entiende como... <select data-eval="1"><option value="">Selecciona...</option><option>mosaico de parches, matriz y corredores</option><option>solo paisaje visual</option><option>un mapa turístico</option></select></li>
-        <li>Fragmentación y conectividad son conceptos de... <select data-eval="2"><option value="">Selecciona...</option><option>ecología del paisaje</option><option>edición de video</option><option>cartografía histórica</option></select></li>
-        <li>Grano y extensión pertenecen al tema de... <select data-eval="3"><option value="">Selecciona...</option><option>escala</option><option>genética</option><option>meteorología</option></select></li>
-        <li>Un atributo del paisaje es... <select data-eval="4"><option value="">Selecciona...</option><option>heterogeneidad</option><option>volumen musical</option><option>precio del combustible</option></select></li>
-        <li>¿Qué guarda este recurso localmente? <select data-eval="5"><option value="">Selecciona...</option><option>nombre, respuestas y progreso</option><option>contraseñas del sistema</option><option>archivos del servidor externo</option></select></li>
+        <li>Composición del paisaje significa... <select data-eval="1"><option value="">Selecciona...</option><option>qué coberturas hay y en qué proporción</option><option>solo el color del mapa</option><option>el clima anual</option></select></li>
+        <li>Configuración del paisaje significa... <select data-eval="2"><option value="">Selecciona...</option><option>cómo se organizan espacialmente los parches</option><option>solo contar especies</option><option>la altitud máxima</option></select></li>
+        <li>Grano y extensión pertenecen al tema de... <select data-eval="3"><option value="">Selecciona...</option><option>escala</option><option>plagas</option><option>hidrología urbana</option></select></li>
+        <li>La conectividad funcional depende principalmente de... <select data-eval="4"><option value="">Selecciona...</option><option>la especie y su capacidad de movimiento</option><option>la forma del título</option><option>el color del parche</option></select></li>
+        <li>En biogeografía de islas, parches grandes y cercanos tienden a... <select data-eval="5"><option value="">Selecciona...</option><option>mantener más especies</option><option>reducir toda colonización</option><option>no mostrar cambios</option></select></li>
       </ol>
       <button id="btnEvaluar" class="btn btn-primary" type="button">Calcular puntaje total</button>
       <div id="msgEval" class="message" aria-live="polite"></div>
@@ -322,169 +238,69 @@
 
   <script>
     (() => {
-      const KEYS = { nombre: 'u3_nombre', puntaje: 'u3_puntaje', progreso: 'u3_progreso', respuestas: 'u3_respuestas' };
+      const KEYS = { nombre:'u3_nombre', puntaje:'u3_puntaje', progreso:'u3_progreso', respuestas:'u3_respuestas' };
       const TOTAL_COMPLETABLES = 5;
       const ui = {
-        statusTop: document.getElementById('statusTop'),
-        nombre: document.getElementById('nombre'),
-        btnGuardar: document.getElementById('btnGuardar'),
-        btnReset: document.getElementById('btnReset'),
-        msg: document.getElementById('msg'),
-        estadoGate: document.getElementById('estadoGate'),
-        hotspots: [...document.querySelectorAll('.js-hotspot')],
-        doneCount: document.getElementById('doneCount'),
-        bar: document.getElementById('bar'),
-        ultimoTema: document.getElementById('ultimoTema'),
-        checks: [...document.querySelectorAll('[data-check]')],
-        msgActividades: document.getElementById('msgActividades'),
-        evals: [...document.querySelectorAll('[data-eval]')],
-        btnEvaluar: document.getElementById('btnEvaluar'),
-        msgEval: document.getElementById('msgEval')
+        statusTop: document.getElementById('statusTop'), nombre: document.getElementById('nombre'), btnGuardar: document.getElementById('btnGuardar'),
+        btnReset: document.getElementById('btnReset'), msg: document.getElementById('msg'), estadoGate: document.getElementById('estadoGate'),
+        hotspots: [...document.querySelectorAll('.js-hotspot')], doneCount: document.getElementById('doneCount'), bar: document.getElementById('bar'),
+        ultimoTema: document.getElementById('ultimoTema'), checks: [...document.querySelectorAll('[data-check]')], msgActividades: document.getElementById('msgActividades'),
+        evals: [...document.querySelectorAll('[data-eval]')], btnEvaluar: document.getElementById('btnEvaluar'), msgEval: document.getElementById('msgEval')
       };
-
       const norm = (v) => (v || '').toLowerCase().trim();
       const getNombre = () => (localStorage.getItem(KEYS.nombre) || '').trim();
       const getPuntaje = () => Number(localStorage.getItem(KEYS.puntaje) || 0);
       const jsonLoad = (k, f) => { try { const v = localStorage.getItem(k); return v ? JSON.parse(v) : f; } catch { return f; } };
       const jsonSave = (k, v) => localStorage.setItem(k, JSON.stringify(v));
-      const getProg = () => jsonLoad(KEYS.progreso, { temaActual: null, completadas: [] });
+      const getProg = () => jsonLoad(KEYS.progreso, { temaActual:null, completadas:[] });
       const getResp = () => jsonLoad(KEYS.respuestas, {});
 
-      function show(el, txt, ok = true) { el.textContent = txt; el.className = `message ${ok ? 'ok' : 'warn'}`; }
-      function gate(lock) {
-        ui.hotspots.forEach((h) => h.disabled = lock);
-        ui.estadoGate.textContent = lock ? 'Bloqueado: guarda tu nombre para habilitar el mapa.' : 'Habilitado: puedes navegar por los temas.';
-      }
+      function show(el, txt, ok=true) { el.textContent = txt; el.className = `message ${ok ? 'ok' : 'warn'}`; }
+      function gate(lock) { ui.hotspots.forEach((h) => h.disabled = lock); ui.estadoGate.textContent = lock ? 'Bloqueado: guarda tu nombre para habilitar el mapa.' : 'Habilitado: puedes navegar por los temas.'; }
       function saveResp(key, value) { const r = getResp(); r[key] = value; jsonSave(KEYS.respuestas, r); }
-      function markDone(id) {
-        const p = getProg();
-        if (!p.completadas.includes(id)) p.completadas.push(id);
-        jsonSave(KEYS.progreso, p);
-        render();
-      }
+      function markDone(id) { const p = getProg(); if (!p.completadas.includes(id)) p.completadas.push(id); jsonSave(KEYS.progreso, p); render(); }
       function render() {
-        const nombre = getNombre() || 'Invitado';
-        const puntaje = getPuntaje();
-        ui.statusTop.textContent = `👤 ${nombre} | ⭐ Puntaje: ${puntaje}/100`;
-        const p = getProg();
-        ui.doneCount.textContent = String(p.completadas.length);
-        ui.bar.style.width = `${Math.round((p.completadas.length / TOTAL_COMPLETABLES) * 100)}%`;
-        ui.ultimoTema.textContent = p.temaActual || 'Ninguno';
+        ui.statusTop.textContent = `👤 ${getNombre() || 'Invitado'} | ⭐ Puntaje: ${getPuntaje()}/100`;
+        const p = getProg(); ui.doneCount.textContent = String(p.completadas.length); ui.bar.style.width = `${Math.round((p.completadas.length / TOTAL_COMPLETABLES) * 100)}%`; ui.ultimoTema.textContent = p.temaActual || 'Ninguno';
       }
 
-      function calRel() {
-        const exp = { pe: 'Lima', ec: 'Quito', bo: 'La Paz' };
-        let ok = 0;
-        document.querySelectorAll('select[data-actividad="rel"]').forEach((s) => {
-          saveResp(`rel_${s.dataset.id}`, s.value);
-          if (s.value === exp[s.dataset.id]) ok += 1;
-        });
-        if (ok === 3) markDone('rel');
-        return ok === 3;
-      }
-      function calComp() {
-        const exp = { c1: 'localstorage', c2: 'paisaje' };
-        let ok = 0;
-        document.querySelectorAll('input[data-actividad="comp"]').forEach((i) => {
-          saveResp(`comp_${i.dataset.id}`, i.value);
-          if (norm(i.value) === exp[i.dataset.id]) ok += 1;
-        });
-        if (ok === 2) markDone('comp');
-        return ok === 2;
-      }
-      function calSopa() {
-        const inp = document.querySelector('input[data-actividad="sopa"]');
-        const parts = norm(inp.value).split(',').map((x) => x.trim()).filter(Boolean);
-        saveResp('sopa', inp.value);
-        const ok = ['paisaje', 'escala', 'parche'].every((w) => parts.includes(w));
-        if (ok) markDone('sopa');
-        return ok;
-      }
-      function calCruci() {
-        const exp = { h1: 'matriz', v1: 'corredor' };
-        let ok = 0;
-        document.querySelectorAll('input[data-actividad="cruci"]').forEach((i) => {
-          saveResp(`cru_${i.dataset.id}`, i.value);
-          if (norm(i.value) === exp[i.dataset.id]) ok += 1;
-        });
-        if (ok === 2) markDone('cruci');
-        return ok === 2;
-      }
+      function calRel() { const exp = { pe:'Área relativamente homogénea', ec:'Cobertura dominante', bo:'Zona de transición ecológica' }; let ok = 0; document.querySelectorAll('select[data-actividad="rel"]').forEach((s) => { saveResp(`rel_${s.dataset.id}`, s.value); if (s.value === exp[s.dataset.id]) ok += 1; }); if (ok === 3) markDone('rel'); return ok === 3; }
+      function calComp() { const exp = { c1:'escala', c2:'area' }; let ok = 0; document.querySelectorAll('input[data-actividad="comp"]').forEach((i) => { saveResp(`comp_${i.dataset.id}`, i.value); if (norm(i.value) === exp[i.dataset.id]) ok += 1; }); if (ok === 2) markDone('comp'); return ok === 2; }
+      function calSopa() { const inp = document.querySelector('input[data-actividad="sopa"]'); const parts = norm(inp.value).split(',').map((x)=>x.trim()).filter(Boolean); saveResp('sopa', inp.value); const ok = ['paisaje','escala','parche'].every((w)=>parts.includes(w)); if (ok) markDone('sopa'); return ok; }
+      function calCruci() { const exp = { h1:'matriz', v1:'corredor' }; let ok = 0; document.querySelectorAll('input[data-actividad="cruci"]').forEach((i) => { saveResp(`cru_${i.dataset.id}`, i.value); if (norm(i.value) === exp[i.dataset.id]) ok += 1; }); if (ok === 2) markDone('cruci'); return ok === 2; }
       function calEval() {
-        const exp = {
-          1: 'mosaico de parches, matriz y corredores',
-          2: 'ecología del paisaje',
-          3: 'escala',
-          4: 'heterogeneidad',
-          5: 'nombre, respuestas y progreso'
-        };
-        let score = 0;
-        ui.evals.forEach((s) => {
-          const id = Number(s.dataset.eval);
-          saveResp(`eval_${id}`, s.value);
-          if (s.value === exp[id]) score += 1;
-        });
-        if (score === 5) markDone('evaluacion');
-        return score;
+        const exp = { 1:'qué coberturas hay y en qué proporción', 2:'cómo se organizan espacialmente los parches', 3:'escala', 4:'la especie y su capacidad de movimiento', 5:'mantener más especies' };
+        let score = 0; ui.evals.forEach((s) => { const id = Number(s.dataset.eval); saveResp(`eval_${id}`, s.value); if (s.value === exp[id]) score += 1; }); if (score === 5) markDone('evaluacion'); return score;
       }
-      function totalScore() {
-        const p = getProg();
-        const actDone = p.completadas.filter((x) => x !== 'evaluacion').length;
-        const evalScore = calEval();
-        const total = Math.round((actDone / 4) * 60 + (evalScore / 5) * 40);
-        localStorage.setItem(KEYS.puntaje, String(total));
-        render();
-        return { total, evalScore };
-      }
+      function totalScore() { const p = getProg(); const actDone = p.completadas.filter((x)=>x!=='evaluacion').length; const evalScore = calEval(); const total = Math.round((actDone / 4) * 60 + (evalScore / 5) * 40); localStorage.setItem(KEYS.puntaje, String(total)); render(); return { total, evalScore }; }
 
       ui.btnGuardar.addEventListener('click', () => {
-        const nombre = ui.nombre.value.trim();
-        if (!nombre) return show(ui.msg, 'Debes ingresar tu nombre completo.', false);
-        localStorage.setItem(KEYS.nombre, nombre);
-        if (!localStorage.getItem(KEYS.puntaje)) localStorage.setItem(KEYS.puntaje, '0');
-        if (!localStorage.getItem(KEYS.progreso)) jsonSave(KEYS.progreso, { temaActual: null, completadas: [] });
-        if (!localStorage.getItem(KEYS.respuestas)) jsonSave(KEYS.respuestas, {});
+        const nombre = ui.nombre.value.trim(); if (!nombre) return show(ui.msg, 'Debes ingresar tu nombre completo.', false);
+        localStorage.setItem(KEYS.nombre, nombre); if (!localStorage.getItem(KEYS.puntaje)) localStorage.setItem(KEYS.puntaje, '0');
+        if (!localStorage.getItem(KEYS.progreso)) jsonSave(KEYS.progreso, { temaActual:null, completadas:[] }); if (!localStorage.getItem(KEYS.respuestas)) jsonSave(KEYS.respuestas, {});
         gate(false); render(); show(ui.msg, 'Nombre guardado. Acceso habilitado.', true);
       });
-
-      ui.btnReset.addEventListener('click', () => {
-        Object.values(KEYS).forEach((k) => localStorage.removeItem(k));
-        ui.nombre.value = '';
-        gate(true); render();
-        show(ui.msg, 'Se reinició el progreso local.', true);
-        show(ui.msgActividades, '', true); show(ui.msgEval, '', true);
-      });
+      ui.btnReset.addEventListener('click', () => { Object.values(KEYS).forEach((k) => localStorage.removeItem(k)); ui.nombre.value=''; gate(true); render(); show(ui.msg, 'Se reinició el progreso local.', true); show(ui.msgActividades, '', true); show(ui.msgEval, '', true); });
 
       ui.hotspots.forEach((h) => h.addEventListener('click', () => {
         if (!getNombre()) { gate(true); return show(ui.msg, 'Guarda tu nombre para navegar.', false); }
-        const target = h.dataset.target;
-        document.getElementById(target)?.scrollIntoView({ behavior: 'smooth', block: 'start' });
-        const p = getProg(); p.temaActual = target; jsonSave(KEYS.progreso, p); render();
+        const target = h.dataset.target; document.getElementById(target)?.scrollIntoView({ behavior:'smooth', block:'start' }); const p = getProg(); p.temaActual = target; jsonSave(KEYS.progreso, p); render();
       }));
 
       ui.checks.forEach((b) => b.addEventListener('click', () => {
         if (!getNombre()) return show(ui.msgActividades, 'Debes guardar tu nombre antes de calificar.', false);
-        const type = b.dataset.check;
-        let ok = false;
-        if (type === 'rel') ok = calRel();
-        if (type === 'comp') ok = calComp();
-        if (type === 'sopa') ok = calSopa();
-        if (type === 'cruci') ok = calCruci();
+        const type = b.dataset.check; let ok = false; if (type === 'rel') ok = calRel(); if (type === 'comp') ok = calComp(); if (type === 'sopa') ok = calSopa(); if (type === 'cruci') ok = calCruci();
         show(ui.msgActividades, ok ? `Actividad ${type} completada.` : `Actividad ${type} con errores.`, ok);
       }));
 
       ui.btnEvaluar.addEventListener('click', () => {
         if (!getNombre()) return show(ui.msgEval, 'Debes guardar tu nombre antes de evaluar.', false);
-        const { total, evalScore } = totalScore();
-        show(ui.msgEval, `Evaluación: ${evalScore}/5. Puntaje total: ${total}/100.`, evalScore >= 3);
+        const { total, evalScore } = totalScore(); show(ui.msgEval, `Evaluación: ${evalScore}/5. Puntaje total: ${total}/100.`, evalScore >= 3);
       });
 
       (function init() {
-        const nombre = getNombre();
-        if (nombre) ui.nombre.value = nombre;
-        gate(!nombre);
-        const r = getResp();
-        Object.entries(r).forEach(([k,v]) => {
+        const nombre = getNombre(); if (nombre) ui.nombre.value = nombre; gate(!nombre);
+        const r = getResp(); Object.entries(r).forEach(([k,v]) => {
           const [type, id] = k.split('_');
           if (type === 'rel') { const el = document.querySelector(`select[data-actividad="rel"][data-id="${id}"]`); if (el) el.value = v; }
           if (type === 'comp') { const el = document.querySelector(`input[data-actividad="comp"][data-id="${id}"]`); if (el) el.value = v; }
