@@ -1,0 +1,308 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Mapa de progreso</title>
+    <style>
+      :root {
+        --bg: #0f172a;
+        --panel: #111827;
+        --card: #1f2937;
+        --text: #e5e7eb;
+        --muted: #9ca3af;
+        --ok: #10b981;
+        --active: #3b82f6;
+      }
+
+      * { box-sizing: border-box; }
+      body {
+        margin: 0;
+        font-family: Inter, system-ui, -apple-system, Segoe UI, Roboto, sans-serif;
+        background: linear-gradient(140deg, #020617, #111827);
+        color: var(--text);
+        min-height: 100vh;
+      }
+
+      .container {
+        max-width: 980px;
+        margin: 0 auto;
+        padding: 24px;
+      }
+
+      header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        gap: 12px;
+        flex-wrap: wrap;
+        margin-bottom: 20px;
+      }
+
+      .score {
+        padding: 10px 14px;
+        border-radius: 10px;
+        background: #1e293b;
+        border: 1px solid #334155;
+        font-weight: 700;
+      }
+
+      .legend {
+        color: var(--muted);
+        font-size: 0.95rem;
+      }
+
+      .map {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+        gap: 14px;
+      }
+
+      .theme {
+        background: var(--card);
+        border: 1px solid #374151;
+        border-radius: 12px;
+        padding: 14px;
+        transition: border-color 180ms ease, box-shadow 180ms ease;
+      }
+
+      .theme.active {
+        border-color: var(--active);
+        box-shadow: 0 0 0 2px #1d4ed833;
+      }
+
+      .theme-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 8px;
+      }
+
+      .badge {
+        padding: 4px 8px;
+        border-radius: 999px;
+        font-size: 0.8rem;
+        border: 1px solid #4b5563;
+        color: #d1d5db;
+      }
+
+      .badge.completed {
+        background: #064e3b;
+        border-color: #10b981;
+        color: #d1fae5;
+      }
+
+      label { display: block; font-weight: 600; margin-bottom: 6px; }
+      textarea {
+        width: 100%;
+        min-height: 84px;
+        resize: vertical;
+        border-radius: 8px;
+        border: 1px solid #4b5563;
+        background: #111827;
+        color: var(--text);
+        padding: 10px;
+      }
+
+      .theme-footer {
+        margin-top: 10px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        color: var(--muted);
+        font-size: 0.9rem;
+      }
+
+      .reset {
+        margin-top: 18px;
+        background: #7f1d1d;
+        color: #fee2e2;
+        border: 1px solid #dc2626;
+        border-radius: 10px;
+        padding: 9px 12px;
+        cursor: pointer;
+      }
+
+      .reset:hover {
+        filter: brightness(1.08);
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <header>
+        <h1>Mapa de actividades</h1>
+        <div id="scoreHeader" class="score">⭐ Puntaje: 0/10</div>
+        <div class="legend">Distribución: Tema 1 = 4 pts · Temas 2-5 = 1.5 pts c/u</div>
+      </header>
+
+      <section id="themeMap" class="map"></section>
+
+      <button id="resetProgress" class="reset" type="button">Reiniciar progreso</button>
+    </div>
+
+    <script>
+      const STORAGE_KEY = "unidad3_progreso";
+      const MAX_SCORE = 10;
+
+      const themes = [
+        { id: "tema1", title: "Tema 1", weight: 4, activityId: "act1" },
+        { id: "tema2", title: "Tema 2", weight: 1.5, activityId: "act2" },
+        { id: "tema3", title: "Tema 3", weight: 1.5, activityId: "act3" },
+        { id: "tema4", title: "Tema 4", weight: 1.5, activityId: "act4" },
+        { id: "tema5", title: "Tema 5", weight: 1.5, activityId: "act5" },
+      ];
+
+      const defaultState = {
+        responses: {},
+        completedThemes: [],
+        score: 0,
+        activeThemeId: null,
+      };
+
+      let state = loadState();
+
+      function loadState() {
+        try {
+          const raw = localStorage.getItem(STORAGE_KEY);
+          if (!raw) return { ...defaultState };
+
+          const parsed = JSON.parse(raw);
+          return {
+            responses: parsed.responses ?? {},
+            completedThemes: Array.isArray(parsed.completedThemes) ? parsed.completedThemes : [],
+            score: typeof parsed.score === "number" ? parsed.score : 0,
+            activeThemeId: parsed.activeThemeId ?? null,
+          };
+        } catch {
+          return { ...defaultState };
+        }
+      }
+
+      function saveState() {
+        localStorage.setItem(STORAGE_KEY, JSON.stringify(state));
+      }
+
+      function calculateScore(completedThemes) {
+        const total = themes
+          .filter((theme) => completedThemes.includes(theme.id))
+          .reduce((sum, theme) => sum + theme.weight, 0);
+
+        return Math.min(MAX_SCORE, Math.round(total * 100) / 100);
+      }
+
+      function updateScoreHeader() {
+        const scoreHeader = document.getElementById("scoreHeader");
+        scoreHeader.textContent = `⭐ Puntaje: ${state.score}/${MAX_SCORE}`;
+      }
+
+      function setActiveTheme(themeId) {
+        state.activeThemeId = themeId;
+        saveState();
+        paintMapIndicators();
+      }
+
+      function toggleCompleted(themeId, completed) {
+        const set = new Set(state.completedThemes);
+        if (completed) set.add(themeId);
+        else set.delete(themeId);
+
+        state.completedThemes = [...set];
+        state.score = calculateScore(state.completedThemes);
+        saveState();
+        updateScoreHeader();
+        paintMapIndicators();
+      }
+
+      function updateResponse(activityId, value) {
+        state.responses[activityId] = value;
+        saveState();
+      }
+
+      function paintMapIndicators() {
+        themes.forEach((theme) => {
+          const card = document.querySelector(`[data-theme-id="${theme.id}"]`);
+          const badge = card.querySelector(".badge");
+          const isComplete = state.completedThemes.includes(theme.id);
+          const isActive = state.activeThemeId === theme.id;
+
+          badge.textContent = isComplete ? "Completado" : "Pendiente";
+          badge.classList.toggle("completed", isComplete);
+          card.classList.toggle("active", isActive);
+        });
+      }
+
+      function renderThemes() {
+        const map = document.getElementById("themeMap");
+        map.innerHTML = themes
+          .map((theme) => {
+            const checked = state.completedThemes.includes(theme.id) ? "checked" : "";
+            return `
+              <article class="theme" data-theme-id="${theme.id}">
+                <div class="theme-header">
+                  <strong>${theme.title}</strong>
+                  <span class="badge">Pendiente</span>
+                </div>
+
+                <label for="${theme.activityId}">Actividad (${theme.weight} pts)</label>
+                <textarea id="${theme.activityId}" data-activity-id="${theme.activityId}" placeholder="Escribe tu respuesta..."></textarea>
+
+                <div class="theme-footer">
+                  <label>
+                    <input type="checkbox" data-complete-id="${theme.id}" ${checked} />
+                    Marcar tema completado
+                  </label>
+                </div>
+              </article>
+            `;
+          })
+          .join("");
+
+        map.querySelectorAll("textarea").forEach((textarea) => {
+          textarea.addEventListener("input", (event) => {
+            updateResponse(event.target.dataset.activityId, event.target.value);
+          });
+
+          textarea.addEventListener("focus", (event) => {
+            const card = event.target.closest(".theme");
+            setActiveTheme(card.dataset.themeId);
+          });
+        });
+
+        map.querySelectorAll("[data-complete-id]").forEach((checkbox) => {
+          checkbox.addEventListener("change", (event) => {
+            toggleCompleted(event.target.dataset.completeId, event.target.checked);
+          });
+        });
+
+        map.querySelectorAll("textarea").forEach((textarea) => {
+          textarea.value = state.responses[textarea.dataset.activityId] ?? "";
+        });
+
+        paintMapIndicators();
+      }
+
+      function setupResetButton() {
+        const resetBtn = document.getElementById("resetProgress");
+        resetBtn.addEventListener("click", () => {
+          const accepted = confirm("¿Seguro que deseas reiniciar todo el progreso?");
+          if (!accepted) return;
+
+          localStorage.removeItem(STORAGE_KEY);
+          state = { ...defaultState };
+          renderThemes();
+          updateScoreHeader();
+        });
+      }
+
+      function init() {
+        state.score = calculateScore(state.completedThemes);
+        updateScoreHeader();
+        renderThemes();
+        setupResetButton();
+      }
+
+      init();
+    </script>
+  </body>
+</html>
