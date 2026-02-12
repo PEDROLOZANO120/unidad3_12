@@ -342,6 +342,26 @@
     .feedback { min-height: 1.05rem; font-weight: 700; margin-top: .4rem; font-size: .88rem; }
 
     .eval-item { margin: .5rem 0; }
+
+    .sopa-layout { display:grid; grid-template-columns: 1.25fr .75fr; gap:.8rem; align-items:start; }
+    @media (max-width: 1000px) { .sopa-layout { grid-template-columns: 1fr; } }
+    .sopa-board { border:1px solid var(--line); border-radius:14px; background:rgba(0,0,0,.22); padding:.55rem; }
+    .sopa-grid-pro { display:grid; grid-template-columns: repeat(18, 34px); gap:8px; justify-content:start; max-width:100%; overflow:auto; padding:.3rem; }
+    .cell-pro { width:34px; height:34px; border-radius:999px; border:1px solid rgba(141, 231, 188, .3); display:grid; place-items:center; font-family: ui-monospace, monospace; font-weight:700; font-size:.95rem; color:#d9ffea; background:rgba(3, 12, 8, .72); box-shadow: inset 0 0 0 1px rgba(85, 180, 132, .08); }
+    .sopa-side { border:1px solid var(--line); border-radius:14px; background:rgba(0,0,0,.22); padding:.65rem; }
+    .tag-list { display:flex; flex-wrap:wrap; gap:.45rem; margin:.45rem 0 .55rem; }
+    .tag { padding:.32rem .55rem; border-radius:999px; border:1px solid var(--line); background:rgba(23,79,57,.45); font-size:.78rem; font-weight:700; }
+    .cross-layout { display:grid; grid-template-columns: 1.2fr .8fr; gap:.8rem; align-items:start; }
+    @media (max-width: 1000px) { .cross-layout { grid-template-columns: 1fr; } }
+    .cross-board { border:1px solid var(--line); border-radius:14px; background:rgba(0,0,0,.22); padding:.55rem; }
+    .cross-grid { display:grid; grid-template-columns: repeat(20, 36px); gap:8px; justify-content:start; max-width:100%; overflow:auto; padding:.3rem; }
+    .dot { width:36px; height:36px; border-radius:999px; display:grid; place-items:center; border:1px solid rgba(135, 223, 180, .28); background:rgba(2, 10, 7, .78); color:#c8ffe0; font-size:.78rem; position:relative; }
+    .dot.active { background:rgba(3, 18, 12, .9); }
+    .dot .n { position:absolute; top:-6px; left:10px; font-size:.62rem; background:rgba(0,0,0,.65); border:1px solid var(--line); border-radius:999px; width:16px; height:16px; display:grid; place-items:center; }
+    .clues { border:1px solid var(--line); border-radius:14px; background:rgba(0,0,0,.22); padding:.65rem; }
+    .clues ul { margin:.3rem 0 0 1rem; padding:0; }
+    .clues li { margin:.26rem 0; color:var(--muted); }
+
   </style>
 </head>
 <body>
@@ -453,17 +473,31 @@
           </article>
 
           <article class="activity" id="act-sopa">
-            <header>Sopa de letras (palabras largas)</header>
+            <header>Sopa de letras (estilo imagen de referencia)</header>
             <div class="body">
-              <p class="subtitle">Busca: <strong>FRAGMENTACION</strong>, <strong>CONECTIVIDAD</strong>, <strong>HETEROGENEIDAD</strong>.</p>
-              <div class="word-grid" aria-label="Sopa de letras">
-                <span>F</span><span>R</span><span>A</span><span>G</span><span>M</span><span>E</span><span>N</span><span>T</span><span>A</span><span>C</span><span>I</span><span>O</span>
-                <span>N</span><span>C</span><span>O</span><span>N</span><span>E</span><span>C</span><span>T</span><span>I</span><span>V</span><span>I</span><span>D</span><span>A</span>
-                <span>D</span><span>H</span><span>E</span><span>T</span><span>E</span><span>R</span><span>O</span><span>G</span><span>E</span><span>N</span><span>E</span><span>I</span>
-                <span>D</span><span>A</span><span>D</span><span>P</span><span>A</span><span>T</span><span>R</span><span>O</span><span>N</span><span>P</span><span>R</span><span>O</span>
-                <span>C</span><span>E</span><span>S</span><span>O</span><span>S</span><span>M</span><span>A</span><span>T</span><span>R</span><span>I</span><span>Z</span><span>X</span>
+              <div class="sopa-layout">
+                <div class="sopa-board">
+                  <p class="subtitle">Selecciona visualmente y reporta las palabras encontradas.</p>
+                  <div class="sopa-grid-pro" aria-label="Sopa de letras profesional">
+                    <span class="cell-pro">C</span><span class="cell-pro">O</span><span class="cell-pro">N</span><span class="cell-pro">E</span><span class="cell-pro">C</span><span class="cell-pro">T</span><span class="cell-pro">I</span><span class="cell-pro">V</span><span class="cell-pro">I</span><span class="cell-pro">D</span><span class="cell-pro">A</span><span class="cell-pro">D</span><span class="cell-pro">Q</span><span class="cell-pro">L</span><span class="cell-pro">M</span><span class="cell-pro">T</span><span class="cell-pro">R</span><span class="cell-pro">U</span>
+                    <span class="cell-pro">A</span><span class="cell-pro">R</span><span class="cell-pro">F</span><span class="cell-pro">G</span><span class="cell-pro">N</span><span class="cell-pro">P</span><span class="cell-pro">O</span><span class="cell-pro">H</span><span class="cell-pro">B</span><span class="cell-pro">W</span><span class="cell-pro">X</span><span class="cell-pro">S</span><span class="cell-pro">E</span><span class="cell-pro">C</span><span class="cell-pro">A</span><span class="cell-pro">L</span><span class="cell-pro">A</span><span class="cell-pro">D</span>
+                    <span class="cell-pro">H</span><span class="cell-pro">E</span><span class="cell-pro">T</span><span class="cell-pro">E</span><span class="cell-pro">R</span><span class="cell-pro">O</span><span class="cell-pro">G</span><span class="cell-pro">E</span><span class="cell-pro">N</span><span class="cell-pro">E</span><span class="cell-pro">I</span><span class="cell-pro">D</span><span class="cell-pro">A</span><span class="cell-pro">D</span><span class="cell-pro">K</span><span class="cell-pro">P</span><span class="cell-pro">Y</span><span class="cell-pro">S</span>
+                    <span class="cell-pro">F</span><span class="cell-pro">R</span><span class="cell-pro">A</span><span class="cell-pro">G</span><span class="cell-pro">M</span><span class="cell-pro">E</span><span class="cell-pro">N</span><span class="cell-pro">T</span><span class="cell-pro">A</span><span class="cell-pro">C</span><span class="cell-pro">I</span><span class="cell-pro">O</span><span class="cell-pro">N</span><span class="cell-pro">Z</span><span class="cell-pro">D</span><span class="cell-pro">V</span><span class="cell-pro">O</span><span class="cell-pro">N</span>
+                    <span class="cell-pro">M</span><span class="cell-pro">A</span><span class="cell-pro">T</span><span class="cell-pro">R</span><span class="cell-pro">I</span><span class="cell-pro">Z</span><span class="cell-pro">B</span><span class="cell-pro">R</span><span class="cell-pro">E</span><span class="cell-pro">C</span><span class="cell-pro">O</span><span class="cell-pro">M</span><span class="cell-pro">P</span><span class="cell-pro">O</span><span class="cell-pro">S</span><span class="cell-pro">I</span><span class="cell-pro">C</span><span class="cell-pro">I</span>
+                    <span class="cell-pro">O</span><span class="cell-pro">N</span><span class="cell-pro">E</span><span class="cell-pro">D</span><span class="cell-pro">M</span><span class="cell-pro">O</span><span class="cell-pro">S</span><span class="cell-pro">A</span><span class="cell-pro">I</span><span class="cell-pro">C</span><span class="cell-pro">O</span><span class="cell-pro">L</span><span class="cell-pro">C</span><span class="cell-pro">O</span><span class="cell-pro">R</span><span class="cell-pro">R</span><span class="cell-pro">E</span><span class="cell-pro">D</span>
+                  </div>
+                </div>
+                <aside class="sopa-side">
+                  <h4 style="margin:0 0 .4rem">📌 Palabras</h4>
+                  <div class="tag-list">
+                    <span class="tag">HETEROGENEIDAD</span><span class="tag">FRAGMENTACION</span><span class="tag">CONECTIVIDAD</span>
+                    <span class="tag">CONFIGURACION</span><span class="tag">COMPOSICION</span><span class="tag">CORREDOR</span>
+                    <span class="tag">MATRIZ</span><span class="tag">PARCHE</span><span class="tag">BORDE</span><span class="tag">MOSAICO</span><span class="tag">ESCALA</span>
+                  </div>
+                  <p class="subtitle">💡 Busca al menos: HETEROGENEIDAD, FRAGMENTACION y CONECTIVIDAD.</p>
+                </aside>
               </div>
-              <input class="input" data-act="sopa" type="text" placeholder="Escribe las 3 palabras separadas por coma" />
+              <input class="input" data-act="sopa" type="text" placeholder="Escribe las 3 palabras clave separadas por coma" />
               <div class="actions">
                 <button class="btn btn-primary" data-review="sopa" type="button">Revisar</button>
                 <button class="btn btn-secondary" data-retry="sopa" type="button">Reintentar</button>
@@ -473,10 +507,33 @@
           </article>
 
           <article class="activity" id="act-cruci">
-            <header>Crucigrama (respuestas textuales)</header>
+            <header>Crucigrama (estilo imagen de referencia)</header>
             <div class="body">
-              <p>Horizontal: cobertura dominante del paisaje → <input class="input" style="max-width:220px;display:inline-block" data-act="cruci" data-id="1" type="text" /></p>
-              <p>Vertical: elemento lineal que conecta parches → <input class="input" style="max-width:220px;display:inline-block" data-act="cruci" data-id="2" type="text" /></p>
+              <div class="cross-layout">
+                <div class="cross-board">
+                  <div class="cross-grid" aria-label="Crucigrama visual">
+                    <span class="dot"></span><span class="dot"></span><span class="dot"></span><span class="dot active"><span class="n">1</span></span><span class="dot active"></span><span class="dot active"></span><span class="dot active"></span><span class="dot"></span><span class="dot"></span><span class="dot active"><span class="n">2</span></span><span class="dot active"></span><span class="dot active"></span><span class="dot active"></span><span class="dot active"></span><span class="dot"></span><span class="dot"></span><span class="dot active"><span class="n">3</span></span><span class="dot active"></span><span class="dot active"></span><span class="dot"></span>
+                    <span class="dot"></span><span class="dot"></span><span class="dot active"></span><span class="dot"></span><span class="dot"></span><span class="dot"></span><span class="dot active"></span><span class="dot"></span><span class="dot"></span><span class="dot"></span><span class="dot active"></span><span class="dot"></span><span class="dot"></span><span class="dot"></span><span class="dot"></span><span class="dot"></span><span class="dot active"></span><span class="dot"></span><span class="dot"></span><span class="dot"></span>
+                    <span class="dot"></span><span class="dot active"><span class="n">4</span></span><span class="dot active"></span><span class="dot active"></span><span class="dot active"></span><span class="dot active"></span><span class="dot active"></span><span class="dot"></span><span class="dot"></span><span class="dot"></span><span class="dot active"></span><span class="dot"></span><span class="dot"></span><span class="dot"></span><span class="dot"></span><span class="dot"></span><span class="dot active"></span><span class="dot"></span><span class="dot"></span><span class="dot"></span>
+                    <span class="dot"></span><span class="dot"></span><span class="dot"></span><span class="dot"></span><span class="dot"></span><span class="dot"></span><span class="dot active"></span><span class="dot active"></span><span class="dot active"></span><span class="dot active"></span><span class="dot active"></span><span class="dot active"></span><span class="dot"></span><span class="dot"></span><span class="dot"></span><span class="dot"></span><span class="dot"></span><span class="dot"></span><span class="dot"></span><span class="dot"></span>
+                    <span class="dot"></span><span class="dot"></span><span class="dot"></span><span class="dot active"></span><span class="dot"></span><span class="dot"></span><span class="dot"></span><span class="dot"></span><span class="dot"></span><span class="dot"></span><span class="dot"></span><span class="dot"></span><span class="dot"></span><span class="dot"></span><span class="dot"></span><span class="dot active"></span><span class="dot active"></span><span class="dot active"></span><span class="dot active"></span><span class="dot"></span>
+                    <span class="dot"></span><span class="dot"></span><span class="dot"></span><span class="dot active"></span><span class="dot"></span><span class="dot"></span><span class="dot"></span><span class="dot"></span><span class="dot active"></span><span class="dot active"></span><span class="dot active"></span><span class="dot active"></span><span class="dot active"></span><span class="dot active"></span><span class="dot"></span><span class="dot"></span><span class="dot"></span><span class="dot"></span><span class="dot"></span><span class="dot"></span>
+                  </div>
+                </div>
+                <aside class="clues">
+                  <h4 style="margin:0 0 .4rem">📌 Pistas</h4>
+                  <ul>
+                    <li><strong>1.</strong> Cobertura dominante del paisaje.</li>
+                    <li><strong>2.</strong> Conexión lineal que facilita movimiento entre parches.</li>
+                    <li><strong>3.</strong> Variabilidad espacial del mosaico.</li>
+                    <li><strong>4.</strong> Área relativamente homogénea del paisaje.</li>
+                  </ul>
+                </aside>
+              </div>
+              <p>1) Cobertura dominante → <input class="input" style="max-width:220px;display:inline-block" data-act="cruci" data-id="1" type="text" /></p>
+              <p>2) Conexión lineal → <input class="input" style="max-width:220px;display:inline-block" data-act="cruci" data-id="2" type="text" /></p>
+              <p>3) Variabilidad espacial → <input class="input" style="max-width:220px;display:inline-block" data-act="cruci" data-id="3" type="text" /></p>
+              <p>4) Área homogénea → <input class="input" style="max-width:220px;display:inline-block" data-act="cruci" data-id="4" type="text" /></p>
               <div class="actions">
                 <button class="btn btn-primary" data-review="cruci" type="button">Revisar</button>
                 <button class="btn btn-secondary" data-retry="cruci" type="button">Reintentar</button>
@@ -744,7 +801,7 @@
           saveRespuesta(`comp_${i.dataset.id}`, i.value);
           if (v === expected[i.dataset.id]) ok += 1;
         });
-        const pass = ok === 2;
+        const pass = ok === 4;
         pass ? markDone('comp') : unmarkDone('comp');
         setFeedback('fb-comp', pass ? '✅ Excelente, completaste correctamente.' : '❌ Faltan términos clave (configuración / heterogeneidad).', pass);
       }
@@ -773,16 +830,16 @@
       }
 
       function reviewCruci() {
-        const expected = { 1: 'matriz', 2: 'corredor' };
+        const expected = { 1: 'matriz', 2: 'corredor', 3: 'heterogeneidad', 4: 'parche' };
         let ok = 0;
         $$('input[data-act="cruci"]').forEach((i) => {
           const v = normalize(i.value);
           saveRespuesta(`cruci_${i.dataset.id}`, i.value);
           if (v === expected[i.dataset.id]) ok += 1;
         });
-        const pass = ok === 2;
+        const pass = ok === 4;
         pass ? markDone('cruci') : unmarkDone('cruci');
-        setFeedback('fb-cruci', pass ? '✅ Crucigrama correcto.' : '❌ Verifica las respuestas: matriz / corredor.', pass);
+        setFeedback('fb-cruci', pass ? '✅ Crucigrama correcto.' : '❌ Verifica: matriz, corredor, heterogeneidad y parche.', pass);
       }
 
       function retryCruci() {
