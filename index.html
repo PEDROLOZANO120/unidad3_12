@@ -351,6 +351,7 @@
     .sopa-side { border:1px solid var(--line); border-radius:14px; background:rgba(0,0,0,.22); padding:.65rem; }
     .tag-list { display:flex; flex-wrap:wrap; gap:.45rem; margin:.45rem 0 .55rem; }
     .tag { padding:.32rem .55rem; border-radius:999px; border:1px solid var(--line); background:rgba(23,79,57,.45); font-size:.78rem; font-weight:700; }
+    .tag.found { background:rgba(87,216,138,.35); color:#eafff2; border-color:rgba(145,248,191,.65); }
     .cross-layout { display:grid; grid-template-columns: 1.2fr .8fr; gap:.8rem; align-items:start; }
     @media (max-width: 1000px) { .cross-layout { grid-template-columns: 1fr; } }
     .cross-board { border:1px solid var(--line); border-radius:14px; background:rgba(0,0,0,.22); padding:.55rem; }
@@ -570,11 +571,11 @@
                     <span class="tag">CONFIGURACION</span><span class="tag">COMPOSICION</span><span class="tag">CORREDOR</span>
                     <span class="tag">MATRIZ</span><span class="tag">PARCHE</span><span class="tag">BORDE</span><span class="tag">MOSAICO</span><span class="tag">ESCALA</span>
                   </div>
-                  <p class="subtitle">💡 Busca al menos: HETEROGENEIDAD, FRAGMENTACION y CONECTIVIDAD.</p>
+                  <p class="subtitle">💡 Haz clic sobre las letras hasta marcar cada palabra objetivo.</p>
+                  <div id="sopaFound" class="tag-list" aria-live="polite"></div>
                 </aside>
               </div>
-              <input class="input" data-act="sopa" type="text" placeholder="Escribe las 3 palabras clave separadas por coma" />
-              <div class="actions">
+                            <div class="actions">
                 <button class="btn btn-primary" data-review="sopa" type="button">Revisar</button>
                 <button class="btn btn-secondary" data-retry="sopa" type="button">Reintentar</button>
               </div>
@@ -944,27 +945,34 @@
         setFeedback('fb-comp', 'Actividad reiniciada.', true);
       }
 
-      function reviewSopa() {
-        const input = $('input[data-act="sopa"]');
-        const parts = normalize(input.value).split(',').map((x) => x.trim()).filter(Boolean);
-        saveRespuesta('sopa', input.value);
+      function updateSopaFound() {
+        const found = $('#sopaFound');
+        if (!found) return;
         const words = ['fragmentacion', 'conectividad', 'heterogeneidad'];
-        const typedOk = words.every((w) => parts.includes(w));
-        const selected = words.every((w) => {
+        found.innerHTML = words.map((w) => {
+          const cells = $$(`.sopa-grid-pro .cell-pro[data-word="${w}"]`);
+          const ok = cells.length > 0 && cells.every((c) => c.classList.contains('selected'));
+          return `<span class="tag ${ok ? 'found' : ''}">${w.toUpperCase()}</span>`;
+        }).join('');
+      }
+
+      function reviewSopa() {
+        const words = ['fragmentacion', 'conectividad', 'heterogeneidad'];
+        const pass = words.every((w) => {
           const cells = $$(`.sopa-grid-pro .cell-pro[data-word="${w}"]`);
           return cells.length > 0 && cells.every((c) => c.classList.contains('selected'));
         });
-        const pass = typedOk && selected;
+        saveRespuesta('sopa', JSON.stringify($$('.sopa-grid-pro .cell-pro').map((c) => c.classList.contains('selected') ? '1' : '0')));
         pass ? markDone('sopa') : unmarkDone('sopa');
-        setFeedback('fb-sopa', pass ? '✅ Sopa completada: selección y palabras correctas.' : '❌ Debes marcar con clic todas las letras objetivo y escribir las 3 palabras.', pass);
+        updateSopaFound();
+        setFeedback('fb-sopa', pass ? '✅ Sopa completada: seleccionaste correctamente las palabras objetivo.' : '❌ Debes marcar con clic todas las letras de cada palabra objetivo.', pass);
       }
 
       function retrySopa() {
-        const input = $('input[data-act="sopa"]');
-        input.value = '';
         saveRespuesta('sopa', '');
         $$('.sopa-grid-pro .cell-pro.selected').forEach((c) => c.classList.remove('selected'));
         unmarkDone('sopa');
+        updateSopaFound();
         setFeedback('fb-sopa', 'Actividad reiniciada.', true);
       }
 
@@ -1088,7 +1096,16 @@
         mark(Array.from({length:12}, (_,i)=>i), 'conectividad');
         mark(Array.from({length:14}, (_,i)=>36+i), 'heterogeneidad');
         mark(Array.from({length:13}, (_,i)=>54+i), 'fragmentacion');
-        cells.forEach((c) => c.addEventListener('click', () => c.classList.toggle('selected')));
+        cells.forEach((c) => c.addEventListener('click', () => { c.classList.toggle('selected'); updateSopaFound(); }));
+        // restaurar selección guardada
+        const saved = getRespuestas().sopa || '';
+        if (saved && saved.startsWith('[')) {
+          try {
+            const arr = JSON.parse(saved);
+            arr.forEach((v, i) => { if (v === '1' && cells[i]) cells[i].classList.add('selected'); });
+          } catch {}
+        }
+        updateSopaFound();
       }
 
       // =========================
@@ -1111,10 +1128,6 @@
             const chars = String(v || '').split('');
             cells.forEach((c, idx) => { c.value = chars[idx] || ''; });
           }
-          if (k === 'sopa') {
-            const el = document.querySelector('input[data-act="sopa"]');
-            if (el) el.value = v;
-          }
           if (type === 'mini') {
             const el = document.querySelector(`select[data-mini="${id}"]`);
             if (el) el.value = v;
@@ -1132,6 +1145,16 @@
         setGate(!nombre);
         setupSopaClickGame();
         restoreResponses();
+        // auto-avance en crucigrama
+        $$('input[data-act="cruci-cell"]').forEach((el) => {
+          el.addEventListener('input', () => {
+            el.value = (el.value || "").toUpperCase().slice(0,1);
+            if (el.value) {
+              const next = el.nextElementSibling;
+              if (next && next.matches('input[data-act="cruci-cell"]')) next.focus();
+            }
+          });
+        });
         render();
       })();
     })();
