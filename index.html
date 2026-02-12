@@ -3,343 +3,317 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Unidad 3 - Recurso interactivo</title>
+  <title>Unidad 3 - Ecología del paisaje</title>
   <style>
     :root {
-      --bg: #f3f6fd;
-      --card: #fff;
+      --bg: #f2f6ff;
+      --card: #ffffff;
       --text: #1f2937;
       --muted: #6b7280;
-      --primary: #2563eb;
-      --primary-dark: #1d4ed8;
+      --primary: #1d4ed8;
+      --primary-dark: #1e40af;
       --ok: #15803d;
       --warn: #dc2626;
-      --border: #dbe4f3;
+      --border: #d7e0f1;
+      --shadow: 0 12px 28px rgba(15, 23, 42, .12);
       --radius: 14px;
-      --shadow: 0 10px 25px rgba(2, 6, 23, 0.1);
     }
-
     * { box-sizing: border-box; }
-
     body {
       margin: 0;
-      font-family: system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, sans-serif;
+      font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+      background: linear-gradient(180deg,#eaf1ff,var(--bg));
       color: var(--text);
-      background: linear-gradient(180deg, #eaf1ff 0%, var(--bg) 100%);
     }
-
     .topbar {
       position: sticky;
       top: 0;
-      z-index: 20;
-      background: #111827;
+      z-index: 30;
+      background: #0f172a;
       color: #fff;
-      padding: .9rem 1rem;
+      padding: .8rem 1rem;
       display: flex;
       align-items: center;
       justify-content: space-between;
-      gap: .6rem;
+      gap: .8rem;
       box-shadow: 0 4px 20px rgba(0,0,0,.25);
     }
-
-    .topbar strong { font-size: .95rem; }
-
-    .btn {
-      border: 0;
-      border-radius: 10px;
-      padding: .6rem .9rem;
-      font-weight: 700;
-      cursor: pointer;
-    }
-
-    .btn-primary { background: var(--primary); color: #fff; }
-    .btn-primary:hover { background: var(--primary-dark); }
-    .btn-ghost { background: rgba(255,255,255,.15); color: #fff; }
-
     main {
-      max-width: 1050px;
-      margin: 0 auto;
+      max-width: 1100px;
+      margin: auto;
       padding: 1rem;
       display: grid;
       gap: 1rem;
     }
-
     .card {
       background: var(--card);
+      border: 1px solid var(--border);
       border-radius: var(--radius);
       box-shadow: var(--shadow);
       padding: 1rem;
-      border: 1px solid var(--border);
     }
-
     h1,h2,h3 { margin-top: 0; }
     .muted { color: var(--muted); }
+    .btn {
+      border: none;
+      border-radius: 10px;
+      padding: .62rem .95rem;
+      font-weight: 700;
+      cursor: pointer;
+    }
+    .btn-primary { background: var(--primary); color: #fff; }
+    .btn-primary:hover { background: var(--primary-dark); }
+    .btn-ghost { background: rgba(255,255,255,.18); color: #fff; }
     .row { display: flex; flex-wrap: wrap; gap: .6rem; }
-
     input[type="text"], select {
       width: 100%;
       border: 1px solid #cfd8e6;
       border-radius: 10px;
-      padding: .65rem .75rem;
-      font-size: .98rem;
+      padding: .62rem .72rem;
+      font-size: 1rem;
       background: #fff;
     }
-
     .message { min-height: 1.2rem; font-weight: 700; margin-top: .5rem; }
     .ok { color: var(--ok); }
     .warn { color: var(--warn); }
-
-    .layout {
-      display: grid;
-      grid-template-columns: 1.25fr .75fr;
-      gap: 1rem;
-    }
-
-    @media (max-width: 900px) { .layout { grid-template-columns: 1fr; } }
-
-    .tema-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-      gap: .75rem;
-      margin-top: .8rem;
-    }
-
-    .tema {
-      border: 1px solid var(--border);
-      border-radius: 12px;
-      padding: .75rem;
-      background: #f8fbff;
-    }
-
-    .progress {
-      background: #eef2ff;
-      border-radius: 999px;
-      overflow: hidden;
-      height: 12px;
-    }
-
-    .progress > span {
-      height: 100%;
-      display: block;
-      background: linear-gradient(90deg, #2563eb, #0ea5e9);
-      width: 0;
-      transition: width .2s ease;
-    }
-
+    .layout { display: grid; grid-template-columns: 1.3fr .7fr; gap: 1rem; }
+    @media (max-width: 920px) { .layout { grid-template-columns: 1fr; } }
     .map-wrap {
       position: relative;
+      border: 1px solid var(--border);
       border-radius: 12px;
       overflow: hidden;
-      border: 1px solid var(--border);
-      background: #f0f7ff;
+      background: #f8fbff;
     }
-
-    .map-wrap svg { width: 100%; display: block; }
-
+    .map-wrap svg { display: block; width: 100%; }
     .hotspot {
       position: absolute;
       transform: translate(-50%, -50%);
+      width: 42px;
+      height: 42px;
+      border-radius: 999px;
+      border: 2px solid #fff;
       background: #1d4ed8;
       color: #fff;
-      border: 2px solid #fff;
-      border-radius: 999px;
-      width: 40px;
-      height: 40px;
       font-weight: 800;
       cursor: pointer;
-      box-shadow: 0 4px 12px rgba(0,0,0,.25);
+      box-shadow: 0 4px 12px rgba(0,0,0,.3);
     }
+    .hotspot:disabled { opacity: .55; cursor: not-allowed; }
+    .tema-grid { display:grid; grid-template-columns: repeat(auto-fit,minmax(230px,1fr)); gap:.75rem; }
+    .tema {
+      border:1px solid var(--border);
+      border-radius:12px;
+      background:#f9fbff;
+      padding:.8rem;
+    }
+    .progress { height: 12px; border-radius: 999px; background:#e5edff; overflow:hidden; }
+    .progress span { display:block; height:100%; width:0; background:linear-gradient(90deg,#2563eb,#0ea5e9); transition:width .2s; }
 
-    .hotspot:disabled { opacity: .5; cursor: not-allowed; }
-
-    details {
+    .actividad {
       border: 1px solid var(--border);
-      border-radius: 10px;
-      padding: .6rem .75rem;
-      margin-bottom: .65rem;
+      border-radius: 12px;
+      margin-bottom: .8rem;
+      overflow: hidden;
       background: #fff;
     }
-
-    summary { cursor: pointer; font-weight: 700; }
-
-    .tabla {
-      width: 100%;
-      border-collapse: collapse;
-      margin-top: .6rem;
+    .actividad header {
+      background: #eef4ff;
+      border-bottom: 1px solid var(--border);
+      padding: .55rem .75rem;
+      font-weight: 800;
     }
-
-    .tabla th, .tabla td {
-      border: 1px solid #e5e7eb;
-      padding: .5rem;
-      text-align: left;
+    .actividad .body { padding: .75rem; }
+    .img-format {
+      border: 1px solid #cfe0ff;
+      border-radius: 10px;
+      background: #f7faff;
+      padding: .45rem;
+      margin-bottom: .65rem;
     }
-
-    .grid-sopa {
-      display: grid;
-      grid-template-columns: repeat(10, 1fr);
-      gap: 3px;
-      max-width: 340px;
-    }
-
-    .cell {
-      background: #eff6ff;
-      border: 1px solid #bfdbfe;
-      text-align: center;
-      padding: .35rem;
-      font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
-      font-weight: 700;
-    }
-
-    .hidden { display: none; }
+    .img-format svg { width: 100%; height: auto; display: block; }
+    .tabla { width: 100%; border-collapse: collapse; }
+    .tabla th, .tabla td { border: 1px solid #e5e7eb; padding: .45rem; }
+    .sopa-grid { display:grid; grid-template-columns: repeat(10,1fr); gap:3px; max-width:360px; }
+    .cell { text-align:center; background:#eff6ff; border:1px solid #bfdbfe; padding:.3rem; font-weight:700; font-family: ui-monospace, monospace; }
   </style>
 </head>
 <body>
-  <header class="topbar" aria-label="Barra de estado">
+  <header class="topbar">
     <strong id="statusTop">👤 Invitado | ⭐ Puntaje: 0/100</strong>
-    <button id="btnReset" type="button" class="btn btn-ghost">Reiniciar progreso</button>
+    <button id="btnReset" class="btn btn-ghost" type="button">Reiniciar progreso</button>
   </header>
 
   <main>
     <section class="card">
-      <h1>Unidad 3: Recurso Integrado</h1>
-      <p class="muted">Este recurso funciona offline e integra gate de nombre, progreso persistente, mapa con hotspots, temas 2 al 5, actividades y evaluación automática.</p>
+      <h1>Unidad 3: Ecología del paisaje</h1>
+      <p><strong>Resultado de aprendizaje:</strong> al finalizar la unidad, el estudiante explica y aplica los conceptos de ecología del paisaje para analizar patrones espaciales, conectividad y efectos de escala, interpretando criterios ecológicos medibles para la toma de decisiones.</p>
+      <p class="muted">Primero guarda tu nombre para habilitar navegación, actividades y evaluación (persistencia en localStorage).</p>
       <label for="nombre">Nombre completo</label>
-      <input id="nombre" type="text" autocomplete="name" placeholder="Ejemplo: Laura Pérez" />
-      <div class="row" style="margin-top:.7rem">
-        <button id="btnGuardar" type="button" class="btn btn-primary">Guardar y desbloquear</button>
+      <input id="nombre" type="text" autocomplete="name" placeholder="Ejemplo: María López" />
+      <div class="row" style="margin-top:.65rem">
+        <button id="btnGuardar" class="btn btn-primary" type="button">Guardar y desbloquear</button>
       </div>
       <div id="msg" class="message" aria-live="polite"></div>
     </section>
 
     <section class="layout">
       <div class="card">
-        <h2>Mapa de navegación con hotspots</h2>
-        <p id="estadoGate" class="muted">Bloqueado: guarda tu nombre para habilitar el mapa y los temas.</p>
-
-        <div class="map-wrap" id="mapa">
-          <svg viewBox="0 0 800 420" role="img" aria-label="Mapa temático Unidad 3">
+        <h2>Mapa de contenidos con hotspots</h2>
+        <p id="estadoGate" class="muted">Bloqueado: guarda tu nombre para habilitar el mapa.</p>
+        <div class="map-wrap">
+          <svg viewBox="0 0 900 430" role="img" aria-label="Mapa de temas de la unidad">
             <defs>
-              <linearGradient id="g1" x1="0" x2="1" y1="0" y2="1">
+              <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
                 <stop offset="0%" stop-color="#dbeafe"/>
                 <stop offset="100%" stop-color="#bfdbfe"/>
               </linearGradient>
             </defs>
-            <rect width="800" height="420" fill="url(#g1)"></rect>
-            <circle cx="160" cy="110" r="70" fill="#d1fae5"></circle>
-            <circle cx="430" cy="100" r="90" fill="#fef3c7"></circle>
-            <circle cx="640" cy="270" r="95" fill="#fee2e2"></circle>
-            <text x="125" y="115" font-size="24" font-weight="700" fill="#065f46">Tema 2</text>
-            <text x="390" y="105" font-size="24" font-weight="700" fill="#92400e">Tema 3</text>
-            <text x="590" y="275" font-size="24" font-weight="700" fill="#991b1b">Tema 4</text>
-            <text x="310" y="330" font-size="24" font-weight="700" fill="#1e3a8a">Tema 5</text>
+            <rect width="900" height="430" fill="url(#bg)"/>
+            <ellipse cx="180" cy="130" rx="130" ry="90" fill="#dcfce7"/>
+            <ellipse cx="460" cy="110" rx="150" ry="90" fill="#fef3c7"/>
+            <ellipse cx="730" cy="190" rx="130" ry="100" fill="#fee2e2"/>
+            <ellipse cx="450" cy="320" rx="190" ry="90" fill="#e0e7ff"/>
+            <text x="105" y="135" font-size="24" font-weight="700" fill="#166534">Tema 1</text>
+            <text x="385" y="115" font-size="24" font-weight="700" fill="#92400e">Tema 2</text>
+            <text x="660" y="195" font-size="24" font-weight="700" fill="#991b1b">Tema 3</text>
+            <text x="385" y="326" font-size="24" font-weight="700" fill="#1e3a8a">Tema 4</text>
           </svg>
-          <button class="hotspot js-hotspot" data-target="tema2" style="left:20%;top:26%" aria-label="Abrir tema 2">2</button>
-          <button class="hotspot js-hotspot" data-target="tema3" style="left:52%;top:24%" aria-label="Abrir tema 3">3</button>
-          <button class="hotspot js-hotspot" data-target="tema4" style="left:80%;top:63%" aria-label="Abrir tema 4">4</button>
-          <button class="hotspot js-hotspot" data-target="tema5" style="left:43%;top:77%" aria-label="Abrir tema 5">5</button>
+          <button class="hotspot js-hotspot" data-target="tema1" style="left:20%;top:30%">1</button>
+          <button class="hotspot js-hotspot" data-target="tema2" style="left:50%;top:25%">2</button>
+          <button class="hotspot js-hotspot" data-target="tema3" style="left:79%;top:44%">3</button>
+          <button class="hotspot js-hotspot" data-target="tema4" style="left:50%;top:74%">4</button>
         </div>
       </div>
-
       <aside class="card">
-        <h2>Progreso</h2>
+        <h2>Panel de progreso</h2>
         <p class="muted">Actividades completadas: <strong id="doneCount">0</strong>/5</p>
-        <div class="progress" aria-hidden="true"><span id="bar"></span></div>
-        <p style="margin-top:.7rem">Último tema visitado: <strong id="ultimoTema">Ninguno</strong></p>
+        <div class="progress"><span id="bar"></span></div>
+        <p style="margin-top:.6rem">Último tema visitado: <strong id="ultimoTema">Ninguno</strong></p>
       </aside>
     </section>
 
     <section class="card">
-      <h2>Temas 2 al 5</h2>
+      <h2>Temas de la unidad</h2>
       <div class="tema-grid">
+        <article class="tema" id="tema1">
+          <h3>Tema 1: Concepto de paisaje</h3>
+          <p>El paisaje en ecología no es solo “vista escénica”: es un <strong>mosaico</strong> de coberturas compuesto por <strong>parches, matriz y corredores</strong>. La configuración espacial condiciona dispersión, flujos y dinámica ecológica.</p>
+        </article>
         <article class="tema" id="tema2">
-          <h3>Tema 2</h3>
-          <p>Conceptos clave y repaso guiado.</p>
-          <details><summary>Contenido</summary><p>Se explica la base teórica del tema y su aplicación práctica.</p></details>
+          <h3>Tema 2: Elementos de ecología del paisaje</h3>
+          <p>Incluye parche, matriz, corredor, borde, flujos de organismos/energía/materia, conectividad y efectos de fragmentación. Permite interpretar estructura y funcionamiento del territorio.</p>
         </article>
         <article class="tema" id="tema3">
-          <h3>Tema 3</h3>
-          <p>Profundización y análisis.</p>
-          <details><summary>Contenido</summary><p>Comparación de casos y toma de decisiones con criterios.</p></details>
+          <h3>Tema 3: Escala</h3>
+          <p>Importa trabajar con <strong>grano</strong> y <strong>extensión</strong>, en escalas espacial y temporal. Los patrones detectados y conclusiones cambian según la escala de análisis elegida.</p>
         </article>
         <article class="tema" id="tema4">
-          <h3>Tema 4</h3>
-          <p>Transferencia a nuevos contextos.</p>
-          <details><summary>Contenido</summary><p>Resolución de situaciones reales con pasos secuenciados.</p></details>
-        </article>
-        <article class="tema" id="tema5">
-          <h3>Tema 5</h3>
-          <p>Cierre integrador.</p>
-          <details><summary>Contenido</summary><p>Síntesis y preparación para la evaluación final.</p></details>
+          <h3>Tema 4: Atributos del paisaje</h3>
+          <p>Se analizan heterogeneidad, complejidad, forma, tamaño, aislamiento, conectividad y dominancia para interpretar el estado ecológico y apoyar decisiones de manejo.</p>
         </article>
       </div>
     </section>
 
     <section class="card" id="actividades">
-      <h2>Actividades</h2>
+      <h2>Actividades (formato visual tipo imagen)</h2>
 
-      <details open>
-        <summary>1) Relacionar conceptos</summary>
-        <table class="tabla">
-          <thead><tr><th>País</th><th>Capital</th></tr></thead>
-          <tbody>
-            <tr><td>Perú</td><td><select data-actividad="relacionar" data-id="pe"><option value="">Selecciona...</option><option>Lima</option><option>Quito</option><option>La Paz</option></select></td></tr>
-            <tr><td>Ecuador</td><td><select data-actividad="relacionar" data-id="ec"><option value="">Selecciona...</option><option>Sucre</option><option>Lima</option><option>Quito</option></select></td></tr>
-            <tr><td>Bolivia</td><td><select data-actividad="relacionar" data-id="bo"><option value="">Selecciona...</option><option>La Paz</option><option>Bogotá</option><option>Asunción</option></select></td></tr>
-          </tbody>
-        </table>
-        <button class="btn btn-primary" data-check="relacionar" type="button">Calificar relacionar</button>
-      </details>
-
-      <details>
-        <summary>2) Completar enunciados</summary>
-        <p>La <input type="text" data-actividad="completar" data-id="c1" style="width:160px;display:inline-block" /> permite guardar información localmente en el navegador.</p>
-        <p>Los <input type="text" data-actividad="completar" data-id="c2" style="width:140px;display:inline-block" /> facilitan navegar entre secciones desde un mapa.</p>
-        <button class="btn btn-primary" data-check="completar" type="button">Calificar completar</button>
-      </details>
-
-      <details>
-        <summary>3) Sopa de letras</summary>
-        <p>Busca: <strong>MAPA</strong>, <strong>TEMA</strong>, <strong>DATOS</strong>.</p>
-        <div class="grid-sopa" aria-label="Sopa de letras">
-          <div class="cell">M</div><div class="cell">A</div><div class="cell">P</div><div class="cell">A</div><div class="cell">B</div><div class="cell">Q</div><div class="cell">R</div><div class="cell">T</div><div class="cell">U</div><div class="cell">L</div>
-          <div class="cell">T</div><div class="cell">E</div><div class="cell">M</div><div class="cell">A</div><div class="cell">K</div><div class="cell">A</div><div class="cell">T</div><div class="cell">E</div><div class="cell">X</div><div class="cell">O</div>
-          <div class="cell">D</div><div class="cell">A</div><div class="cell">T</div><div class="cell">O</div><div class="cell">S</div><div class="cell">I</div><div class="cell">N</div><div class="cell">F</div><div class="cell">O</div><div class="cell">S</div>
-          <div class="cell">L</div><div class="cell">P</div><div class="cell">E</div><div class="cell">R</div><div class="cell">S</div><div class="cell">I</div><div class="cell">S</div><div class="cell">T</div><div class="cell">E</div><div class="cell">N</div>
+      <article class="actividad">
+        <header>1) Relacionar</header>
+        <div class="body">
+          <div class="img-format">
+            <svg viewBox="0 0 760 130" aria-label="Guía visual de relación">
+              <rect width="760" height="130" fill="#eff6ff"/>
+              <text x="20" y="40" font-size="22" font-weight="700" fill="#1e3a8a">Países</text>
+              <text x="420" y="40" font-size="22" font-weight="700" fill="#1e3a8a">Capitales</text>
+              <line x1="190" y1="65" x2="390" y2="65" stroke="#60a5fa" stroke-width="3"/>
+              <line x1="190" y1="95" x2="390" y2="95" stroke="#60a5fa" stroke-width="3"/>
+            </svg>
+          </div>
+          <table class="tabla">
+            <thead><tr><th>País</th><th>Capital</th></tr></thead>
+            <tbody>
+              <tr><td>Perú</td><td><select data-actividad="rel" data-id="pe"><option value="">Selecciona...</option><option>Lima</option><option>Quito</option><option>La Paz</option></select></td></tr>
+              <tr><td>Ecuador</td><td><select data-actividad="rel" data-id="ec"><option value="">Selecciona...</option><option>Sucre</option><option>Lima</option><option>Quito</option></select></td></tr>
+              <tr><td>Bolivia</td><td><select data-actividad="rel" data-id="bo"><option value="">Selecciona...</option><option>La Paz</option><option>Bogotá</option><option>Asunción</option></select></td></tr>
+            </tbody>
+          </table>
+          <button class="btn btn-primary" data-check="rel" type="button" style="margin-top:.55rem">Calificar relacionar</button>
         </div>
-        <div class="row" style="margin-top:.6rem">
-          <input type="text" data-actividad="sopa" placeholder="Escribe las 3 palabras separadas por coma" />
-          <button class="btn btn-primary" data-check="sopa" type="button">Calificar sopa</button>
-        </div>
-      </details>
+      </article>
 
-      <details>
-        <summary>4) Crucigrama (respuestas textuales)</summary>
-        <p>Horizontal 1: almacenamiento del navegador → <input type="text" data-actividad="cruci" data-id="h1" style="width:180px;display:inline-block" /></p>
-        <p>Vertical 1: elemento de clic sobre mapa → <input type="text" data-actividad="cruci" data-id="v1" style="width:160px;display:inline-block" /></p>
-        <button class="btn btn-primary" data-check="cruci" type="button">Calificar crucigrama</button>
-      </details>
+      <article class="actividad">
+        <header>2) Completar</header>
+        <div class="body">
+          <div class="img-format">
+            <svg viewBox="0 0 760 110" aria-label="Plantilla visual completar">
+              <rect width="760" height="110" fill="#f8fafc"/>
+              <rect x="30" y="34" width="220" height="30" rx="8" fill="#dbeafe"/>
+              <rect x="295" y="34" width="200" height="30" rx="8" fill="#dbeafe"/>
+              <rect x="530" y="34" width="180" height="30" rx="8" fill="#dbeafe"/>
+            </svg>
+          </div>
+          <p>La <input style="width:170px;display:inline-block" type="text" data-actividad="comp" data-id="c1" /> permite persistencia en el navegador.</p>
+          <p>El análisis de <input style="width:130px;display:inline-block" type="text" data-actividad="comp" data-id="c2" /> considera parche, matriz y corredor.</p>
+          <button class="btn btn-primary" data-check="comp" type="button">Calificar completar</button>
+        </div>
+      </article>
+
+      <article class="actividad">
+        <header>3) Sopa de letras</header>
+        <div class="body">
+          <div class="img-format">
+            <svg viewBox="0 0 760 100" aria-label="Encabezado visual sopa de letras">
+              <rect width="760" height="100" fill="#ecfeff"/>
+              <text x="30" y="58" font-size="28" font-weight="800" fill="#0c4a6e">Busca: PAISAJE, ESCALA, PARCHE</text>
+            </svg>
+          </div>
+          <div class="sopa-grid">
+            <div class="cell">P</div><div class="cell">A</div><div class="cell">I</div><div class="cell">S</div><div class="cell">A</div><div class="cell">J</div><div class="cell">E</div><div class="cell">L</div><div class="cell">Q</div><div class="cell">V</div>
+            <div class="cell">X</div><div class="cell">E</div><div class="cell">S</div><div class="cell">C</div><div class="cell">A</div><div class="cell">L</div><div class="cell">A</div><div class="cell">R</div><div class="cell">M</div><div class="cell">N</div>
+            <div class="cell">P</div><div class="cell">A</div><div class="cell">R</div><div class="cell">C</div><div class="cell">H</div><div class="cell">E</div><div class="cell">T</div><div class="cell">U</div><div class="cell">Y</div><div class="cell">I</div>
+            <div class="cell">C</div><div class="cell">O</div><div class="cell">N</div><div class="cell">E</div><div class="cell">C</div><div class="cell">T</div><div class="cell">A</div><div class="cell">D</div><div class="cell">O</div><div class="cell">S</div>
+          </div>
+          <div class="row" style="margin-top:.55rem">
+            <input type="text" data-actividad="sopa" placeholder="Escribe las 3 palabras separadas por coma" />
+            <button class="btn btn-primary" data-check="sopa" type="button">Calificar sopa</button>
+          </div>
+        </div>
+      </article>
+
+      <article class="actividad">
+        <header>4) Crucigrama (respuesta textual)</header>
+        <div class="body">
+          <div class="img-format">
+            <svg viewBox="0 0 760 130" aria-label="Plantilla visual crucigrama">
+              <rect width="760" height="130" fill="#fefce8"/>
+              <g fill="#fde68a" stroke="#d97706">
+                <rect x="30" y="30" width="38" height="38"/>
+                <rect x="70" y="30" width="38" height="38"/>
+                <rect x="110" y="30" width="38" height="38"/>
+                <rect x="110" y="70" width="38" height="38"/>
+                <rect x="150" y="70" width="38" height="38"/>
+              </g>
+              <text x="210" y="56" font-size="22" font-weight="700" fill="#92400e">H1 y V1 (ecología del paisaje)</text>
+            </svg>
+          </div>
+          <p>H1: estructura dominante del paisaje → <input style="width:170px;display:inline-block" type="text" data-actividad="cruci" data-id="h1" /></p>
+          <p>V1: conexión entre parches → <input style="width:170px;display:inline-block" type="text" data-actividad="cruci" data-id="v1" /></p>
+          <button class="btn btn-primary" data-check="cruci" type="button">Calificar crucigrama</button>
+        </div>
+      </article>
 
       <div id="msgActividades" class="message" aria-live="polite"></div>
     </section>
 
-    <section class="card" id="evaluacion">
-      <h2>Evaluación final (5 puntos)</h2>
+    <section class="card">
+      <h2>Evaluación final (5 preguntas)</h2>
       <ol>
-        <li>¿Qué API permite persistencia local?
-          <select data-eval="1"><option value="">Selecciona...</option><option>localStorage</option><option>sessionTemp</option><option>indexMemory</option></select>
-        </li>
-        <li>¿Qué controla el gate de acceso?
-          <select data-eval="2"><option value="">Selecciona...</option><option>El nombre del estudiante</option><option>La hora del sistema</option><option>El tamaño de pantalla</option></select>
-        </li>
-        <li>¿Para qué sirven los hotspots?
-          <select data-eval="3"><option value="">Selecciona...</option><option>Navegar a temas</option><option>Reducir batería</option><option>Comprimir audio</option></select>
-        </li>
-        <li>¿Cuántos temas integrados tiene este recurso?
-          <select data-eval="4"><option value="">Selecciona...</option><option>4 (temas 2 a 5)</option><option>2</option><option>10</option></select>
-        </li>
-        <li>¿Qué sucede al reiniciar?
-          <select data-eval="5"><option value="">Selecciona...</option><option>Se borra progreso y respuestas</option><option>Se instala una app</option><option>Se bloquea la página</option></select>
-        </li>
+        <li>El paisaje ecológico se entiende como... <select data-eval="1"><option value="">Selecciona...</option><option>mosaico de parches, matriz y corredores</option><option>solo paisaje visual</option><option>un mapa turístico</option></select></li>
+        <li>Fragmentación y conectividad son conceptos de... <select data-eval="2"><option value="">Selecciona...</option><option>ecología del paisaje</option><option>edición de video</option><option>cartografía histórica</option></select></li>
+        <li>Grano y extensión pertenecen al tema de... <select data-eval="3"><option value="">Selecciona...</option><option>escala</option><option>genética</option><option>meteorología</option></select></li>
+        <li>Un atributo del paisaje es... <select data-eval="4"><option value="">Selecciona...</option><option>heterogeneidad</option><option>volumen musical</option><option>precio del combustible</option></select></li>
+        <li>¿Qué guarda este recurso localmente? <select data-eval="5"><option value="">Selecciona...</option><option>nombre, respuestas y progreso</option><option>contraseñas del sistema</option><option>archivos del servidor externo</option></select></li>
       </ol>
       <button id="btnEvaluar" class="btn btn-primary" type="button">Calcular puntaje total</button>
       <div id="msgEval" class="message" aria-live="polite"></div>
@@ -348,264 +322,177 @@
 
   <script>
     (() => {
-      const KEYS = {
-        nombre: 'u3_nombre',
-        puntaje: 'u3_puntaje',
-        progreso: 'u3_progreso',
-        respuestas: 'u3_respuestas'
-      };
-
-      const TOTAL_ACT = 5;
-
+      const KEYS = { nombre: 'u3_nombre', puntaje: 'u3_puntaje', progreso: 'u3_progreso', respuestas: 'u3_respuestas' };
+      const TOTAL_COMPLETABLES = 5;
       const ui = {
         statusTop: document.getElementById('statusTop'),
         nombre: document.getElementById('nombre'),
-        msg: document.getElementById('msg'),
-        estadoGate: document.getElementById('estadoGate'),
         btnGuardar: document.getElementById('btnGuardar'),
         btnReset: document.getElementById('btnReset'),
-        hotspots: Array.from(document.querySelectorAll('.js-hotspot')),
+        msg: document.getElementById('msg'),
+        estadoGate: document.getElementById('estadoGate'),
+        hotspots: [...document.querySelectorAll('.js-hotspot')],
         doneCount: document.getElementById('doneCount'),
         bar: document.getElementById('bar'),
         ultimoTema: document.getElementById('ultimoTema'),
+        checks: [...document.querySelectorAll('[data-check]')],
         msgActividades: document.getElementById('msgActividades'),
-        btnChecks: Array.from(document.querySelectorAll('[data-check]')),
-        evals: Array.from(document.querySelectorAll('[data-eval]')),
+        evals: [...document.querySelectorAll('[data-eval]')],
         btnEvaluar: document.getElementById('btnEvaluar'),
         msgEval: document.getElementById('msgEval')
       };
 
-      const normalizar = (v) => (v || '').toLowerCase().trim();
+      const norm = (v) => (v || '').toLowerCase().trim();
       const getNombre = () => (localStorage.getItem(KEYS.nombre) || '').trim();
       const getPuntaje = () => Number(localStorage.getItem(KEYS.puntaje) || 0);
+      const jsonLoad = (k, f) => { try { const v = localStorage.getItem(k); return v ? JSON.parse(v) : f; } catch { return f; } };
+      const jsonSave = (k, v) => localStorage.setItem(k, JSON.stringify(v));
+      const getProg = () => jsonLoad(KEYS.progreso, { temaActual: null, completadas: [] });
+      const getResp = () => jsonLoad(KEYS.respuestas, {});
 
-      const loadJSON = (key, fallback) => {
-        try {
-          const val = localStorage.getItem(key);
-          return val ? JSON.parse(val) : fallback;
-        } catch {
-          return fallback;
-        }
-      };
-
-      const saveJSON = (key, value) => localStorage.setItem(key, JSON.stringify(value));
-
-      function getProgreso() {
-        return loadJSON(KEYS.progreso, { temaActual: null, completadas: [] });
+      function show(el, txt, ok = true) { el.textContent = txt; el.className = `message ${ok ? 'ok' : 'warn'}`; }
+      function gate(lock) {
+        ui.hotspots.forEach((h) => h.disabled = lock);
+        ui.estadoGate.textContent = lock ? 'Bloqueado: guarda tu nombre para habilitar el mapa.' : 'Habilitado: puedes navegar por los temas.';
       }
-
-      function getRespuestas() {
-        return loadJSON(KEYS.respuestas, {});
+      function saveResp(key, value) { const r = getResp(); r[key] = value; jsonSave(KEYS.respuestas, r); }
+      function markDone(id) {
+        const p = getProg();
+        if (!p.completadas.includes(id)) p.completadas.push(id);
+        jsonSave(KEYS.progreso, p);
+        render();
       }
-
-      function setGate(bloqueado) {
-        ui.hotspots.forEach((h) => { h.disabled = bloqueado; });
-        ui.estadoGate.textContent = bloqueado
-          ? 'Bloqueado: guarda tu nombre para habilitar el mapa y los temas.'
-          : 'Habilitado: puedes navegar por los temas desde el mapa.';
-      }
-
-      function renderStatus() {
+      function render() {
         const nombre = getNombre() || 'Invitado';
         const puntaje = getPuntaje();
         ui.statusTop.textContent = `👤 ${nombre} | ⭐ Puntaje: ${puntaje}/100`;
-
-        const progreso = getProgreso();
-        const done = progreso.completadas.length;
-        ui.doneCount.textContent = String(done);
-        ui.bar.style.width = `${Math.round((done / TOTAL_ACT) * 100)}%`;
-        ui.ultimoTema.textContent = progreso.temaActual || 'Ninguno';
+        const p = getProg();
+        ui.doneCount.textContent = String(p.completadas.length);
+        ui.bar.style.width = `${Math.round((p.completadas.length / TOTAL_COMPLETABLES) * 100)}%`;
+        ui.ultimoTema.textContent = p.temaActual || 'Ninguno';
       }
 
-      function mensaje(el, texto, ok = true) {
-        el.textContent = texto;
-        el.className = `message ${ok ? 'ok' : 'warn'}`;
-      }
-
-      function marcarCompletada(idActividad) {
-        const p = getProgreso();
-        if (!p.completadas.includes(idActividad)) p.completadas.push(idActividad);
-        saveJSON(KEYS.progreso, p);
-        renderStatus();
-      }
-
-      function guardarRespuesta(clave, valor) {
-        const r = getRespuestas();
-        r[clave] = valor;
-        saveJSON(KEYS.respuestas, r);
-      }
-
-      function calificarRelacionar() {
-        const expected = { pe: 'Lima', ec: 'Quito', bo: 'La Paz' };
+      function calRel() {
+        const exp = { pe: 'Lima', ec: 'Quito', bo: 'La Paz' };
         let ok = 0;
-        document.querySelectorAll('select[data-actividad="relacionar"]').forEach((s) => {
-          guardarRespuesta(`rel_${s.dataset.id}`, s.value);
-          if (s.value === expected[s.dataset.id]) ok += 1;
+        document.querySelectorAll('select[data-actividad="rel"]').forEach((s) => {
+          saveResp(`rel_${s.dataset.id}`, s.value);
+          if (s.value === exp[s.dataset.id]) ok += 1;
         });
-        if (ok === 3) marcarCompletada('relacionar');
+        if (ok === 3) markDone('rel');
         return ok === 3;
       }
-
-      function calificarCompletar() {
-        const expected = { c1: 'localstorage', c2: 'hotspots' };
+      function calComp() {
+        const exp = { c1: 'localstorage', c2: 'paisaje' };
         let ok = 0;
-        document.querySelectorAll('input[data-actividad="completar"]').forEach((i) => {
-          const val = normalizar(i.value);
-          guardarRespuesta(`comp_${i.dataset.id}`, i.value);
-          if (val === expected[i.dataset.id]) ok += 1;
+        document.querySelectorAll('input[data-actividad="comp"]').forEach((i) => {
+          saveResp(`comp_${i.dataset.id}`, i.value);
+          if (norm(i.value) === exp[i.dataset.id]) ok += 1;
         });
-        if (ok === 2) marcarCompletada('completar');
+        if (ok === 2) markDone('comp');
         return ok === 2;
       }
-
-      function calificarSopa() {
-        const input = document.querySelector('input[data-actividad="sopa"]');
-        const parts = normalizar(input.value).split(',').map((v) => v.trim()).filter(Boolean);
-        guardarRespuesta('sopa', input.value);
-        const base = ['mapa', 'tema', 'datos'];
-        const ok = base.every((w) => parts.includes(w));
-        if (ok) marcarCompletada('sopa');
+      function calSopa() {
+        const inp = document.querySelector('input[data-actividad="sopa"]');
+        const parts = norm(inp.value).split(',').map((x) => x.trim()).filter(Boolean);
+        saveResp('sopa', inp.value);
+        const ok = ['paisaje', 'escala', 'parche'].every((w) => parts.includes(w));
+        if (ok) markDone('sopa');
         return ok;
       }
-
-      function calificarCruci() {
-        const expected = { h1: 'localstorage', v1: 'hotspot' };
+      function calCruci() {
+        const exp = { h1: 'matriz', v1: 'corredor' };
         let ok = 0;
         document.querySelectorAll('input[data-actividad="cruci"]').forEach((i) => {
-          const val = normalizar(i.value);
-          guardarRespuesta(`cru_${i.dataset.id}`, i.value);
-          if (val === expected[i.dataset.id]) ok += 1;
+          saveResp(`cru_${i.dataset.id}`, i.value);
+          if (norm(i.value) === exp[i.dataset.id]) ok += 1;
         });
-        if (ok === 2) marcarCompletada('cruci');
+        if (ok === 2) markDone('cruci');
         return ok === 2;
       }
-
-      function calificarEvaluacion() {
-        const expected = {
-          1: 'localStorage',
-          2: 'El nombre del estudiante',
-          3: 'Navegar a temas',
-          4: '4 (temas 2 a 5)',
-          5: 'Se borra progreso y respuestas'
+      function calEval() {
+        const exp = {
+          1: 'mosaico de parches, matriz y corredores',
+          2: 'ecología del paisaje',
+          3: 'escala',
+          4: 'heterogeneidad',
+          5: 'nombre, respuestas y progreso'
         };
         let score = 0;
         ui.evals.forEach((s) => {
-          const key = Number(s.dataset.eval);
-          guardarRespuesta(`eval_${key}`, s.value);
-          if (s.value === expected[key]) score += 1;
+          const id = Number(s.dataset.eval);
+          saveResp(`eval_${id}`, s.value);
+          if (s.value === exp[id]) score += 1;
         });
-        if (score === 5) marcarCompletada('evaluacion');
+        if (score === 5) markDone('evaluacion');
         return score;
       }
-
-      function calcularPuntajeTotal() {
-        const progreso = getProgreso();
-        const actividades = progreso.completadas.filter((x) => x !== 'evaluacion').length;
-        const scoreEval = calificarEvaluacion();
-        const total = Math.round((actividades / 4) * 50 + (scoreEval / 5) * 50);
+      function totalScore() {
+        const p = getProg();
+        const actDone = p.completadas.filter((x) => x !== 'evaluacion').length;
+        const evalScore = calEval();
+        const total = Math.round((actDone / 4) * 60 + (evalScore / 5) * 40);
         localStorage.setItem(KEYS.puntaje, String(total));
-        renderStatus();
-        return { total, scoreEval };
+        render();
+        return { total, evalScore };
       }
 
       ui.btnGuardar.addEventListener('click', () => {
         const nombre = ui.nombre.value.trim();
-        if (!nombre) {
-          mensaje(ui.msg, 'Debes ingresar tu nombre completo.', false);
-          return;
-        }
+        if (!nombre) return show(ui.msg, 'Debes ingresar tu nombre completo.', false);
         localStorage.setItem(KEYS.nombre, nombre);
         if (!localStorage.getItem(KEYS.puntaje)) localStorage.setItem(KEYS.puntaje, '0');
-        if (!localStorage.getItem(KEYS.progreso)) saveJSON(KEYS.progreso, { temaActual: null, completadas: [] });
-        if (!localStorage.getItem(KEYS.respuestas)) saveJSON(KEYS.respuestas, {});
-        setGate(false);
-        renderStatus();
-        mensaje(ui.msg, 'Nombre guardado. Navegación habilitada.', true);
+        if (!localStorage.getItem(KEYS.progreso)) jsonSave(KEYS.progreso, { temaActual: null, completadas: [] });
+        if (!localStorage.getItem(KEYS.respuestas)) jsonSave(KEYS.respuestas, {});
+        gate(false); render(); show(ui.msg, 'Nombre guardado. Acceso habilitado.', true);
       });
 
       ui.btnReset.addEventListener('click', () => {
         Object.values(KEYS).forEach((k) => localStorage.removeItem(k));
         ui.nombre.value = '';
-        setGate(true);
-        renderStatus();
-        mensaje(ui.msg, 'Progreso reiniciado correctamente.', true);
-        mensaje(ui.msgActividades, '', true);
-        mensaje(ui.msgEval, '', true);
+        gate(true); render();
+        show(ui.msg, 'Se reinició el progreso local.', true);
+        show(ui.msgActividades, '', true); show(ui.msgEval, '', true);
       });
 
-      ui.hotspots.forEach((btn) => {
-        btn.addEventListener('click', () => {
-          if (!getNombre()) {
-            mensaje(ui.msg, 'Navegación bloqueada. Primero guarda tu nombre.', false);
-            setGate(true);
-            return;
-          }
-          const target = btn.dataset.target;
-          document.getElementById(target)?.scrollIntoView({ behavior: 'smooth', block: 'start' });
-          const p = getProgreso();
-          p.temaActual = target;
-          saveJSON(KEYS.progreso, p);
-          renderStatus();
-        });
-      });
+      ui.hotspots.forEach((h) => h.addEventListener('click', () => {
+        if (!getNombre()) { gate(true); return show(ui.msg, 'Guarda tu nombre para navegar.', false); }
+        const target = h.dataset.target;
+        document.getElementById(target)?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        const p = getProg(); p.temaActual = target; jsonSave(KEYS.progreso, p); render();
+      }));
 
-      ui.btnChecks.forEach((btn) => {
-        btn.addEventListener('click', () => {
-          if (!getNombre()) {
-            mensaje(ui.msgActividades, 'Debes guardar tu nombre antes de calificar actividades.', false);
-            return;
-          }
-          const which = btn.dataset.check;
-          let ok = false;
-          if (which === 'relacionar') ok = calificarRelacionar();
-          if (which === 'completar') ok = calificarCompletar();
-          if (which === 'sopa') ok = calificarSopa();
-          if (which === 'cruci') ok = calificarCruci();
-          mensaje(ui.msgActividades, ok ? `Actividad "${which}" completada.` : `Actividad "${which}" con errores, intenta nuevamente.`, ok);
-        });
-      });
+      ui.checks.forEach((b) => b.addEventListener('click', () => {
+        if (!getNombre()) return show(ui.msgActividades, 'Debes guardar tu nombre antes de calificar.', false);
+        const type = b.dataset.check;
+        let ok = false;
+        if (type === 'rel') ok = calRel();
+        if (type === 'comp') ok = calComp();
+        if (type === 'sopa') ok = calSopa();
+        if (type === 'cruci') ok = calCruci();
+        show(ui.msgActividades, ok ? `Actividad ${type} completada.` : `Actividad ${type} con errores.`, ok);
+      }));
 
       ui.btnEvaluar.addEventListener('click', () => {
-        if (!getNombre()) {
-          mensaje(ui.msgEval, 'Debes guardar tu nombre antes de evaluar.', false);
-          return;
-        }
-        const { total, scoreEval } = calcularPuntajeTotal();
-        const ok = scoreEval >= 3;
-        mensaje(ui.msgEval, `Evaluación: ${scoreEval}/5. Puntaje total acumulado: ${total}/100.`, ok);
+        if (!getNombre()) return show(ui.msgEval, 'Debes guardar tu nombre antes de evaluar.', false);
+        const { total, evalScore } = totalScore();
+        show(ui.msgEval, `Evaluación: ${evalScore}/5. Puntaje total: ${total}/100.`, evalScore >= 3);
       });
 
       (function init() {
         const nombre = getNombre();
         if (nombre) ui.nombre.value = nombre;
-        setGate(!nombre);
-
-        const respuestas = getRespuestas();
-        Object.entries(respuestas).forEach(([k, v]) => {
-          const [tipo, id] = k.split('_');
-          if (tipo === 'rel') {
-            const el = document.querySelector(`select[data-actividad="relacionar"][data-id="${id}"]`);
-            if (el) el.value = v;
-          }
-          if (tipo === 'comp') {
-            const el = document.querySelector(`input[data-actividad="completar"][data-id="${id}"]`);
-            if (el) el.value = v;
-          }
-          if (tipo === 'cru') {
-            const el = document.querySelector(`input[data-actividad="cruci"][data-id="${id}"]`);
-            if (el) el.value = v;
-          }
-          if (k === 'sopa') {
-            const el = document.querySelector('input[data-actividad="sopa"]');
-            if (el) el.value = v;
-          }
-          if (tipo === 'eval') {
-            const el = document.querySelector(`select[data-eval="${id}"]`);
-            if (el) el.value = v;
-          }
+        gate(!nombre);
+        const r = getResp();
+        Object.entries(r).forEach(([k,v]) => {
+          const [type, id] = k.split('_');
+          if (type === 'rel') { const el = document.querySelector(`select[data-actividad="rel"][data-id="${id}"]`); if (el) el.value = v; }
+          if (type === 'comp') { const el = document.querySelector(`input[data-actividad="comp"][data-id="${id}"]`); if (el) el.value = v; }
+          if (type === 'cru') { const el = document.querySelector(`input[data-actividad="cruci"][data-id="${id}"]`); if (el) el.value = v; }
+          if (k === 'sopa') { const el = document.querySelector('input[data-actividad="sopa"]'); if (el) el.value = v; }
+          if (type === 'eval') { const el = document.querySelector(`select[data-eval="${id}"]`); if (el) el.value = v; }
         });
-
-        renderStatus();
+        render();
       })();
     })();
   </script>
