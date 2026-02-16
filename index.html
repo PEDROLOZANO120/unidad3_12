@@ -724,38 +724,48 @@
             </div>
           </article>
 
-          <article class="activity" id="act-t1eval7">
-            <header>Evaluación del tema 1 (opción múltiple + relacionar)</header>
+          <article class="activity" id="act-multi7">
+            <header>Actividad 5: opción múltiple (tema 1)</header>
             <div class="body">
-              <p class="subtitle">Responde 5 preguntas de opción múltiple y 2 de relacionar. Puntaje ideal: 7/7.</p>
+              <div class="eval-item"><label class="label">1) En ecología del paisaje, “paisaje” se entiende como:</label><select class="select" data-act="multi7" data-id="1"><option value="">Selecciona...</option><option>Unidad espacial heterogénea organizada como mosaico</option><option>Solo una vista panorámica bonita</option><option>Mapa político de una región</option></select></div>
+              <div class="eval-item"><label class="label">2) ¿Qué componente representa la cobertura dominante que rodea parches?</label><select class="select" data-act="multi7" data-id="2"><option value="">Selecciona...</option><option>Matriz</option><option>Ecotono</option><option>Núcleo urbano</option></select></div>
+              <div class="eval-item"><label class="label">3) Dos paisajes con igual % de bosque pueden comportarse distinto por:</label><select class="select" data-act="multi7" data-id="3"><option value="">Selecciona...</option><option>Su configuración espacial y fragmentación</option><option>El color usado en la leyenda</option><option>La hora del día de la foto</option></select></div>
+              <div class="actions">
+                <button class="btn btn-primary" data-review="multi7" type="button">Revisar</button>
+                <button class="btn btn-secondary" data-retry="multi7" type="button">Reintentar</button>
+              </div>
+              <div id="fb-multi7" class="feedback" aria-live="polite"></div>
+            </div>
+          </article>
 
-              <h4 style="margin:.2rem 0 .4rem">A) Opción múltiple</h4>
-              <div class="eval-item"><label class="label">1) En ecología del paisaje, “paisaje” se entiende como:</label><select class="select" data-t1eval="1"><option value="">Selecciona...</option><option>Unidad espacial heterogénea organizada como mosaico</option><option>Solo una vista panorámica bonita</option><option>Mapa político de una región</option></select></div>
-              <div class="eval-item"><label class="label">2) ¿Qué componente representa la cobertura dominante que rodea parches?</label><select class="select" data-t1eval="2"><option value="">Selecciona...</option><option>Matriz</option><option>Ecotono</option><option>Núcleo urbano</option></select></div>
-              <div class="eval-item"><label class="label">3) Los corredores ecológicos son:</label><select class="select" data-t1eval="3"><option value="">Selecciona...</option><option>Elementos lineales que facilitan movimiento entre parches</option><option>Bordes impermeables sin función ecológica</option><option>Áreas totalmente aisladas</option></select></div>
-              <div class="eval-item"><label class="label">4) Dos paisajes con igual % de bosque pueden comportarse distinto por:</label><select class="select" data-t1eval="4"><option value="">Selecciona...</option><option>Su configuración espacial y fragmentación</option><option>El color usado en la leyenda</option><option>La hora del día de la foto</option></select></div>
-              <div class="eval-item"><label class="label">5) El efecto de borde se relaciona con cambios en:</label><select class="select" data-t1eval="5"><option value="">Selecciona...</option><option>Microclima, depredación e invasiones cerca del límite</option><option>Solo el nombre del parche</option><option>Únicamente el tipo de letra del mapa</option></select></div>
-
-              <h4 style="margin:.65rem 0 .4rem">B) Relacionar</h4>
+          <article class="activity" id="act-relx">
+            <header>Actividad 6: relacionar (tema 1)</header>
+            <div class="body">
               <table class="table">
                 <thead><tr><th>Concepto</th><th>Selecciona la relación correcta</th></tr></thead>
                 <tbody>
-                  <tr>
-                    <td>6) Permeabilidad del territorio</td>
-                    <td><select class="select" data-t1eval="6"><option value="">Selecciona...</option><option>Qué tan fácil circulan organismos y flujos por el paisaje</option><option>El número de satélites disponibles</option><option>El costo económico de un mapa</option></select></td>
-                  </tr>
-                  <tr>
-                    <td>7) Paisaje como sistema dinámico</td>
-                    <td><select class="select" data-t1eval="7"><option value="">Selecciona...</option><option>Estructura y procesos se influyen mutuamente en el tiempo</option><option>La estructura nunca cambia</option><option>Los disturbios no afectan el territorio</option></select></td>
-                  </tr>
+                  <tr><td>Permeabilidad del territorio</td><td><select class="select" data-act="relx" data-id="1"><option value="">Selecciona...</option><option>Qué tan fácil circulan organismos y flujos por el paisaje</option><option>El número de satélites disponibles</option><option>El costo económico de un mapa</option></select></td></tr>
+                  <tr><td>Paisaje como sistema dinámico</td><td><select class="select" data-act="relx" data-id="2"><option value="">Selecciona...</option><option>Estructura y procesos se influyen mutuamente en el tiempo</option><option>La estructura nunca cambia</option><option>Los disturbios no afectan el territorio</option></select></td></tr>
                 </tbody>
               </table>
-
               <div class="actions">
-                <button class="btn btn-primary" data-review="t1eval" type="button">Revisar</button>
-                <button class="btn btn-secondary" data-retry="t1eval" type="button">Reintentar</button>
+                <button class="btn btn-primary" data-review="relx" type="button">Revisar</button>
+                <button class="btn btn-secondary" data-retry="relx" type="button">Reintentar</button>
               </div>
-              <div id="fb-t1eval" class="feedback" aria-live="polite"></div>
+              <div id="fb-relx" class="feedback" aria-live="polite"></div>
+            </div>
+          </article>
+
+          <article class="activity" id="act-compx">
+            <header>Actividad 7: completar palabras clave (tema 1)</header>
+            <div class="body">
+              <p>El borde puede modificar el <input class="input" style="max-width:220px;display:inline-block" data-act="compx" data-id="1" type="text" /> del parche.</p>
+              <p>Cuando los parches están aislados, suele disminuir la <input class="input" style="max-width:220px;display:inline-block" data-act="compx" data-id="2" type="text" /> ecológica.</p>
+              <div class="actions">
+                <button class="btn btn-primary" data-review="compx" type="button">Revisar</button>
+                <button class="btn btn-secondary" data-retry="compx" type="button">Reintentar</button>
+              </div>
+              <div id="fb-compx" class="feedback" aria-live="polite"></div>
             </div>
           </article>
           </div>
@@ -889,7 +899,7 @@
         respuestas: 'u3_respuestas'
       };
 
-      const TOTAL_ITEMS = 10; // 5 actividades tema1 + 4 mini + evaluación final
+      const TOTAL_ITEMS = 12; // 7 actividades tema1 + 4 mini + evaluación final
 
       const $ = (s) => document.querySelector(s);
       const $$ = (s) => Array.from(document.querySelectorAll(s));
@@ -1149,34 +1159,66 @@
         setFeedback('fb-cruci', 'Actividad reiniciada.', true);
       }
 
-      function reviewTema1Eval7() {
+      function reviewMulti7() {
         const expected = {
           1: 'Unidad espacial heterogénea organizada como mosaico',
           2: 'Matriz',
-          3: 'Elementos lineales que facilitan movimiento entre parches',
-          4: 'Su configuración espacial y fragmentación',
-          5: 'Microclima, depredación e invasiones cerca del límite',
-          6: 'Qué tan fácil circulan organismos y flujos por el paisaje',
-          7: 'Estructura y procesos se influyen mutuamente en el tiempo'
+          3: 'Su configuración espacial y fragmentación'
         };
         let ok = 0;
-        $$('select[data-t1eval]').forEach((s) => {
-          const id = Number(s.dataset.t1eval);
-          saveRespuesta(`t1eval_${id}`, s.value);
-          if (s.value === expected[id]) ok += 1;
+        $$('select[data-act="multi7"]').forEach((s) => {
+          saveRespuesta(`multi7_${s.dataset.id}`, s.value);
+          if (s.value === expected[s.dataset.id]) ok += 1;
         });
-        const pass = ok === 7;
-        pass ? markDone('t1eval') : unmarkDone('t1eval');
-        setFeedback('fb-t1eval', pass ? '✅ Excelente: 7/7 en la evaluación del tema 1.' : `❌ Obtuviste ${ok}/7. Revisa teoría del tema 1 y vuelve a intentar.`, pass);
+        const pass = ok === 3;
+        pass ? markDone('multi7') : unmarkDone('multi7');
+        setFeedback('fb-multi7', pass ? '✅ Opción múltiple correcta.' : `❌ Resultado ${ok}/3. Revisa la teoría.`, pass);
       }
 
-      function retryTema1Eval7() {
-        $$('select[data-t1eval]').forEach((s) => {
-          s.value = '';
-          saveRespuesta(`t1eval_${s.dataset.t1eval}`, '');
+      function retryMulti7() {
+        $$('select[data-act="multi7"]').forEach((s) => { s.value = ''; saveRespuesta(`multi7_${s.dataset.id}`, ''); });
+        unmarkDone('multi7');
+        setFeedback('fb-multi7', 'Actividad reiniciada.', true);
+      }
+
+      function reviewRelx() {
+        const expected = {
+          1: 'Qué tan fácil circulan organismos y flujos por el paisaje',
+          2: 'Estructura y procesos se influyen mutuamente en el tiempo'
+        };
+        let ok = 0;
+        $$('select[data-act="relx"]').forEach((s) => {
+          saveRespuesta(`relx_${s.dataset.id}`, s.value);
+          if (s.value === expected[s.dataset.id]) ok += 1;
         });
-        unmarkDone('t1eval');
-        setFeedback('fb-t1eval', 'Evaluación del tema 1 reiniciada.', true);
+        const pass = ok === 2;
+        pass ? markDone('relx') : unmarkDone('relx');
+        setFeedback('fb-relx', pass ? '✅ Relacionar correcto.' : `❌ Resultado ${ok}/2. Intenta nuevamente.`, pass);
+      }
+
+      function retryRelx() {
+        $$('select[data-act="relx"]').forEach((s) => { s.value = ''; saveRespuesta(`relx_${s.dataset.id}`, ''); });
+        unmarkDone('relx');
+        setFeedback('fb-relx', 'Actividad reiniciada.', true);
+      }
+
+      function reviewCompx() {
+        const expected = { 1: 'microclima', 2: 'conectividad' };
+        let ok = 0;
+        $$('input[data-act="compx"]').forEach((i) => {
+          const v = normalize(i.value);
+          saveRespuesta(`compx_${i.dataset.id}`, i.value);
+          if (v === expected[i.dataset.id]) ok += 1;
+        });
+        const pass = ok === 2;
+        pass ? markDone('compx') : unmarkDone('compx');
+        setFeedback('fb-compx', pass ? '✅ Completar correcto.' : '❌ Faltan términos clave (microclima / conectividad).', pass);
+      }
+
+      function retryCompx() {
+        $$('input[data-act="compx"]').forEach((i) => { i.value = ''; saveRespuesta(`compx_${i.dataset.id}`, ''); });
+        unmarkDone('compx');
+        setFeedback('fb-compx', 'Actividad reiniciada.', true);
       }
 
       // =========================
@@ -1233,7 +1275,7 @@
         // Puntaje total
         const progreso = getProgreso();
         const actsDone = progreso.completadas.filter((x) => x !== 'evalfinal').length;
-        const total = Math.round((actsDone / 9) * 60 + (score / 5) * 40);
+        const total = Math.round((actsDone / 11) * 60 + (score / 5) * 40);
         localStorage.setItem(KEYS.puntaje, String(total));
         render();
 
@@ -1258,14 +1300,18 @@
         comp: reviewCompletar,
         sopa: reviewSopa,
         cruci: reviewCruci,
-        t1eval: reviewTema1Eval7
+        multi7: reviewMulti7,
+        relx: reviewRelx,
+        compx: reviewCompx
       };
       const retryMap = {
         rel: retryRelacionar,
         comp: retryCompletar,
         sopa: retrySopa,
         cruci: retryCruci,
-        t1eval: retryTema1Eval7
+        multi7: retryMulti7,
+        relx: retryRelx,
+        compx: retryCompx
       };
       $$('[data-review]').forEach((b) => b.addEventListener('click', () => reviewMap[b.dataset.review]()));
       $$('[data-retry]').forEach((b) => b.addEventListener('click', () => retryMap[b.dataset.retry]()));
@@ -1381,8 +1427,16 @@
             const el = document.querySelector(`select[data-eval="${id}"]`);
             if (el) el.value = v;
           }
-          if (type === 't1eval') {
-            const el = document.querySelector(`select[data-t1eval="${id}"]`);
+          if (type === 'multi7') {
+            const el = document.querySelector(`select[data-act="multi7"][data-id="${id}"]`);
+            if (el) el.value = v;
+          }
+          if (type === 'relx') {
+            const el = document.querySelector(`select[data-act="relx"][data-id="${id}"]`);
+            if (el) el.value = v;
+          }
+          if (type === 'compx') {
+            const el = document.querySelector(`input[data-act="compx"][data-id="${id}"]`);
             if (el) el.value = v;
           }
         });
