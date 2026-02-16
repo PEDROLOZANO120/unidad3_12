@@ -342,6 +342,8 @@
     .feedback { min-height: 1.05rem; font-weight: 700; margin-top: .4rem; font-size: .88rem; }
 
     .eval-item { margin: .5rem 0; }
+    .split-zone { margin-top:.65rem; border:1px solid var(--line); border-radius:14px; background:rgba(4,16,11,.35); padding:.7rem; }
+    .split-title { margin:0 0 .45rem; font-size:.88rem; letter-spacing:.4px; text-transform:uppercase; color:var(--muted); }
 
     .sopa-layout { display:grid; grid-template-columns: 1.25fr .75fr; gap:.8rem; align-items:start; }
     @media (max-width: 1000px) { .sopa-layout { grid-template-columns: 1fr; } }
@@ -513,6 +515,8 @@
 
       <section class="topic-card" id="tema1">
         <h3>Tema 1 — Concepto de paisaje</h3>
+        <div class="split-zone">
+        <h4 class="split-title">Parte teórica</h4>
         <details class="accordion" open>
           <summary>Teoría del tema 1</summary>
           <div class="acc-body">
@@ -525,8 +529,11 @@
             </div>
           </div>
         </details>
+        </div>
 
-        <div class="activity-card">
+        <div class="split-zone">
+          <h4 class="split-title">Parte práctica y evaluación</h4>
+          <div class="activity-card">
           <h4>Actividades del tema 1</h4>
 
           <article class="activity" id="act-relacionar">
@@ -627,70 +634,95 @@
               <div id="fb-cruci" class="feedback" aria-live="polite"></div>
             </div>
           </article>
+          </div>
         </div>
       </section>
 
       <section class="topic-card" id="tema2">
         <h3>Tema 2 — Elementos de ecología del paisaje</h3>
-        <details class="accordion" open>
-          <summary>Teoría del tema 2</summary>
-          <div class="acc-body">
-            <p>El lenguaje básico incluye parche, matriz, corredor, borde y flujos (biológicos y físicos). La conectividad y fragmentación determinan persistencia poblacional y movilidad ecológica.</p>
+        <div class="split-zone">
+          <h4 class="split-title">Parte teórica</h4>
+          <details class="accordion" open>
+            <summary>Teoría del tema 2</summary>
+            <div class="acc-body">
+              <p>El lenguaje básico incluye parche, matriz, corredor, borde y flujos (biológicos y físicos). La conectividad y fragmentación determinan persistencia poblacional y movilidad ecológica.</p>
+            </div>
+          </details>
+        </div>
+        <div class="split-zone">
+          <h4 class="split-title">Parte de evaluación</h4>
+          <div class="eval-item">
+            <label class="label">Mini autoevaluación: ¿qué define la permeabilidad del paisaje?</label>
+            <select class="select" data-mini="tema2"><option value="">Selecciona...</option><option>La matriz</option><option>Solo el clima</option><option>El color del mapa</option></select>
+            <div class="actions"><button class="btn btn-primary" data-review-mini="tema2" type="button">Revisar</button><button class="btn btn-secondary" data-retry-mini="tema2" type="button">Reintentar</button></div>
+            <div id="fb-mini-tema2" class="feedback"></div>
           </div>
-        </details>
-        <div class="eval-item">
-          <label class="label">Mini autoevaluación: ¿qué define la permeabilidad del paisaje?</label>
-          <select class="select" data-mini="tema2"><option value="">Selecciona...</option><option>La matriz</option><option>Solo el clima</option><option>El color del mapa</option></select>
-          <div class="actions"><button class="btn btn-primary" data-review-mini="tema2" type="button">Revisar</button><button class="btn btn-secondary" data-retry-mini="tema2" type="button">Reintentar</button></div>
-          <div id="fb-mini-tema2" class="feedback"></div>
         </div>
       </section>
 
       <section class="topic-card" id="tema3">
         <h3>Tema 3 — Escala</h3>
-        <details class="accordion" open>
-          <summary>Teoría del tema 3</summary>
-          <div class="acc-body">
-            <p>La escala espacial se interpreta con grano y extensión; la escala temporal cambia la lectura de tendencias ecológicas. La jerarquía espacial va de microhábitat a región.</p>
+        <div class="split-zone">
+          <h4 class="split-title">Parte teórica</h4>
+          <details class="accordion" open>
+            <summary>Teoría del tema 3</summary>
+            <div class="acc-body">
+              <p>La escala espacial se interpreta con grano y extensión; la escala temporal cambia la lectura de tendencias ecológicas. La jerarquía espacial va de microhábitat a región.</p>
+            </div>
+          </details>
+        </div>
+        <div class="split-zone">
+          <h4 class="split-title">Parte de evaluación</h4>
+          <div class="eval-item">
+            <label class="label">Mini autoevaluación: grano y extensión pertenecen a...</label>
+            <select class="select" data-mini="tema3"><option value="">Selecciona...</option><option>Escala</option><option>Plagas</option><option>Biogeografía humana</option></select>
+            <div class="actions"><button class="btn btn-primary" data-review-mini="tema3" type="button">Revisar</button><button class="btn btn-secondary" data-retry-mini="tema3" type="button">Reintentar</button></div>
+            <div id="fb-mini-tema3" class="feedback"></div>
           </div>
-        </details>
-        <div class="eval-item">
-          <label class="label">Mini autoevaluación: grano y extensión pertenecen a...</label>
-          <select class="select" data-mini="tema3"><option value="">Selecciona...</option><option>Escala</option><option>Plagas</option><option>Biogeografía humana</option></select>
-          <div class="actions"><button class="btn btn-primary" data-review-mini="tema3" type="button">Revisar</button><button class="btn btn-secondary" data-retry-mini="tema3" type="button">Reintentar</button></div>
-          <div id="fb-mini-tema3" class="feedback"></div>
         </div>
       </section>
 
       <section class="topic-card" id="tema4">
         <h3>Tema 4 — Atributos del paisaje</h3>
-        <details class="accordion" open>
-          <summary>Teoría del tema 4</summary>
-          <div class="acc-body">
-            <p>Se miden tamaño, forma, aislamiento, conectividad y dominancia. Parches más grandes suelen ofrecer más área interior; más aislamiento reduce recolonización.</p>
+        <div class="split-zone">
+          <h4 class="split-title">Parte teórica</h4>
+          <details class="accordion" open>
+            <summary>Teoría del tema 4</summary>
+            <div class="acc-body">
+              <p>Se miden tamaño, forma, aislamiento, conectividad y dominancia. Parches más grandes suelen ofrecer más área interior; más aislamiento reduce recolonización.</p>
+            </div>
+          </details>
+        </div>
+        <div class="split-zone">
+          <h4 class="split-title">Parte de evaluación</h4>
+          <div class="eval-item">
+            <label class="label">Mini autoevaluación: ¿qué aumenta cuando un parche es muy irregular?</label>
+            <select class="select" data-mini="tema4"><option value="">Selecciona...</option><option>Efecto borde</option><option>Área interior pura</option><option>Conectividad funcional automática</option></select>
+            <div class="actions"><button class="btn btn-primary" data-review-mini="tema4" type="button">Revisar</button><button class="btn btn-secondary" data-retry-mini="tema4" type="button">Reintentar</button></div>
+            <div id="fb-mini-tema4" class="feedback"></div>
           </div>
-        </details>
-        <div class="eval-item">
-          <label class="label">Mini autoevaluación: ¿qué aumenta cuando un parche es muy irregular?</label>
-          <select class="select" data-mini="tema4"><option value="">Selecciona...</option><option>Efecto borde</option><option>Área interior pura</option><option>Conectividad funcional automática</option></select>
-          <div class="actions"><button class="btn btn-primary" data-review-mini="tema4" type="button">Revisar</button><button class="btn btn-secondary" data-retry-mini="tema4" type="button">Reintentar</button></div>
-          <div id="fb-mini-tema4" class="feedback"></div>
         </div>
       </section>
 
       <section class="topic-card" id="tema5">
         <h3>Tema 5 — Biogeografía de islas aplicada</h3>
-        <details class="accordion" open>
-          <summary>Teoría del tema 5</summary>
-          <div class="acc-body">
-            <p>La riqueza de especies depende del equilibrio entre colonización y extinción. Parches grandes y cercanos tienden a mantener más especies y mayor estabilidad.</p>
+        <div class="split-zone">
+          <h4 class="split-title">Parte teórica</h4>
+          <details class="accordion" open>
+            <summary>Teoría del tema 5</summary>
+            <div class="acc-body">
+              <p>La riqueza de especies depende del equilibrio entre colonización y extinción. Parches grandes y cercanos tienden a mantener más especies y mayor estabilidad.</p>
+            </div>
+          </details>
+        </div>
+        <div class="split-zone">
+          <h4 class="split-title">Parte de evaluación</h4>
+          <div class="eval-item">
+            <label class="label">Mini autoevaluación: parches pequeños y aislados suelen...</label>
+            <select class="select" data-mini="tema5"><option value="">Selecciona...</option><option>Tener menor riqueza y más riesgo local</option><option>Incrementar siempre colonización</option><option>No mostrar efecto borde</option></select>
+            <div class="actions"><button class="btn btn-primary" data-review-mini="tema5" type="button">Revisar</button><button class="btn btn-secondary" data-retry-mini="tema5" type="button">Reintentar</button></div>
+            <div id="fb-mini-tema5" class="feedback"></div>
           </div>
-        </details>
-        <div class="eval-item">
-          <label class="label">Mini autoevaluación: parches pequeños y aislados suelen...</label>
-          <select class="select" data-mini="tema5"><option value="">Selecciona...</option><option>Tener menor riqueza y más riesgo local</option><option>Incrementar siempre colonización</option><option>No mostrar efecto borde</option></select>
-          <div class="actions"><button class="btn btn-primary" data-review-mini="tema5" type="button">Revisar</button><button class="btn btn-secondary" data-retry-mini="tema5" type="button">Reintentar</button></div>
-          <div id="fb-mini-tema5" class="feedback"></div>
         </div>
       </section>
 
