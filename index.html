@@ -355,12 +355,13 @@
     .cross-layout { display:grid; grid-template-columns: 1.2fr .8fr; gap:.8rem; align-items:start; }
     @media (max-width: 1000px) { .cross-layout { grid-template-columns: 1fr; } }
     .cross-board { border:1px solid var(--line); border-radius:14px; background:rgba(0,0,0,.22); padding:.55rem; }
-    .cross-grid { display:grid; grid-template-columns: repeat(20, 36px); gap:8px; justify-content:start; max-width:100%; overflow:auto; padding:.3rem; }
-    .dot { width:36px; height:36px; border-radius:999px; display:grid; place-items:center; border:1px solid rgba(135, 223, 180, .28); background:rgba(2, 10, 7, .78); color:#c8ffe0; font-size:.78rem; position:relative; overflow:visible; }
-    .dot.active { background:rgba(3, 18, 12, .9); }
-    .dot .n { position:absolute; top:-8px; left:-2px; font-size:.62rem; background:rgba(0,0,0,.78); border:1px solid var(--line); border-radius:999px; width:17px; height:17px; display:grid; place-items:center; z-index:3; }
-    .dot-input { width:28px; height:28px; border-radius:999px; border:1px solid rgba(145,236,192,.6); background:rgba(7,26,17,.98); color:#ecfff4; text-align:center; text-transform:uppercase; font-weight:800; font-size:.9rem; padding:0; line-height:1; box-shadow: inset 0 0 0 1px rgba(20,70,47,.55); caret-color:#d8ffe9; }
-    .dot-input:focus-visible { outline:2px solid #84f2bd; outline-offset:1px; }
+    .cross-grid { display:grid; grid-template-columns: repeat(16, 58px); gap:8px; justify-content:start; max-width:100%; overflow:auto; padding:.3rem; }
+    .dot { width:58px; height:32px; border-radius:999px; display:grid; place-items:center; border:1px solid rgba(135, 223, 180, .18); background:rgba(1, 8, 6, .92); color:#c8ffe0; font-size:.78rem; position:relative; overflow:visible; }
+    .dot.active { background:rgba(5, 26, 18, .66); border-color:rgba(135,223,180,.35); }
+    .dot .n { position:absolute; top:4px; left:8px; font-size:.78rem; font-weight:700; color:#d8ffea; opacity:.9; }
+    .dot-input { width:100%; height:100%; border-radius:999px; border:1px solid rgba(145,236,192,.28); background:transparent; color:#ecfff4; text-align:center; text-transform:uppercase; font-weight:800; font-size:.95rem; padding:0 8px 0 18px; line-height:1; caret-color:#d8ffe9; }
+    .dot-input[data-pos="0"] { padding-left:22px; }
+    .dot-input:focus-visible { outline:2px solid #84f2bd; outline-offset:1px; background:rgba(11,42,28,.55); }
     .clues { border:1px solid var(--line); border-radius:14px; background:rgba(0,0,0,.22); padding:.65rem; }
     .clues ul { margin:.3rem 0 0 1rem; padding:0; }
     .clues li { margin:.26rem 0; color:var(--muted); }
@@ -600,12 +601,7 @@
               <div class="cross-layout">
                 <div class="cross-board">
                   <div class="cross-grid" aria-label="Crucigrama visual">
-                    <span class="dot"></span><span class="dot"></span><span class="dot"></span><span class="dot active"><span class="n">1</span></span><span class="dot active"></span><span class="dot active"></span><span class="dot active"></span><span class="dot"></span><span class="dot"></span><span class="dot active"><span class="n">2</span></span><span class="dot active"></span><span class="dot active"></span><span class="dot active"></span><span class="dot active"><span class="n">5</span></span><span class="dot"></span><span class="dot"></span><span class="dot active"><span class="n">3</span></span><span class="dot active"></span><span class="dot active"></span><span class="dot"></span>
-                    <span class="dot"></span><span class="dot"></span><span class="dot active"></span><span class="dot"></span><span class="dot"></span><span class="dot"></span><span class="dot active"><span class="n">6</span></span><span class="dot"></span><span class="dot"></span><span class="dot"></span><span class="dot active"></span><span class="dot"></span><span class="dot"></span><span class="dot"></span><span class="dot"></span><span class="dot"></span><span class="dot active"></span><span class="dot"></span><span class="dot"></span><span class="dot"></span>
-                    <span class="dot"></span><span class="dot active"><span class="n">4</span></span><span class="dot active"></span><span class="dot active"></span><span class="dot active"></span><span class="dot active"></span><span class="dot active"></span><span class="dot"></span><span class="dot"></span><span class="dot"></span><span class="dot active"></span><span class="dot"></span><span class="dot"></span><span class="dot"></span><span class="dot"></span><span class="dot"></span><span class="dot active"></span><span class="dot"></span><span class="dot"></span><span class="dot"></span>
-                    <span class="dot"></span><span class="dot"></span><span class="dot"></span><span class="dot"></span><span class="dot"></span><span class="dot"></span><span class="dot active"></span><span class="dot active"></span><span class="dot active"></span><span class="dot active"></span><span class="dot active"></span><span class="dot active"></span><span class="dot"></span><span class="dot"></span><span class="dot"></span><span class="dot"></span><span class="dot"></span><span class="dot"></span><span class="dot"></span><span class="dot"></span>
-                    <span class="dot"></span><span class="dot"></span><span class="dot"></span><span class="dot active"></span><span class="dot"></span><span class="dot"></span><span class="dot"></span><span class="dot"></span><span class="dot"></span><span class="dot"></span><span class="dot"></span><span class="dot"></span><span class="dot"></span><span class="dot"></span><span class="dot"></span><span class="dot active"></span><span class="dot active"></span><span class="dot active"></span><span class="dot active"></span><span class="dot"></span>
-                    <span class="dot"></span><span class="dot"></span><span class="dot"></span><span class="dot active"></span><span class="dot"></span><span class="dot"></span><span class="dot"></span><span class="dot"></span><span class="dot active"></span><span class="dot active"></span><span class="dot active"></span><span class="dot active"></span><span class="dot active"></span><span class="dot active"></span><span class="dot"></span><span class="dot"></span><span class="dot"></span><span class="dot"></span><span class="dot"></span><span class="dot"></span>
+                    <!-- Se construye por JS para mantener un modelo visual uniforme tipo imagen de referencia -->
                   </div>
                 </div>
                 <aside class="clues">
@@ -1112,59 +1108,61 @@
       function setupCruciGridInputs() {
         const grid = document.querySelector('.cross-grid');
         if (!grid) return;
-        grid.querySelectorAll('input.dot-input').forEach((i) => i.remove());
 
-        const cols = 20;
-        const dots = Array.from(grid.querySelectorAll('.dot'));
-        const activeDots = Array.from(grid.querySelectorAll('.dot.active'));
-        const config = {
-          1: { len: 6, dir: 'h' },
-          2: { len: 8, dir: 'h' },
-          3: { len: 6, dir: 'h' },
-          4: { len: 6, dir: 'h' },
-          5: { len: 8, dir: 'v' },
-          6: { len: 8, dir: 'v' }
+        const cols = 16;
+        const rows = 12;
+        const words = {
+          1: { len: 6, dir: 'h', row: 2, col: 2 }, // PARCHE
+          2: { len: 8, dir: 'h', row: 5, col: 2 }, // CORREDOR
+          3: { len: 6, dir: 'h', row: 8, col: 2 }, // ESCALA
+          4: { len: 6, dir: 'h', row: 10, col: 2 }, // MATRIZ
+          5: { len: 8, dir: 'v', row: 0, col: 12 }, // MOSAICOS
+          6: { len: 8, dir: 'v', row: 2, col: 14 } // PATRONES
         };
 
-        const markerNodes = Array.from(grid.querySelectorAll('.dot .n'));
-        const findStart = (n) => {
-          const marker = markerNodes.find((m) => m.textContent.trim() === String(n));
-          return marker ? marker.parentElement : null;
-        };
-
-        const getCells = (start, len, dir) => {
-          const startIndex = dots.indexOf(start);
-          if (startIndex < 0) return [];
-          const direct = [];
-          for (let pos = 0; pos < len; pos += 1) {
-            const idx = dir === 'h' ? (startIndex + pos) : (startIndex + (pos * cols));
-            const dot = dots[idx];
-            if (!dot || !dot.classList.contains('active')) break;
-            direct.push(dot);
+        const activeByCell = new Map();
+        Object.entries(words).forEach(([id, w]) => {
+          for (let p = 0; p < w.len; p += 1) {
+            const r = w.row + (w.dir === 'v' ? p : 0);
+            const c = w.col + (w.dir === 'h' ? p : 0);
+            const key = `${r}-${c}`;
+            if (!activeByCell.has(key)) activeByCell.set(key, []);
+            activeByCell.get(key).push({ id: Number(id), pos: p, start: p === 0 });
           }
-          if (direct.length === len) return direct;
-
-          const startActive = activeDots.indexOf(start);
-          if (startActive < 0) return direct;
-          return activeDots.slice(startActive, startActive + len);
-        };
-
-        Object.entries(config).forEach(([wordId, cfg]) => {
-          const start = findStart(Number(wordId));
-          if (!start) return;
-          const cells = getCells(start, cfg.len, cfg.dir);
-          cells.forEach((dot, pos) => {
-            const input = document.createElement('input');
-            input.className = 'dot-input';
-            input.maxLength = 1;
-            input.autocomplete = 'off';
-            input.setAttribute('aria-label', `Crucigrama ${wordId}, letra ${pos + 1}`);
-            input.setAttribute('data-act', 'cruci-cell');
-            input.setAttribute('data-word', String(wordId));
-            input.setAttribute('data-pos', String(pos));
-            dot.appendChild(input);
-          });
         });
+
+        grid.innerHTML = '';
+        for (let r = 0; r < rows; r += 1) {
+          for (let c = 0; c < cols; c += 1) {
+            const key = `${r}-${c}`;
+            const dot = document.createElement('span');
+            dot.className = 'dot';
+            const refs = activeByCell.get(key);
+
+            if (refs && refs.length) {
+              dot.classList.add('active');
+              const main = refs[0];
+              if (main.start) {
+                const num = document.createElement('span');
+                num.className = 'n';
+                num.textContent = String(main.id);
+                dot.appendChild(num);
+              }
+              const input = document.createElement('input');
+              input.className = 'dot-input';
+              input.maxLength = 1;
+              input.autocomplete = 'off';
+              input.setAttribute('aria-label', `Crucigrama ${main.id}, letra ${main.pos + 1}`);
+              input.setAttribute('data-act', 'cruci-cell');
+              input.setAttribute('data-word', String(main.id));
+              input.setAttribute('data-pos', String(main.pos));
+              if (main.pos === 0) input.dataset.start = '1';
+              dot.appendChild(input);
+            }
+
+            grid.appendChild(dot);
+          }
+        }
       }
 
       // =========================
