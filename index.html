@@ -359,7 +359,8 @@
     .dot { width:36px; height:36px; border-radius:999px; display:grid; place-items:center; border:1px solid rgba(135, 223, 180, .28); background:rgba(2, 10, 7, .78); color:#c8ffe0; font-size:.78rem; position:relative; overflow:visible; }
     .dot.active { background:rgba(3, 18, 12, .9); }
     .dot .n { position:absolute; top:-8px; left:-2px; font-size:.62rem; background:rgba(0,0,0,.78); border:1px solid var(--line); border-radius:999px; width:17px; height:17px; display:grid; place-items:center; z-index:3; }
-    .dot-input { width:26px; height:26px; border-radius:999px; border:1px solid rgba(145,236,192,.52); background:rgba(7,26,17,.98); color:#ecfff4; text-align:center; text-transform:uppercase; font-weight:800; font-size:.86rem; padding:0; line-height:1; box-shadow: inset 0 0 0 1px rgba(20,70,47,.55); }
+    .dot-input { width:28px; height:28px; border-radius:999px; border:1px solid rgba(145,236,192,.6); background:rgba(7,26,17,.98); color:#ecfff4; text-align:center; text-transform:uppercase; font-weight:800; font-size:.9rem; padding:0; line-height:1; box-shadow: inset 0 0 0 1px rgba(20,70,47,.55); caret-color:#d8ffe9; }
+    .dot-input:focus-visible { outline:2px solid #84f2bd; outline-offset:1px; }
     .clues { border:1px solid var(--line); border-radius:14px; background:rgba(0,0,0,.22); padding:.65rem; }
     .clues ul { margin:.3rem 0 0 1rem; padding:0; }
     .clues li { margin:.26rem 0; color:var(--muted); }
@@ -599,8 +600,8 @@
               <div class="cross-layout">
                 <div class="cross-board">
                   <div class="cross-grid" aria-label="Crucigrama visual">
-                    <span class="dot"></span><span class="dot"></span><span class="dot"></span><span class="dot active"><span class="n">1</span></span><span class="dot active"></span><span class="dot active"></span><span class="dot active"></span><span class="dot"></span><span class="dot"></span><span class="dot active"><span class="n">2</span></span><span class="dot active"></span><span class="dot active"></span><span class="dot active"></span><span class="dot active"></span><span class="dot"></span><span class="dot"></span><span class="dot active"><span class="n">3</span></span><span class="dot active"></span><span class="dot active"></span><span class="dot"></span>
-                    <span class="dot"></span><span class="dot"></span><span class="dot active"></span><span class="dot"></span><span class="dot"></span><span class="dot"></span><span class="dot active"></span><span class="dot"></span><span class="dot"></span><span class="dot"></span><span class="dot active"></span><span class="dot"></span><span class="dot"></span><span class="dot"></span><span class="dot"></span><span class="dot"></span><span class="dot active"></span><span class="dot"></span><span class="dot"></span><span class="dot"></span>
+                    <span class="dot"></span><span class="dot"></span><span class="dot"></span><span class="dot active"><span class="n">1</span></span><span class="dot active"></span><span class="dot active"></span><span class="dot active"></span><span class="dot"></span><span class="dot"></span><span class="dot active"><span class="n">2</span></span><span class="dot active"></span><span class="dot active"></span><span class="dot active"></span><span class="dot active"><span class="n">5</span></span><span class="dot"></span><span class="dot"></span><span class="dot active"><span class="n">3</span></span><span class="dot active"></span><span class="dot active"></span><span class="dot"></span>
+                    <span class="dot"></span><span class="dot"></span><span class="dot active"></span><span class="dot"></span><span class="dot"></span><span class="dot"></span><span class="dot active"><span class="n">6</span></span><span class="dot"></span><span class="dot"></span><span class="dot"></span><span class="dot active"></span><span class="dot"></span><span class="dot"></span><span class="dot"></span><span class="dot"></span><span class="dot"></span><span class="dot active"></span><span class="dot"></span><span class="dot"></span><span class="dot"></span>
                     <span class="dot"></span><span class="dot active"><span class="n">4</span></span><span class="dot active"></span><span class="dot active"></span><span class="dot active"></span><span class="dot active"></span><span class="dot active"></span><span class="dot"></span><span class="dot"></span><span class="dot"></span><span class="dot active"></span><span class="dot"></span><span class="dot"></span><span class="dot"></span><span class="dot"></span><span class="dot"></span><span class="dot active"></span><span class="dot"></span><span class="dot"></span><span class="dot"></span>
                     <span class="dot"></span><span class="dot"></span><span class="dot"></span><span class="dot"></span><span class="dot"></span><span class="dot"></span><span class="dot active"></span><span class="dot active"></span><span class="dot active"></span><span class="dot active"></span><span class="dot active"></span><span class="dot active"></span><span class="dot"></span><span class="dot"></span><span class="dot"></span><span class="dot"></span><span class="dot"></span><span class="dot"></span><span class="dot"></span><span class="dot"></span>
                     <span class="dot"></span><span class="dot"></span><span class="dot"></span><span class="dot active"></span><span class="dot"></span><span class="dot"></span><span class="dot"></span><span class="dot"></span><span class="dot"></span><span class="dot"></span><span class="dot"></span><span class="dot"></span><span class="dot"></span><span class="dot"></span><span class="dot"></span><span class="dot active"></span><span class="dot active"></span><span class="dot active"></span><span class="dot active"></span><span class="dot"></span>
@@ -609,11 +610,17 @@
                 </div>
                 <aside class="clues">
                   <h4 style="margin:0 0 .4rem">📌 Pistas</h4>
+                  <p style="margin:.2rem 0 .2rem;font-weight:700">Horizontales</p>
                   <ul>
-                    <li><strong>1.</strong> Cobertura dominante del paisaje local.</li>
-                    <li><strong>2.</strong> Conexión lineal que facilita movimiento constante entre parches.</li>
-                    <li><strong>3.</strong> Variabilidad espacial del mosaico ecológico.</li>
-                    <li><strong>4.</strong> Área relativamente homogénea del paisaje natural.</li>
+                    <li><strong>1.</strong> Fragmento de hábitat homogéneo (6).</li>
+                    <li><strong>2.</strong> Conexión lineal entre parches (8).</li>
+                    <li><strong>3.</strong> Nivel de análisis espacial/temporal (6).</li>
+                    <li><strong>4.</strong> Cobertura que rodea los parches (6).</li>
+                  </ul>
+                  <p style="margin:.55rem 0 .2rem;font-weight:700">Verticales</p>
+                  <ul>
+                    <li><strong>5.</strong> Organización espacial del mosaico (8).</li>
+                    <li><strong>6.</strong> Relación patrón y proceso en paisaje (8).</li>
                   </ul>
                 </aside>
               </div>
@@ -970,22 +977,22 @@
       }
 
       function reviewCruci() {
-        const expected = { 1: 'matriz', 2: 'corredor', 3: 'heterogeneidad', 4: 'parche' };
+        const expected = { 1: 'parche', 2: 'corredor', 3: 'escala', 4: 'matriz', 5: 'mosaicos', 6: 'patrones' };
         let ok = 0;
-        [1,2,3,4].forEach((id) => {
+        [1,2,3,4,5,6].forEach((id) => {
           const cells = $$(`input[data-act="cruci-cell"][data-word="${id}"]`).sort((a,b)=>Number(a.dataset.pos)-Number(b.dataset.pos));
           const word = cells.map((c)=>normalize(c.value).slice(0,1)).join('');
           saveRespuesta(`cruci_${id}`, word);
           if (word === expected[id]) ok += 1;
         });
-        const pass = ok === 4;
+        const pass = ok === 6;
         pass ? markDone('cruci') : unmarkDone('cruci');
-        setFeedback('fb-cruci', pass ? '✅ Crucigrama correcto.' : '❌ Verifica: matriz, corredor, heterogeneidad y parche.', pass);
+        setFeedback('fb-cruci', pass ? '✅ Crucigrama correcto.' : '❌ Verifica las 6 palabras (1-6) del crucigrama.', pass);
       }
 
       function retryCruci() {
         $$('input[data-act="cruci-cell"]').forEach((i) => { i.value = ''; });
-        [1,2,3,4].forEach((id)=>saveRespuesta(`cruci_${id}`, ''));
+        [1,2,3,4,5,6].forEach((id)=>saveRespuesta(`cruci_${id}`, ''));
         unmarkDone('cruci');
         setFeedback('fb-cruci', 'Actividad reiniciada.', true);
       }
@@ -1105,30 +1112,55 @@
       function setupCruciGridInputs() {
         const grid = document.querySelector('.cross-grid');
         if (!grid) return;
-        // limpiar inputs previos
         grid.querySelectorAll('input.dot-input').forEach((i) => i.remove());
-        const dots = Array.from(grid.querySelectorAll('.dot.active'));
-        const lengths = { 1: 6, 2: 8, 3: 14, 4: 6 };
-        [1,2,3,4].forEach((w) => {
-          const start = grid.querySelector(`.dot .n:nth-child(1)`);
-        });
-        const startDots = [1,2,3,4].map((n) => {
-          const marker = Array.from(grid.querySelectorAll('.dot .n')).find((m) => m.textContent.trim() === String(n));
+
+        const cols = 20;
+        const dots = Array.from(grid.querySelectorAll('.dot'));
+        const activeDots = Array.from(grid.querySelectorAll('.dot.active'));
+        const config = {
+          1: { len: 6, dir: 'h' },
+          2: { len: 8, dir: 'h' },
+          3: { len: 6, dir: 'h' },
+          4: { len: 6, dir: 'h' },
+          5: { len: 8, dir: 'v' },
+          6: { len: 8, dir: 'v' }
+        };
+
+        const markerNodes = Array.from(grid.querySelectorAll('.dot .n'));
+        const findStart = (n) => {
+          const marker = markerNodes.find((m) => m.textContent.trim() === String(n));
           return marker ? marker.parentElement : null;
-        });
-        startDots.forEach((startDot, idx) => {
-          const word = idx + 1;
-          if (!startDot) return;
-          const startIndex = dots.indexOf(startDot);
-          if (startIndex < 0) return;
-          const len = lengths[word];
-          const slice = dots.slice(startIndex, startIndex + len);
-          slice.forEach((dot, pos) => {
+        };
+
+        const getCells = (start, len, dir) => {
+          const startIndex = dots.indexOf(start);
+          if (startIndex < 0) return [];
+          const direct = [];
+          for (let pos = 0; pos < len; pos += 1) {
+            const idx = dir === 'h' ? (startIndex + pos) : (startIndex + (pos * cols));
+            const dot = dots[idx];
+            if (!dot || !dot.classList.contains('active')) break;
+            direct.push(dot);
+          }
+          if (direct.length === len) return direct;
+
+          const startActive = activeDots.indexOf(start);
+          if (startActive < 0) return direct;
+          return activeDots.slice(startActive, startActive + len);
+        };
+
+        Object.entries(config).forEach(([wordId, cfg]) => {
+          const start = findStart(Number(wordId));
+          if (!start) return;
+          const cells = getCells(start, cfg.len, cfg.dir);
+          cells.forEach((dot, pos) => {
             const input = document.createElement('input');
             input.className = 'dot-input';
             input.maxLength = 1;
+            input.autocomplete = 'off';
+            input.setAttribute('aria-label', `Crucigrama ${wordId}, letra ${pos + 1}`);
             input.setAttribute('data-act', 'cruci-cell');
-            input.setAttribute('data-word', String(word));
+            input.setAttribute('data-word', String(wordId));
             input.setAttribute('data-pos', String(pos));
             dot.appendChild(input);
           });
