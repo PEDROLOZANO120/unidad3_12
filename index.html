@@ -289,12 +289,13 @@
 
     .mini-card h4 { margin: 0 0 .32rem; font-size: .95rem; }
     .mini-card p { margin: 0; color: var(--muted); font-size: .9rem; }
-    .landscape-examples { margin-top:.75rem; }
-    .landscape-examples h4 { margin:.2rem 0 .45rem; }
-    .example-grid { display:grid; grid-template-columns:repeat(3,minmax(180px,1fr)); gap:.55rem; }
-    .example-card { border:1px solid var(--line); border-radius:12px; background:rgba(0,0,0,.2); padding:.45rem; }
-    .example-card p { margin:.35rem 0 0; font-size:.83rem; color:var(--muted); }
-    .example-svg { width:100%; height:120px; border-radius:10px; border:1px solid rgba(144,234,189,.25); background:rgba(2,16,11,.82); }
+    .landscape-examples { margin-top:.9rem; display:grid; gap:.55rem; }
+    .landscape-examples h4 { margin:.2rem 0 .45rem; color:#e7fff3; letter-spacing:.01em; }
+    .example-grid { display:grid; grid-template-columns:repeat(3,minmax(190px,1fr)); gap:.7rem; }
+    .example-card { border:1px solid rgba(153,239,196,.34); border-radius:14px; background:linear-gradient(160deg, rgba(7,27,18,.86), rgba(11,38,24,.65)); padding:.55rem; box-shadow:0 10px 24px rgba(0,0,0,.26); transition:transform .2s ease, box-shadow .2s ease, border-color .2s ease; }
+    .example-card:hover { transform:translateY(-2px); border-color:rgba(184,255,219,.65); box-shadow:0 14px 28px rgba(0,0,0,.34); }
+    .example-card p { margin:.45rem 0 0; font-size:.86rem; color:#daf5e8; line-height:1.45; }
+    .example-svg { width:100%; height:140px; border-radius:12px; border:1px solid rgba(180,255,223,.38); background:radial-gradient(circle at 30% 20%, rgba(36,122,85,.25), rgba(2,16,11,.9)); image-rendering:auto; }
     @media (max-width: 900px) { .example-grid { grid-template-columns:1fr; } }
 
     .activity {
@@ -739,13 +740,15 @@
           </article>
 
           <article class="activity" id="act-multi7">
-            <header>Actividad 5: opción múltiple (tema 1)</header>
+            <header>Actividad 5: opción múltiple avanzada (tema 1, nivel maestría)</header>
             <div class="body">
-              <div class="eval-item"><label class="label">1) En ecología del paisaje, “paisaje” se entiende como:</label><select class="select" data-act="multi7" data-id="1"><option value="">Selecciona...</option><option>Unidad espacial heterogénea organizada como mosaico</option><option>Solo una vista panorámica bonita</option><option>Mapa político de una región</option></select></div>
-              <div class="eval-item"><label class="label">2) ¿Qué componente representa la cobertura dominante que rodea parches?</label><select class="select" data-act="multi7" data-id="2"><option value="">Selecciona...</option><option>Matriz</option><option>Ecotono</option><option>Núcleo urbano</option></select></div>
-              <div class="eval-item"><label class="label">3) Dos paisajes con igual % de bosque pueden comportarse distinto por:</label><select class="select" data-act="multi7" data-id="3"><option value="">Selecciona...</option><option>Su configuración espacial y fragmentación</option><option>El color usado en la leyenda</option><option>La hora del día de la foto</option></select></div>
-              <div class="eval-item"><label class="label">4) ¿Cuál afirmación describe mejor la heterogeneidad del paisaje?</label><select class="select" data-act="multi7" data-id="4"><option value="">Selecciona...</option><option>Variedad de coberturas y su arreglo espacial</option><option>Solo el relieve topográfico</option><option>Únicamente la temperatura media</option></select></div>
-              <div class="eval-item"><label class="label">5) En un parche pequeño, generalmente ocurre:</label><select class="select" data-act="multi7" data-id="5"><option value="">Selecciona...</option><option>Mayor proporción de borde y menor área interior</option><option>Ausencia total de efecto de borde</option><option>Conectividad perfecta automática</option></select></div>
+              <div class="eval-item"><label class="label">1) Un paisaje con igual composición pero distinta configuración puede mostrar respuestas ecológicas diferentes porque:</label><select class="select" data-act="multi7" data-id="1"><option value="">Selecciona...</option><option>La conectividad funcional depende de distancias, borde y permeabilidad, no solo de porcentaje de cobertura</option><option>El mosaico siempre mantiene los mismos flujos sin importar su geometría</option><option>La composición determina por completo la dinámica sin interacción espacial</option></select></div>
+              <div class="eval-item"><label class="label">2) ¿Cuál afirmación integra mejor el enfoque ecológico del paisaje?</label><select class="select" data-act="multi7" data-id="2"><option value="">Selecciona...</option><option>Analiza interacciones entre parches, matriz y corredores considerando procesos y escalas</option><option>Reduce el estudio a inventarios taxonómicos desconectados del espacio</option><option>Evalúa únicamente percepción estética del territorio</option></select></div>
+              <div class="eval-item"><label class="label">3) En términos de borde/ecotono, la consecuencia más consistente para especies de interior es:</label><select class="select" data-act="multi7" data-id="3"><option value="">Selecciona...</option><option>Mayor exposición microclimática y reducción de hábitat núcleo efectivo</option><option>Eliminación automática de toda depredación</option><option>Aumento garantizado de estabilidad poblacional</option></select></div>
+              <div class="eval-item"><label class="label">4) Si una matriz agrícola incrementa su permeabilidad con setos y riberas, se espera:</label><select class="select" data-act="multi7" data-id="4"><option value="">Selecciona...</option><option>Mayor probabilidad de dispersión y flujo entre parches funcionalmente conectados</option><option>Desaparición de la dependencia de escala</option><option>Fragmentación estructural sin efecto funcional</option></select></div>
+              <div class="eval-item"><label class="label">5) La heterogeneidad útil para conservación no implica solo “más tipos” de cobertura, sino:</label><select class="select" data-act="multi7" data-id="5"><option value="">Selecciona...</option><option>Distribución espacial que sostenga procesos, refugios y conectividad para especies objetivo</option><option>Variabilidad aleatoria sin criterios funcionales</option><option>Homogeneización de parches para simplificar el mapa</option></select></div>
+              <div class="eval-item"><label class="label">6) ¿Qué decisión es más sólida al diseñar un análisis de paisaje orientado a manejo?</label><select class="select" data-act="multi7" data-id="6"><option value="">Selecciona...</option><option>Definir pregunta ecológica, especie focal y escala antes de seleccionar métricas</option><option>Elegir métricas por facilidad de software y luego formular la pregunta</option><option>Usar una sola resolución universal para todos los procesos</option></select></div>
+              <div class="eval-item"><label class="label">7) En un escenario de fragmentación progresiva, ¿cuál indicador sugiere mayor riesgo ecológico?</label><select class="select" data-act="multi7" data-id="7"><option value="">Selecciona...</option><option>Disminución de área núcleo + aumento de aislamiento entre parches equivalentes</option><option>Aumento de conectividad estructural entre parches</option><option>Reducción del contraste de borde por restauración</option></select></div>
               <div class="actions">
                 <button class="btn btn-primary" data-review="multi7" type="button">Revisar</button>
                 <button class="btn btn-secondary" data-retry="multi7" type="button">Reintentar</button>
@@ -814,11 +817,15 @@
           <h4 class="split-title">Parte de evaluación</h4>
 
           <article class="activity" id="act-t2a1">
-            <header>Actividad 1 (Tema 2): opción múltiple</header>
+            <header>Actividad 1 (Tema 2): opción múltiple avanzada (7 preguntas)</header>
             <div class="body">
-              <div class="eval-item"><label class="label">1) La heterogeneidad espaciotemporal del paisaje controla principalmente:</label><select class="select" data-act="t2a1" data-id="1"><option value="">Selecciona...</option><option>Movimientos y flujos de organismos, materia y energía</option><option>Solo la forma de los mapas</option><option>Únicamente el color de la vegetación</option></select></div>
-              <div class="eval-item"><label class="label">2) En organización ecológica, el paisaje se ubica:</label><select class="select" data-act="t2a1" data-id="2"><option value="">Selecciona...</option><option>Por encima del ecosistema y por debajo de la ecorregión</option><option>Por debajo del individuo</option><option>Solo al nivel de parcela agrícola</option></select></div>
-              <div class="eval-item"><label class="label">3) El enfoque de la ecología del paisaje es:</label><select class="select" data-act="t2a1" data-id="3"><option value="">Selecciona...</option><option>Integrado, sistémico y transdisciplinar</option><option>Exclusivamente descriptivo</option><option>Solo climático</option></select></div>
+              <div class="eval-item"><label class="label">1) La Ecología del Paisaje se distingue porque:</label><select class="select" data-act="t2a1" data-id="1"><option value="">Selecciona...</option><option>Integra patrones espaciales y procesos ecológicos en múltiples escalas</option><option>Se limita al inventario de especies sin análisis espacial</option><option>Solo considera variables físicas y excluye la acción humana</option></select></div>
+              <div class="eval-item"><label class="label">2) El componente geográfico de la disciplina se centra en:</label><select class="select" data-act="t2a1" data-id="2"><option value="">Selecciona...</option><option>La configuración y estructura espacial del mosaico</option><option>La genética molecular de poblaciones aisladas</option><option>La clasificación taxonómica de familias botánicas</option></select></div>
+              <div class="eval-item"><label class="label">3) En teoría de jerarquías, un proceso de escala amplia puede:</label><select class="select" data-act="t2a1" data-id="3"><option value="">Selecciona...</option><option>Condicionar y limitar dinámicas observadas a escala local</option><option>Ser irrelevante para los niveles inferiores</option><option>Eliminar toda variabilidad en escalas finas</option></select></div>
+              <div class="eval-item"><label class="label">4) Considerar al paisaje como sistema abierto implica reconocer:</label><select class="select" data-act="t2a1" data-id="4"><option value="">Selecciona...</option><option>Intercambios continuos de energía, materia y organismos con el entorno</option><option>Cierre total de fronteras ecológicas y ausencia de flujos</option><option>Independencia absoluta respecto al contexto regional</option></select></div>
+              <div class="eval-item"><label class="label">5) ¿Cuál es una implicación aplicada correcta para conservación?</label><select class="select" data-act="t2a1" data-id="5"><option value="">Selecciona...</option><option>Priorizar conectividad funcional además de área protegida</option><option>Maximizar bordes para toda especie por igual</option><option>Suponer que toda matriz tiene igual permeabilidad</option></select></div>
+              <div class="eval-item"><label class="label">6) La transdisciplinariedad del campo se expresa mejor como:</label><select class="select" data-act="t2a1" data-id="6"><option value="">Selecciona...</option><option>Articulación entre geografía, biogeografía y ecología para resolver problemas territoriales</option><option>Sustitución de la ecología por cartografía descriptiva</option><option>Separación estricta entre ciencias naturales y gestión</option></select></div>
+              <div class="eval-item"><label class="label">7) Si se ignoran escalas espaciotemporales en el análisis, el principal riesgo es:</label><select class="select" data-act="t2a1" data-id="7"><option value="">Selecciona...</option><option>Interpretar relaciones espurias o incompletas entre patrón y proceso</option><option>Obtener mayor precisión automática en todas las métricas</option><option>Mejorar la extrapolación sin necesidad de validación</option></select></div>
               <div class="actions"><button class="btn btn-primary" data-review="t2a1" type="button">Revisar</button><button class="btn btn-secondary" data-retry="t2a1" type="button">Reintentar</button></div>
               <div id="fb-t2a1" class="feedback"></div>
             </div>
@@ -1534,20 +1541,22 @@
 
       function reviewMulti7() {
         const expected = {
-          1: 'Unidad espacial heterogénea organizada como mosaico',
-          2: 'Matriz',
-          3: 'Su configuración espacial y fragmentación',
-          4: 'Variedad de coberturas y su arreglo espacial',
-          5: 'Mayor proporción de borde y menor área interior'
+          1: 'La conectividad funcional depende de distancias, borde y permeabilidad, no solo de porcentaje de cobertura',
+          2: 'Analiza interacciones entre parches, matriz y corredores considerando procesos y escalas',
+          3: 'Mayor exposición microclimática y reducción de hábitat núcleo efectivo',
+          4: 'Mayor probabilidad de dispersión y flujo entre parches funcionalmente conectados',
+          5: 'Distribución espacial que sostenga procesos, refugios y conectividad para especies objetivo',
+          6: 'Definir pregunta ecológica, especie focal y escala antes de seleccionar métricas',
+          7: 'Disminución de área núcleo + aumento de aislamiento entre parches equivalentes'
         };
         let ok = 0;
         $$('select[data-act="multi7"]').forEach((s) => {
           saveRespuesta(`multi7_${s.dataset.id}`, s.value);
           if (s.value === expected[s.dataset.id]) ok += 1;
         });
-        const pass = ok === 5;
+        const pass = ok === 7;
         pass ? markDone('multi7') : unmarkDone('multi7');
-        setFeedback('fb-multi7', pass ? '✅ Opción múltiple correcta.' : `❌ Resultado ${ok}/5. Revisa la teoría.`, pass);
+        setFeedback('fb-multi7', pass ? '✅ Opción múltiple correcta.' : `❌ Resultado ${ok}/7. Revisa la teoría de forma integral.`, pass);
       }
 
       function retryMulti7() {
@@ -1599,18 +1608,22 @@
 
       function reviewT2A1() {
         const expected = {
-          1: 'Movimientos y flujos de organismos, materia y energía',
-          2: 'Por encima del ecosistema y por debajo de la ecorregión',
-          3: 'Integrado, sistémico y transdisciplinar'
+          1: 'Integra patrones espaciales y procesos ecológicos en múltiples escalas',
+          2: 'La configuración y estructura espacial del mosaico',
+          3: 'Condicionar y limitar dinámicas observadas a escala local',
+          4: 'Intercambios continuos de energía, materia y organismos con el entorno',
+          5: 'Priorizar conectividad funcional además de área protegida',
+          6: 'Articulación entre geografía, biogeografía y ecología para resolver problemas territoriales',
+          7: 'Interpretar relaciones espurias o incompletas entre patrón y proceso'
         };
         let ok = 0;
         $$('select[data-act="t2a1"]').forEach((s) => {
           saveRespuesta(`t2a1_${s.dataset.id}`, s.value);
           if (s.value === expected[s.dataset.id]) ok += 1;
         });
-        const pass = ok === 3;
+        const pass = ok === 7;
         pass ? markDone('t2a1') : unmarkDone('t2a1');
-        setFeedback('fb-t2a1', pass ? '✅ Actividad 1 correcta.' : `❌ Resultado ${ok}/3.`, pass);
+        setFeedback('fb-t2a1', pass ? '✅ Actividad 1 correcta (nivel maestría).' : `❌ Resultado ${ok}/7.`, pass);
       }
 
       function retryT2A1() {
