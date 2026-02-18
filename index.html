@@ -634,6 +634,7 @@
                   <tr><td>Parche</td><td><select class="select" data-act="rel" data-id="1"><option value="">Selecciona...</option><option>Área relativamente homogénea</option><option>Cobertura dominante</option><option>Conexión lineal entre hábitats</option></select></td></tr>
                   <tr><td>Matriz</td><td><select class="select" data-act="rel" data-id="2"><option value="">Selecciona...</option><option>Transición parche-matriz</option><option>Cobertura dominante</option><option>Área interior del parche</option></select></td></tr>
                   <tr><td>Corredor</td><td><select class="select" data-act="rel" data-id="3"><option value="">Selecciona...</option><option>Conexión lineal entre hábitats</option><option>Zona urbana aislada</option><option>Borde de un parche</option></select></td></tr>
+                  <tr><td>Borde (ecotono)</td><td><select class="select" data-act="rel" data-id="4"><option value="">Selecciona...</option><option>Zona de transición entre coberturas</option><option>Área núcleo sin cambios</option><option>Conjunto de carreteras</option></select></td></tr>
                 </tbody>
               </table>
               <div class="actions">
@@ -649,6 +650,7 @@
             <div class="body">
               <p>Dos paisajes con igual composición pueden tener biodiversidad distinta por la <input class="input" style="max-width:220px;display:inline-block" data-act="comp" data-id="1" type="text" />.</p>
               <p>La variación espacial del mosaico se conoce como <input class="input" style="max-width:220px;display:inline-block" data-act="comp" data-id="2" type="text" /> del paisaje.</p>
+              <p>Una transición gradual entre dos coberturas se denomina <input class="input" style="max-width:220px;display:inline-block" data-act="comp" data-id="3" type="text" />.</p>
               <div class="actions">
                 <button class="btn btn-primary" data-review="comp" type="button">Revisar</button>
                 <button class="btn btn-secondary" data-retry="comp" type="button">Reintentar</button>
@@ -730,6 +732,8 @@
               <div class="eval-item"><label class="label">1) En ecología del paisaje, “paisaje” se entiende como:</label><select class="select" data-act="multi7" data-id="1"><option value="">Selecciona...</option><option>Unidad espacial heterogénea organizada como mosaico</option><option>Solo una vista panorámica bonita</option><option>Mapa político de una región</option></select></div>
               <div class="eval-item"><label class="label">2) ¿Qué componente representa la cobertura dominante que rodea parches?</label><select class="select" data-act="multi7" data-id="2"><option value="">Selecciona...</option><option>Matriz</option><option>Ecotono</option><option>Núcleo urbano</option></select></div>
               <div class="eval-item"><label class="label">3) Dos paisajes con igual % de bosque pueden comportarse distinto por:</label><select class="select" data-act="multi7" data-id="3"><option value="">Selecciona...</option><option>Su configuración espacial y fragmentación</option><option>El color usado en la leyenda</option><option>La hora del día de la foto</option></select></div>
+              <div class="eval-item"><label class="label">4) ¿Cuál afirmación describe mejor la heterogeneidad del paisaje?</label><select class="select" data-act="multi7" data-id="4"><option value="">Selecciona...</option><option>Variedad de coberturas y su arreglo espacial</option><option>Solo el relieve topográfico</option><option>Únicamente la temperatura media</option></select></div>
+              <div class="eval-item"><label class="label">5) En un parche pequeño, generalmente ocurre:</label><select class="select" data-act="multi7" data-id="5"><option value="">Selecciona...</option><option>Mayor proporción de borde y menor área interior</option><option>Ausencia total de efecto de borde</option><option>Conectividad perfecta automática</option></select></div>
               <div class="actions">
                 <button class="btn btn-primary" data-review="multi7" type="button">Revisar</button>
                 <button class="btn btn-secondary" data-retry="multi7" type="button">Reintentar</button>
@@ -746,6 +750,7 @@
                 <tbody>
                   <tr><td>Permeabilidad del territorio</td><td><select class="select" data-act="relx" data-id="1"><option value="">Selecciona...</option><option>Qué tan fácil circulan organismos y flujos por el paisaje</option><option>El número de satélites disponibles</option><option>El costo económico de un mapa</option></select></td></tr>
                   <tr><td>Paisaje como sistema dinámico</td><td><select class="select" data-act="relx" data-id="2"><option value="">Selecciona...</option><option>Estructura y procesos se influyen mutuamente en el tiempo</option><option>La estructura nunca cambia</option><option>Los disturbios no afectan el territorio</option></select></td></tr>
+                  <tr><td>Ecotono</td><td><select class="select" data-act="relx" data-id="3"><option value="">Selecciona...</option><option>Transición entre dos coberturas con cambios ecológicos</option><option>Cobertura dominante del paisaje</option><option>Ruta de dispersión de aves migratorias</option></select></td></tr>
                 </tbody>
               </table>
               <div class="actions">
@@ -761,6 +766,7 @@
             <div class="body">
               <p>El borde puede modificar el <input class="input" style="max-width:220px;display:inline-block" data-act="compx" data-id="1" type="text" /> del parche.</p>
               <p>Cuando los parches están aislados, suele disminuir la <input class="input" style="max-width:220px;display:inline-block" data-act="compx" data-id="2" type="text" /> ecológica.</p>
+              <p>Muchos parches pequeños y separados suelen indicar alta <input class="input" style="max-width:220px;display:inline-block" data-act="compx" data-id="3" type="text" />.</p>
               <div class="actions">
                 <button class="btn btn-primary" data-review="compx" type="button">Revisar</button>
                 <button class="btn btn-secondary" data-retry="compx" type="button">Reintentar</button>
@@ -1073,16 +1079,17 @@
         const expected = {
           1: 'Área relativamente homogénea',
           2: 'Cobertura dominante',
-          3: 'Conexión lineal entre hábitats'
+          3: 'Conexión lineal entre hábitats',
+          4: 'Zona de transición entre coberturas'
         };
         let ok = 0;
         $$('select[data-act="rel"]').forEach((s) => {
           saveRespuesta(`rel_${s.dataset.id}`, s.value);
           if (s.value === expected[s.dataset.id]) ok += 1;
         });
-        const pass = ok === 3;
+        const pass = ok === 4;
         pass ? markDone('rel') : unmarkDone('rel');
-        setFeedback('fb-rel', pass ? '✅ Correcto: relacionaste todos los conceptos.' : '❌ Aún hay errores. Revisa parche, matriz y corredor.', pass);
+        setFeedback('fb-rel', pass ? '✅ Correcto: relacionaste todos los conceptos.' : '❌ Aún hay errores. Revisa parche, matriz, corredor y borde/ecotono.', pass);
       }
 
       function retryRelacionar() {
@@ -1092,16 +1099,16 @@
       }
 
       function reviewCompletar() {
-        const expected = { 1: 'configuracion', 2: 'heterogeneidad' };
+        const expected = { 1: 'configuracion', 2: 'heterogeneidad', 3: 'ecotono' };
         let ok = 0;
         $$('input[data-act="comp"]').forEach((i) => {
           const v = normalize(i.value);
           saveRespuesta(`comp_${i.dataset.id}`, i.value);
           if (v === expected[i.dataset.id]) ok += 1;
         });
-        const pass = ok === 2;
+        const pass = ok === 3;
         pass ? markDone('comp') : unmarkDone('comp');
-        setFeedback('fb-comp', pass ? '✅ Excelente, completaste correctamente.' : '❌ Faltan términos clave (configuración / heterogeneidad).', pass);
+        setFeedback('fb-comp', pass ? '✅ Excelente, completaste correctamente.' : '❌ Faltan términos clave (configuración / heterogeneidad / ecotono).', pass);
       }
 
       function retryCompletar() {
@@ -1113,7 +1120,7 @@
       function updateSopaFound() {
         const found = $('#sopaFound');
         if (!found) return false;
-        const words = ['fragmentacion', 'conectividad', 'heterogeneidad'];
+        const words = ['fragmentacion', 'conectividad', 'heterogeneidad', 'matriz', 'mosaico'];
         const state = words.map((w) => {
           const cells = $$(`.sopa-grid-pro .cell-pro[data-word="${w}"]`);
           const ok = cells.length > 0 && cells.every((c) => c.classList.contains('selected'));
@@ -1163,16 +1170,18 @@
         const expected = {
           1: 'Unidad espacial heterogénea organizada como mosaico',
           2: 'Matriz',
-          3: 'Su configuración espacial y fragmentación'
+          3: 'Su configuración espacial y fragmentación',
+          4: 'Variedad de coberturas y su arreglo espacial',
+          5: 'Mayor proporción de borde y menor área interior'
         };
         let ok = 0;
         $$('select[data-act="multi7"]').forEach((s) => {
           saveRespuesta(`multi7_${s.dataset.id}`, s.value);
           if (s.value === expected[s.dataset.id]) ok += 1;
         });
-        const pass = ok === 3;
+        const pass = ok === 5;
         pass ? markDone('multi7') : unmarkDone('multi7');
-        setFeedback('fb-multi7', pass ? '✅ Opción múltiple correcta.' : `❌ Resultado ${ok}/3. Revisa la teoría.`, pass);
+        setFeedback('fb-multi7', pass ? '✅ Opción múltiple correcta.' : `❌ Resultado ${ok}/5. Revisa la teoría.`, pass);
       }
 
       function retryMulti7() {
@@ -1184,16 +1193,17 @@
       function reviewRelx() {
         const expected = {
           1: 'Qué tan fácil circulan organismos y flujos por el paisaje',
-          2: 'Estructura y procesos se influyen mutuamente en el tiempo'
+          2: 'Estructura y procesos se influyen mutuamente en el tiempo',
+          3: 'Transición entre dos coberturas con cambios ecológicos'
         };
         let ok = 0;
         $$('select[data-act="relx"]').forEach((s) => {
           saveRespuesta(`relx_${s.dataset.id}`, s.value);
           if (s.value === expected[s.dataset.id]) ok += 1;
         });
-        const pass = ok === 2;
+        const pass = ok === 3;
         pass ? markDone('relx') : unmarkDone('relx');
-        setFeedback('fb-relx', pass ? '✅ Relacionar correcto.' : `❌ Resultado ${ok}/2. Intenta nuevamente.`, pass);
+        setFeedback('fb-relx', pass ? '✅ Relacionar correcto.' : `❌ Resultado ${ok}/3. Intenta nuevamente.`, pass);
       }
 
       function retryRelx() {
@@ -1203,16 +1213,16 @@
       }
 
       function reviewCompx() {
-        const expected = { 1: 'microclima', 2: 'conectividad' };
+        const expected = { 1: 'microclima', 2: 'conectividad', 3: 'fragmentacion' };
         let ok = 0;
         $$('input[data-act="compx"]').forEach((i) => {
           const v = normalize(i.value);
           saveRespuesta(`compx_${i.dataset.id}`, i.value);
           if (v === expected[i.dataset.id]) ok += 1;
         });
-        const pass = ok === 2;
+        const pass = ok === 3;
         pass ? markDone('compx') : unmarkDone('compx');
-        setFeedback('fb-compx', pass ? '✅ Completar correcto.' : '❌ Faltan términos clave (microclima / conectividad).', pass);
+        setFeedback('fb-compx', pass ? '✅ Completar correcto.' : '❌ Faltan términos clave (microclima / conectividad / fragmentación).', pass);
       }
 
       function retryCompx() {
@@ -1326,6 +1336,8 @@
         mark(Array.from({length:12}, (_,i)=>i), 'conectividad');
         mark(Array.from({length:14}, (_,i)=>36+i), 'heterogeneidad');
         mark(Array.from({length:13}, (_,i)=>54+i), 'fragmentacion');
+        mark(Array.from({length:6}, (_,i)=>72+i), 'matriz');
+        mark(Array.from({length:7}, (_,i)=>94+i), 'mosaico');
         cells.forEach((c) => c.addEventListener('click', () => { c.classList.toggle('selected'); const done = updateSopaFound(); if (done) { markDone('sopa'); setFeedback('fb-sopa', '✅ ¡Perfecto! Ya encontraste todas las palabras.', true); } }));
         // restaurar selección guardada
         const saved = getRespuestas().sopa || '';
