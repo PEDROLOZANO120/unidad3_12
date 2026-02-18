@@ -834,22 +834,54 @@
           </article>
 
           <article class="activity" id="act-t2a4">
-            <header>Actividad 4 (Tema 2): verdadero/falso aplicado</header>
+            <header>Actividad 4 (Tema 2): sopa de letras</header>
             <div class="body">
-              <div class="eval-item"><label class="label">1) La dinámica climática explica por sí sola toda la evolución de los ecosistemas.</label><select class="select" data-act="t2a4" data-id="1"><option value="">Selecciona...</option><option>Falso</option><option>Verdadero</option></select></div>
-              <div class="eval-item"><label class="label">2) Las actividades humanas modifican, transforman y crean paisajes.</label><select class="select" data-act="t2a4" data-id="2"><option value="">Selecciona...</option><option>Verdadero</option><option>Falso</option></select></div>
-              <div class="eval-item"><label class="label">3) La ecología del paisaje solo describe elementos sin analizar relaciones.</label><select class="select" data-act="t2a4" data-id="3"><option value="">Selecciona...</option><option>Falso</option><option>Verdadero</option></select></div>
+              <div class="sopa-layout">
+                <div class="sopa-board">
+                  <p class="subtitle">Haz clic en las letras para formar: PATRON, PROCESO y ESCALA.</p>
+                  <div class="sopa-grid-pro" id="t2SopaGrid" aria-label="Sopa de letras tema 2">
+                    <span class="cell-pro">P</span><span class="cell-pro">A</span><span class="cell-pro">T</span><span class="cell-pro">R</span><span class="cell-pro">O</span><span class="cell-pro">N</span><span class="cell-pro">Q</span><span class="cell-pro">W</span><span class="cell-pro">E</span><span class="cell-pro">R</span><span class="cell-pro">T</span><span class="cell-pro">Y</span>
+                    <span class="cell-pro">U</span><span class="cell-pro">I</span><span class="cell-pro">O</span><span class="cell-pro">P</span><span class="cell-pro">A</span><span class="cell-pro">S</span><span class="cell-pro">D</span><span class="cell-pro">F</span><span class="cell-pro">G</span><span class="cell-pro">H</span><span class="cell-pro">J</span><span class="cell-pro">K</span>
+                    <span class="cell-pro">P</span><span class="cell-pro">R</span><span class="cell-pro">O</span><span class="cell-pro">C</span><span class="cell-pro">E</span><span class="cell-pro">S</span><span class="cell-pro">O</span><span class="cell-pro">L</span><span class="cell-pro">Z</span><span class="cell-pro">X</span><span class="cell-pro">C</span><span class="cell-pro">V</span>
+                    <span class="cell-pro">B</span><span class="cell-pro">N</span><span class="cell-pro">M</span><span class="cell-pro">Q</span><span class="cell-pro">W</span><span class="cell-pro">E</span><span class="cell-pro">R</span><span class="cell-pro">T</span><span class="cell-pro">Y</span><span class="cell-pro">U</span><span class="cell-pro">I</span><span class="cell-pro">O</span>
+                    <span class="cell-pro">P</span><span class="cell-pro">A</span><span class="cell-pro">S</span><span class="cell-pro">D</span><span class="cell-pro">F</span><span class="cell-pro">G</span><span class="cell-pro">H</span><span class="cell-pro">J</span><span class="cell-pro">K</span><span class="cell-pro">L</span><span class="cell-pro">Q</span><span class="cell-pro">W</span>
+                    <span class="cell-pro">E</span><span class="cell-pro">S</span><span class="cell-pro">C</span><span class="cell-pro">A</span><span class="cell-pro">L</span><span class="cell-pro">A</span><span class="cell-pro">R</span><span class="cell-pro">T</span><span class="cell-pro">Y</span><span class="cell-pro">U</span><span class="cell-pro">I</span><span class="cell-pro">O</span>
+                  </div>
+                </div>
+                <aside class="sopa-side">
+                  <h4 style="margin:0 0 .35rem">Palabras objetivo</h4>
+                  <div class="tag-list"><span class="tag">PATRON</span><span class="tag">PROCESO</span><span class="tag">ESCALA</span></div>
+                  <small class="subtitle">Estado:</small>
+                  <div id="t2SopaFound" class="tag-list"></div>
+                </aside>
+              </div>
               <div class="actions"><button class="btn btn-primary" data-review="t2a4" type="button">Revisar</button><button class="btn btn-secondary" data-retry="t2a4" type="button">Reintentar</button></div>
               <div id="fb-t2a4" class="feedback"></div>
             </div>
           </article>
 
           <article class="activity" id="act-t2a5">
-            <header>Actividad 5 (Tema 2): identificar flujos</header>
+            <header>Actividad 5 (Tema 2): crucigrama</header>
             <div class="body">
-              <div class="eval-item"><label class="label">1) Movimiento de nutrientes entre unidades del paisaje:</label><select class="select" data-act="t2a5" data-id="1"><option value="">Selecciona...</option><option>Flujo funcional del paisaje</option><option>Solo patrón visual</option><option>Escala cartográfica</option></select></div>
-              <div class="eval-item"><label class="label">2) Desplazamiento de fauna entre parches:</label><select class="select" data-act="t2a5" data-id="2"><option value="">Selecciona...</option><option>Conectividad funcional</option><option>Aislamiento absoluto</option><option>Dominancia de matriz</option></select></div>
-              <div class="eval-item"><label class="label">3) Interacción suelo-agua-vegetación en mosaicos:</label><select class="select" data-act="t2a5" data-id="3"><option value="">Selecciona...</option><option>Proceso ecológico integrado</option><option>Error metodológico</option><option>Fenómeno sin escala</option></select></div>
+              <div class="cross-layout">
+                <div class="cross-board">
+                  <div class="cross-grid" id="t2CrossGrid" aria-label="Crucigrama tema 2">
+                    <span class="dot active"><span class="n">1</span><input class="dot-input" maxlength="1" data-act="t2cruci-cell" data-word="1" data-pos="0"></span><span class="dot active"><input class="dot-input" maxlength="1" data-act="t2cruci-cell" data-word="1" data-pos="1"></span><span class="dot active"><input class="dot-input" maxlength="1" data-act="t2cruci-cell" data-word="1" data-pos="2"></span><span class="dot active"><input class="dot-input" maxlength="1" data-act="t2cruci-cell" data-word="1" data-pos="3"></span><span class="dot active"><input class="dot-input" maxlength="1" data-act="t2cruci-cell" data-word="1" data-pos="4"></span><span class="dot active"><input class="dot-input" maxlength="1" data-act="t2cruci-cell" data-word="1" data-pos="5"></span>
+                    <span class="dot"></span><span class="dot"></span><span class="dot"></span><span class="dot"></span><span class="dot"></span><span class="dot"></span>
+                    <span class="dot active"><span class="n">2</span><input class="dot-input" maxlength="1" data-act="t2cruci-cell" data-word="2" data-pos="0"></span><span class="dot active"><input class="dot-input" maxlength="1" data-act="t2cruci-cell" data-word="2" data-pos="1"></span><span class="dot active"><input class="dot-input" maxlength="1" data-act="t2cruci-cell" data-word="2" data-pos="2"></span><span class="dot active"><input class="dot-input" maxlength="1" data-act="t2cruci-cell" data-word="2" data-pos="3"></span><span class="dot active"><input class="dot-input" maxlength="1" data-act="t2cruci-cell" data-word="2" data-pos="4"></span><span class="dot active"><input class="dot-input" maxlength="1" data-act="t2cruci-cell" data-word="2" data-pos="5"></span>
+                    <span class="dot"></span><span class="dot"></span><span class="dot"></span><span class="dot"></span><span class="dot"></span><span class="dot"></span>
+                    <span class="dot active"><span class="n">3</span><input class="dot-input" maxlength="1" data-act="t2cruci-cell" data-word="3" data-pos="0"></span><span class="dot active"><input class="dot-input" maxlength="1" data-act="t2cruci-cell" data-word="3" data-pos="1"></span><span class="dot active"><input class="dot-input" maxlength="1" data-act="t2cruci-cell" data-word="3" data-pos="2"></span><span class="dot active"><input class="dot-input" maxlength="1" data-act="t2cruci-cell" data-word="3" data-pos="3"></span><span class="dot active"><input class="dot-input" maxlength="1" data-act="t2cruci-cell" data-word="3" data-pos="4"></span><span class="dot active"><input class="dot-input" maxlength="1" data-act="t2cruci-cell" data-word="3" data-pos="5"></span>
+                  </div>
+                </div>
+                <aside class="clues">
+                  <h4 style="margin:0 0 .4rem">📌 Pistas (6 letras)</h4>
+                  <ul>
+                    <li><strong>1.</strong> Unidad espacial homogénea del mosaico.</li>
+                    <li><strong>2.</strong> Cobertura dominante que rodea parches.</li>
+                    <li><strong>3.</strong> Movimientos de energía/materia entre unidades.</li>
+                  </ul>
+                </aside>
+              </div>
               <div class="actions"><button class="btn btn-primary" data-review="t2a5" type="button">Revisar</button><button class="btn btn-secondary" data-retry="t2a5" type="button">Reintentar</button></div>
               <div id="fb-t2a5" class="feedback"></div>
             </div>
@@ -891,7 +923,7 @@
           <details class="accordion" open>
             <summary>Teoría del tema 3</summary>
             <div class="acc-body">
-              <p>La escala espacial se interpreta con grano y extensión; la escala temporal cambia la lectura de tendencias ecológicas. La jerarquía espacial va de microhábitat a región.</p>
+              <p>La escala es la dimensión espacial y temporal requerida para que cambie la tasa de los procesos ecológicos y la importancia relativa de los factores que los explican. Por ello, al ampliar o reducir la ventana de observación, cambian los patrones detectados y la interpretación de la heterogeneidad.</p><p>El problema de la escala puede abordarse en el plano espacial y temporal. Procesos relevantes en escalas pequeñas pueden no ser visibles en escalas grandes, y viceversa. La escala de medición también modifica la relación entre variables ambientales y presencia/abundancia de especies.</p><p>El concepto ecológico de escala espacial incluye dos componentes: <strong>grano</strong> (resolución mínima de observación) y <strong>extensión</strong> (área total del estudio). Ambos definen los límites de inferencia: no se detectan patrones por encima de la extensión ni por debajo del grano.</p><p>La teoría de jerarquías indica que cada nivel ecológico presenta relaciones distintas entre entidad y contexto. En escalas pequeñas suele haber mayor variabilidad y más variables explicativas; en escalas grandes aumenta la generalidad y la predictibilidad, aunque con menor detalle.</p><p>En síntesis, comprender la dinámica del paisaje exige un enfoque multiescalar: integrar datos de distintas escalas, reconocer sensibilidad de métricas al cambio de grano/extensión y considerar el punto de vista de los organismos además de la escala humana.</p>
             </div>
           </details>
         </div>
@@ -1378,42 +1410,51 @@
         setFeedback('fb-t2a3', 'Actividad reiniciada.', true);
       }
 
-      function reviewT2A4() {
-        const expected = { 1: 'Falso', 2: 'Verdadero', 3: 'Falso' };
-        let ok = 0;
-        $$('select[data-act="t2a4"]').forEach((s) => {
-          saveRespuesta(`t2a4_${s.dataset.id}`, s.value);
-          if (s.value === expected[s.dataset.id]) ok += 1;
+      function updateT2SopaFound() {
+        const found = document.getElementById('t2SopaFound');
+        if (!found) return false;
+        const words = ['patron', 'proceso', 'escala'];
+        const state = words.map((w) => {
+          const cells = $$(`#t2SopaGrid .cell-pro[data-word="${w}"]`);
+          const ok = cells.length > 0 && cells.every((c) => c.classList.contains('selected'));
+          return { w, ok };
         });
-        const pass = ok === 3;
+        found.innerHTML = state.map(({w, ok}) => `<span class="tag ${ok ? 'found' : ''}">${ok ? '✅' : '⬜'} ${w.toUpperCase()}</span>`).join('');
+        return state.every((s) => s.ok);
+      }
+
+      function reviewT2A4() {
+        const pass = updateT2SopaFound();
+        saveRespuesta('t2a4_board', JSON.stringify($$('#t2SopaGrid .cell-pro').map((c) => c.classList.contains('selected') ? '1' : '0')));
         pass ? markDone('t2a4') : unmarkDone('t2a4');
-        setFeedback('fb-t2a4', pass ? '✅ Actividad 4 correcta.' : `❌ Resultado ${ok}/3.`, pass);
+        setFeedback('fb-t2a4', pass ? '✅ Sopa tema 2 correcta.' : '❌ Aún faltan letras en palabras objetivo.', pass);
       }
 
       function retryT2A4() {
-        $$('select[data-act="t2a4"]').forEach((s) => { s.value = ''; saveRespuesta(`t2a4_${s.dataset.id}`, ''); });
+        saveRespuesta('t2a4_board', '');
+        $$('#t2SopaGrid .cell-pro.selected').forEach((c) => c.classList.remove('selected'));
         unmarkDone('t2a4');
+        updateT2SopaFound();
         setFeedback('fb-t2a4', 'Actividad reiniciada.', true);
       }
 
       function reviewT2A5() {
-        const expected = {
-          1: 'Flujo funcional del paisaje',
-          2: 'Conectividad funcional',
-          3: 'Proceso ecológico integrado'
-        };
+        const expected = { 1: 'parche', 2: 'matriz', 3: 'flujos' };
         let ok = 0;
-        $$('select[data-act="t2a5"]').forEach((s) => {
-          saveRespuesta(`t2a5_${s.dataset.id}`, s.value);
-          if (s.value === expected[s.dataset.id]) ok += 1;
+        [1,2,3].forEach((id) => {
+          const cells = $$(`input[data-act="t2cruci-cell"][data-word="${id}"]`).sort((a,b)=>Number(a.dataset.pos)-Number(b.dataset.pos));
+          const word = cells.map((c)=>normalize(c.value).slice(0,1)).join('');
+          saveRespuesta(`t2cruci_${id}`, word);
+          if (word === expected[id]) ok += 1;
         });
         const pass = ok === 3;
         pass ? markDone('t2a5') : unmarkDone('t2a5');
-        setFeedback('fb-t2a5', pass ? '✅ Actividad 5 correcta.' : `❌ Resultado ${ok}/3.`, pass);
+        setFeedback('fb-t2a5', pass ? '✅ Crucigrama tema 2 correcto.' : `❌ Resultado ${ok}/3 en crucigrama.`, pass);
       }
 
       function retryT2A5() {
-        $$('select[data-act="t2a5"]').forEach((s) => { s.value = ''; saveRespuesta(`t2a5_${s.dataset.id}`, ''); });
+        $$('input[data-act="t2cruci-cell"]').forEach((i) => { i.value = ''; });
+        [1,2,3].forEach((id)=>saveRespuesta(`t2cruci_${id}`, ''));
         unmarkDone('t2a5');
         setFeedback('fb-t2a5', 'Actividad reiniciada.', true);
       }
@@ -1594,6 +1635,27 @@
       }
 
 
+      function setupT2SopaClickGame() {
+        const cells = $$('#t2SopaGrid .cell-pro');
+        if (!cells.length) return;
+        const mark = (indexes, word) => indexes.forEach((i) => {
+          if (cells[i]) { cells[i].dataset.word = word; cells[i].classList.add('target'); }
+        });
+        mark(Array.from({length:6}, (_,i)=>i), 'patron');
+        mark(Array.from({length:7}, (_,i)=>24+i), 'proceso');
+        mark(Array.from({length:6}, (_,i)=>62+i), 'escala');
+        cells.forEach((c) => c.addEventListener('click', () => { c.classList.toggle('selected'); updateT2SopaFound(); }));
+        const saved = getRespuestas().t2a4_board || '';
+        if (saved && saved.startsWith('[')) {
+          try {
+            const arr = JSON.parse(saved);
+            arr.forEach((v, i) => { if (v === '1' && cells[i]) cells[i].classList.add('selected'); });
+          } catch {}
+        }
+        updateT2SopaFound();
+      }
+
+
       function setupCruciGridInputs() {
         const grid = document.querySelector('.cross-grid');
         if (!grid) return;
@@ -1702,6 +1764,11 @@
             const el = document.querySelector(`input[data-act="t2a3"][data-id="${id}"]`);
             if (el) el.value = v;
           }
+          if (type === 't2cruci') {
+            const cells = $$(`input[data-act="t2cruci-cell"][data-word="${id}"]`).sort((a,b)=>Number(a.dataset.pos)-Number(b.dataset.pos));
+            const chars = String(v || '').split('');
+            cells.forEach((c, idx) => { c.value = chars[idx] || ''; });
+          }
         });
       }
 
@@ -1710,6 +1777,7 @@
         if (nombre) ui.nombre.value = nombre;
         setGate(!nombre);
         setupSopaClickGame();
+        setupT2SopaClickGame();
         setupCruciGridInputs();
         restoreResponses();
         // auto-avance en crucigrama
@@ -1720,6 +1788,17 @@
               const w = el.dataset.word;
               const pos = Number(el.dataset.pos || 0) + 1;
               const next = document.querySelector(`input[data-act="cruci-cell"][data-word="${w}"][data-pos="${pos}"]`);
+              if (next) next.focus();
+            }
+          });
+        });
+        $$('input[data-act="t2cruci-cell"]').forEach((el) => {
+          el.addEventListener('input', () => {
+            el.value = (el.value || '').toUpperCase().slice(0,1);
+            if (el.value) {
+              const w = el.dataset.word;
+              const pos = Number(el.dataset.pos || 0) + 1;
+              const next = document.querySelector(`input[data-act="t2cruci-cell"][data-word="${w}"][data-pos="${pos}"]`);
               if (next) next.focus();
             }
           });
