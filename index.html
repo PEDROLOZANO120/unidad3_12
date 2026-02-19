@@ -691,8 +691,8 @@
                   <h4 style="margin:0 0 .4rem">📌 Palabras</h4>
                   <div class="tag-list">
                     <span class="tag">HETEROGENEIDAD</span><span class="tag">FRAGMENTACION</span><span class="tag">CONECTIVIDAD</span>
-                    <span class="tag">CONFIGURACION</span><span class="tag">COMPOSICION</span><span class="tag">CORREDOR</span>
-                    <span class="tag">MATRIZ</span><span class="tag">PARCHE</span><span class="tag">BORDE</span><span class="tag">MOSAICO</span><span class="tag">ESCALA</span>
+                    <span class="tag">COMPOSICION</span><span class="tag">CORREDOR</span><span class="tag">MATRIZ</span>
+                    <span class="tag">MOSAICO</span><span class="tag">ESCALA</span>
                   </div>
                   <p class="subtitle">💡 Haz clic sobre las letras hasta marcar cada palabra objetivo.</p>
                   <small class="subtitle">Estado de palabras encontradas:</small><div id="sopaFound" class="tag-list" aria-live="polite"></div>
@@ -862,7 +862,7 @@
             <div class="body">
               <div class="sopa-layout">
                 <div class="sopa-board">
-                  <p class="subtitle">Haz clic en las letras para formar: PATRON, PROCESO y ESCALA.</p>
+                  <p class="subtitle">Haz clic en las letras para formar: PATRON, PROCESO, ESCALA, TESELAS, FLUJOS y MOSAICO.</p>
                   <div class="sopa-grid-pro" id="t2SopaGrid" aria-label="Sopa de letras tema 2">
                     <span class="cell-pro">P</span><span class="cell-pro">A</span><span class="cell-pro">T</span><span class="cell-pro">R</span><span class="cell-pro">O</span><span class="cell-pro">N</span><span class="cell-pro">Q</span><span class="cell-pro">W</span><span class="cell-pro">E</span><span class="cell-pro">R</span><span class="cell-pro">T</span><span class="cell-pro">Y</span>
                     <span class="cell-pro">U</span><span class="cell-pro">I</span><span class="cell-pro">O</span><span class="cell-pro">P</span><span class="cell-pro">A</span><span class="cell-pro">S</span><span class="cell-pro">D</span><span class="cell-pro">F</span><span class="cell-pro">G</span><span class="cell-pro">H</span><span class="cell-pro">J</span><span class="cell-pro">K</span>
@@ -2130,22 +2130,45 @@
         if (!grid) return;
         const rows = cfg.rows;
         const cols = cfg.cols;
-        const board = Array(rows * cols).fill('');
-        const mapWords = {};
-        const orderedWords = [...cfg.words].sort((a, b) => b.word.length - a.word.length);
-        orderedWords.forEach((w) => {
-          const idxs = placeWordWithFallback(board, rows, cols, w);
-          if (idxs) mapWords[w.key] = idxs;
-        });
+        const required = [...cfg.words].sort((a, b) => b.word.length - a.word.length);
+
+        let board = null;
+        let mapWords = null;
+        for (let attempt = 0; attempt < 20; attempt += 1) {
+          const tempBoard = Array(rows * cols).fill('');
+          const tempMap = {};
+          let ok = true;
+
+          required.forEach((w) => {
+            if (!ok) return;
+            const idxs = placeWordWithFallback(tempBoard, rows, cols, w);
+            if (idxs) tempMap[w.key] = idxs;
+            else ok = false;
+          });
+
+          if (ok) {
+            board = tempBoard;
+            mapWords = tempMap;
+            break;
+          }
+        }
+
+        if (!board || !mapWords) {
+          setFeedback(fbId || 'fb-sopa', '❌ No se pudo construir la sopa con todas las palabras objetivo.', false);
+          return;
+        }
+
         const alphabet = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
         for (let i = 0; i < board.length; i += 1) {
           if (!board[i]) board[i] = alphabet[Math.floor(Math.random() * alphabet.length)];
         }
+
         grid.innerHTML = board.map((ch) => `<span class="cell-pro">${ch}</span>`).join('');
         const cells = Array.from(grid.querySelectorAll('.cell-pro'));
         Object.entries(mapWords).forEach(([k, idxs]) => idxs.forEach((idx) => {
           if (cells[idx]) { cells[idx].dataset.word = k; cells[idx].classList.add('target'); }
         }));
+
         cells.forEach((c) => c.addEventListener('click', () => {
           c.classList.toggle('selected');
           const done = foundUpdater();
@@ -2154,6 +2177,7 @@
             setFeedback(fbId, '✅ Excelente, encontraste todas las palabras en distintas direcciones.', true);
           }
         }));
+
         const saved = getRespuestas()[saveKey] || '';
         if (saved && saved.startsWith('[')) {
           try {
