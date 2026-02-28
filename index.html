@@ -1042,6 +1042,8 @@
             <h5>Sopa de letras (horizontal, vertical y diagonal)</h5>
             <p class="subtitle">Busca: <strong>escala</strong>, <strong>grano</strong>, <strong>tiempo</strong>, <strong>jerarquia</strong> y <strong>modelo</strong>.</p>
             <div id="t3SopaGrid" class="mini-sopa-grid" aria-label="Sopa tema 3"></div>
+            <small class="subtitle">Palabras objetivo:</small>
+            <div id="t3SopaTargets" class="tag-list"></div>
             <div id="t3SopaFound" class="pill-row"></div>
             <div class="actions"><button class="btn btn-primary" data-review="t3sopa" type="button">Validar selección</button><button class="btn btn-secondary" data-retry="t3sopa" type="button">Limpiar selección</button></div>
             <div id="fb-t3sopa" class="feedback"></div>
@@ -1171,6 +1173,8 @@
             <h5>Sopa de letras (horizontal, vertical y diagonal)</h5>
             <p class="subtitle">Busca: <strong>parche</strong>, <strong>matriz</strong>, <strong>borde</strong>, <strong>funcion</strong> y <strong>cambio</strong>.</p>
             <div id="t4SopaGrid" class="mini-sopa-grid" aria-label="Sopa tema 4"></div>
+            <small class="subtitle">Palabras objetivo:</small>
+            <div id="t4SopaTargets" class="tag-list"></div>
             <div id="t4SopaFound" class="pill-row"></div>
             <div class="actions"><button class="btn btn-primary" data-review="t4sopa" type="button">Validar selección</button><button class="btn btn-secondary" data-retry="t4sopa" type="button">Limpiar selección</button></div>
             <div id="fb-t4sopa" class="feedback"></div>
@@ -1274,6 +1278,8 @@
             <h5>Sopa de letras (horizontal, vertical y diagonal)</h5>
             <p class="subtitle">Busca: <strong>isla</strong>, <strong>area</strong>, <strong>especie</strong>, <strong>riesgo</strong> y <strong>flujo</strong>.</p>
             <div id="t5SopaGrid" class="mini-sopa-grid" aria-label="Sopa tema 5"></div>
+            <small class="subtitle">Palabras objetivo:</small>
+            <div id="t5SopaTargets" class="tag-list"></div>
             <div id="t5SopaFound" class="pill-row"></div>
             <div class="actions"><button class="btn btn-primary" data-review="t5sopa" type="button">Validar selección</button><button class="btn btn-secondary" data-retry="t5sopa" type="button">Limpiar selección</button></div>
             <div id="fb-t5sopa" class="feedback"></div>
@@ -1880,25 +1886,41 @@
         const found = document.getElementById(cfg.foundId);
         if (!grid || !found) return;
 
+        const targets = document.getElementById(`${themeKey}SopaTargets`);
+        const wordsEntries = Object.entries(cfg.words);
+        if (targets) {
+          targets.innerHTML = wordsEntries.map(([w]) => `<span class="tag">${w.toUpperCase()}</span>`).join('');
+        }
+
         const size = cfg.size || 100;
         const letters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
         const board = Array.from({ length: size }, (_, i) => letters[(i * 7) % letters.length]);
 
-        Object.entries(cfg.words).forEach(([word, idxs]) => {
+        let valid = true;
+        wordsEntries.forEach(([word, idxs]) => {
           const chars = word.toUpperCase().split('');
+          if (idxs.length !== chars.length) valid = false;
           idxs.forEach((idx, pos) => {
+            if (idx < 0 || idx >= board.length) valid = false;
             if (idx >= 0 && idx < board.length) {
-              board[idx] = chars[pos] || board[idx];
+              const next = chars[pos] || board[idx];
+              if (board[idx] !== letters[(idx * 7) % letters.length] && board[idx] !== next) valid = false;
+              board[idx] = next;
             }
           });
         });
 
+        if (!valid) {
+          setFeedback(`fb-${themeKey}sopa`, '❌ Configuración de sopa inválida: revisa palabras objetivo.', false);
+          return;
+        }
+
         grid.innerHTML = board.map((ch) => `<span class="cell-pro">${ch}</span>`).join('');
         const cells = Array.from(grid.querySelectorAll('.cell-pro'));
-        Object.entries(cfg.words).forEach(([w, idxs]) => idxs.forEach((i)=>{ if(cells[i]) cells[i].dataset.word=w; }));
+        wordsEntries.forEach(([w, idxs]) => idxs.forEach((i)=>{ if(cells[i]) cells[i].dataset.word=w; }));
 
         const update = () => {
-          const state = Object.entries(cfg.words).map(([w, idxs]) => ({ w, ok: idxs.every((i)=>cells[i]?.classList.contains('selected')) }));
+          const state = wordsEntries.map(([w, idxs]) => ({ w, ok: idxs.every((i)=>cells[i]?.classList.contains('selected')) }));
           found.innerHTML = state.map(({w,ok})=>`<span class="tag ${ok?'found':''}">${ok?'✅':'⬜'} ${w.toUpperCase()}</span>`).join('');
           return state.every((x)=>x.ok);
         };
